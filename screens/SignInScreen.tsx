@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {View} from 'react-native';
-import {RootStackScreenProps} from '../types';
+import { View } from 'react-native';
+import { RootStackScreenProps } from '../types';
 
 export default function SignInScreen({
-  navigation,
+	navigation,
 }: RootStackScreenProps<'SignIn'>) {
-  return <View></View>;
+	return <View></View>;
 }
