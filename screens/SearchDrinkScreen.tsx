@@ -67,18 +67,20 @@ export default function SearchDrinkScreen({
 						value={drinkKeyword}
 						onChangeText={(keyword: string) => setDrinkKeyword(keyword)}
 					/>
-					<Pressable
-						style={({ pressed }) => ({
-							opacity: pressed ? 0.5 : 1,
-							width: 32,
-							height: 32,
-							justifyContent: 'center',
-							alignItems: 'center',
-						})}
-						onPress={() => setDrinkKeyword('')}
-					>
-						<ClearIcon />
-					</Pressable>
+					{drinkKeyword !== '' ? (
+						<Pressable
+							style={({ pressed }) => ({
+								opacity: pressed ? 0.5 : 1,
+								width: 32,
+								height: 32,
+								justifyContent: 'center',
+								alignItems: 'center',
+							})}
+							onPress={() => setDrinkKeyword('')}
+						>
+							<ClearIcon />
+						</Pressable>
+					) : undefined}
 				</View>
 			</View>
 
