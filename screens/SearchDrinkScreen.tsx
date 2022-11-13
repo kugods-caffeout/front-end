@@ -13,6 +13,9 @@ import Colors from '../constants/Colors';
 import DrinkItem from '../component/DrinkItem';
 import { DrinkList } from '../data/DrinkList';
 
+import SearchIcon from '../assets/search-icon.svg';
+import ClearIcon from '../assets/clear-icon.svg';
+
 export default function SearchDrinkScreen({
 	navigation,
 }: RootStackScreenProps<'SearchDrink'>) {
@@ -51,12 +54,20 @@ export default function SearchDrinkScreen({
 						height: 44,
 						backgroundColor: Colors.LightGray,
 						borderRadius: 15,
+						flexDirection: 'row',
+						alignItems: 'center',
+						paddingHorizontal: 12,
 					}}
 				>
+					<SearchIcon />
 					<TextInput
+						style={{
+							width: Dimensions.get('window').width * 0.73,
+						}}
 						value={drinkKeyword}
 						onChangeText={(keyword: string) => setDrinkKeyword(keyword)}
-					></TextInput>
+					/>
+					<ClearIcon />
 				</View>
 			</View>
 
