@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { View, Dimensions, FlatList, Text, Pressable } from 'react-native';
+import { View, Dimensions, Text, Pressable } from 'react-native';
 import Colors from '../constants/Colors';
+
+import RightArrowIcon from '../assets/right-arrow-icon.svg';
 
 export default function DrinkItem(props: {
 	brand: string;
@@ -18,6 +20,7 @@ export default function DrinkItem(props: {
 				alignItems: 'center',
 				paddingHorizontal: 16,
 				marginBottom: 2,
+				justifyContent: 'space-between',
 			})}
 		>
 			<View
@@ -60,6 +63,7 @@ export default function DrinkItem(props: {
 					</Text>
 				</View>
 			</View>
+			<RightArrowIcon />
 		</Pressable>
 	);
 }
