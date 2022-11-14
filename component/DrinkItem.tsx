@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Dimensions, Text, Pressable } from 'react-native';
+import { View, Dimensions, Text, Pressable, Keyboard } from 'react-native';
 import Colors from '../constants/Colors';
 
 import RightArrowIcon from '../assets/right-arrow-icon.svg';
@@ -8,6 +8,7 @@ export default function DrinkItem(props: {
 	brand: string;
 	drinkName: string;
 	caffeine: number;
+	keyWord: string;
 }) {
 	return (
 		<Pressable
@@ -45,14 +46,25 @@ export default function DrinkItem(props: {
 						width: Dimensions.get('window').width * 0.6,
 					}}
 				>
+					{props.keyWord == '' ?
 					<Text
-						style={{
-							fontSize: 16,
-							color: Colors.Black,
-						}}
-					>
+					style={{
+						fontSize: 16,
+						color: Colors.Black,
+					}}
+				>
 						{props.drinkName}
-					</Text>
+				</Text>
+						:
+						<View style ={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+						<Text style={{fontSize: 16, 
+								color: Colors.Black,}}>{props.drinkName.split(props.keyWord)[0]}</Text> 
+						<Text style={{fontSize: 16,
+								color: Colors.Brown}}>{props.keyWord}</Text> 
+						<Text style={{fontSize: 16,
+								color: Colors.Black,}}>{props.drinkName.split(props.keyWord)[1]}</Text>
+						</View>
+					}
 					<Text
 						style={{
 							fontSize: 16,

@@ -3,7 +3,6 @@ import {
 	View,
 	Dimensions,
 	FlatList,
-	Text,
 	Pressable,
 	TextInput,
 } from 'react-native';
@@ -27,7 +26,7 @@ export default function SearchDrinkScreen({
 		} else {
 			return drinkList.filter((drink: any) =>
 				drink.drinkName.includes(keyword),
-			);
+			);	
 		}
 	}
 	return (
@@ -90,6 +89,7 @@ export default function SearchDrinkScreen({
 						brand={item.brand}
 						drinkName={item.drinkName}
 						caffeine={item.caffeine}
+						keyWord={drinkKeyword}
 					/>
 				)}
 				data={searchedDrinkList(DrinkList, drinkKeyword)}
