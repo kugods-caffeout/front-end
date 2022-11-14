@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {
 	View,
-	Dimensions,
 	FlatList,
 	Pressable,
 	TextInput,
+	StyleSheet,
 } from 'react-native';
 import { RootStackScreenProps } from '../types';
 import Colors from '../constants/Colors';
-
+import Dimensions from '../constants/Dimensions';
 import DrinkItem from '../component/DrinkItem';
 import { DrinkList } from '../data/DrinkList';
 
@@ -30,51 +30,23 @@ export default function SearchDrinkScreen({
 		}
 	}
 	return (
-		<View
-			style={{
-				width: Dimensions.get('window').width,
-				height: Dimensions.get('window').height,
-				backgroundColor: Colors.LightGray,
-			}}
-		>
-			<View
-				style={{
-					width: Dimensions.get('window').width,
-					height: 56,
-					backgroundColor: Colors.White,
-					justifyContent: 'center',
-					alignItems: 'center',
-					marginBottom: 2,
-				}}
-			>
-				<View
-					style={{
-						width: 358,
-						height: 44,
-						backgroundColor: Colors.LightGray,
-						borderRadius: 15,
-						flexDirection: 'row',
-						alignItems: 'center',
-						paddingHorizontal: 12,
-					}}
-				>
+		<View style={styles.topContainer}>
+			<View style={styles.headerContainer}>
+				<View style={styles.searchBarContainer}>
 					<SearchIcon />
 					<TextInput
-						style={{
-							width: Dimensions.get('window').width * 0.73,
-						}}
+						style={styles.searchBarInput}
 						value={drinkKeyword}
 						onChangeText={(keyword: string) => setDrinkKeyword(keyword)}
 					/>
 					{drinkKeyword !== '' ? (
 						<Pressable
-							style={({ pressed }) => ({
-								opacity: pressed ? 0.5 : 1,
-								width: 32,
-								height: 32,
-								justifyContent: 'center',
-								alignItems: 'center',
-							})}
+							style={({ pressed }) => [
+								{
+									opacity: pressed ? 0.5 : 1,
+								},
+								styles.clearButton,
+							]}
 							onPress={() => setDrinkKeyword('')}
 						>
 							<ClearIcon />
@@ -97,3 +69,39 @@ export default function SearchDrinkScreen({
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	topContainer: {
+		width: Dimensions.width * 390,
+		height: Dimensions.height * 844,
+		backgroundColor: Colors.LightGray,
+	},
+	headerContainer: {
+		width: Dimensions.width * 390,
+		height: Dimensions.height * 56,
+		backgroundColor: Colors.White,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginBottom: 2,
+	},
+	searchBarContainer: {
+		width: Dimensions.width * 358,
+		height: Dimensions.height * 44,
+		backgroundColor: Colors.LightGray,
+		borderRadius: 15,
+		flexDirection: 'row',
+		alignItems: 'center',
+		paddingHorizontal: Dimensions.width * 12,
+	},
+	searchBarInput: {
+		width: Dimensions.width * 278,
+		height: Dimensions.height * 44,
+		color: Colors.Black,
+	},
+	clearButton: {
+		width: Dimensions.width * 32,
+		height: Dimensions.height * 44,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+});
