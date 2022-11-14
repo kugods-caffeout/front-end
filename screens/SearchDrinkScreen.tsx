@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { View, FlatList, Text, Pressable, TextInput } from 'react-native';
+import {
+	View,
+	FlatList,
+	Text,
+	Pressable,
+	TextInput,
+	StyleSheet,
+} from 'react-native';
 import { RootStackScreenProps } from '../types';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
@@ -24,53 +31,23 @@ export default function SearchDrinkScreen({
 		}
 	}
 	return (
-		<View
-			style={{
-				width: Dimensions.width * 390,
-				height: Dimensions.height * 844,
-				backgroundColor: Colors.LightGray,
-			}}
-		>
-			<View
-				style={{
-					width: Dimensions.width * 390,
-					height: Dimensions.height * 56,
-					backgroundColor: Colors.White,
-					justifyContent: 'center',
-					alignItems: 'center',
-					marginBottom: 2,
-				}}
-			>
-				<View
-					style={{
-						width: Dimensions.width * 358,
-						height: Dimensions.height * 44,
-						backgroundColor: Colors.LightGray,
-						borderRadius: 15,
-						flexDirection: 'row',
-						alignItems: 'center',
-						paddingHorizontal: Dimensions.width * 12,
-					}}
-				>
+		<View style={styles.topContainer}>
+			<View style={styles.headerContainer}>
+				<View style={styles.searchBarContainer}>
 					<SearchIcon />
 					<TextInput
-						style={{
-							width: Dimensions.width * 278,
-							height: Dimensions.height * 44,
-							color: Colors.Black,
-						}}
+						style={styles.searchBarInput}
 						value={drinkKeyword}
 						onChangeText={(keyword: string) => setDrinkKeyword(keyword)}
 					/>
 					{drinkKeyword !== '' ? (
 						<Pressable
-							style={({ pressed }) => ({
-								opacity: pressed ? 0.5 : 1,
-								width: Dimensions.width * 32,
-								height: Dimensions.height * 44,
-								justifyContent: 'center',
-								alignItems: 'center',
-							})}
+							style={({ pressed }) => [
+								{
+									opacity: pressed ? 0.5 : 1,
+								},
+								styles.clearButton,
+							]}
 							onPress={() => setDrinkKeyword('')}
 						>
 							<ClearIcon />
@@ -92,3 +69,39 @@ export default function SearchDrinkScreen({
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	topContainer: {
+		width: Dimensions.width * 390,
+		height: Dimensions.height * 844,
+		backgroundColor: Colors.LightGray,
+	},
+	headerContainer: {
+		width: Dimensions.width * 390,
+		height: Dimensions.height * 56,
+		backgroundColor: Colors.White,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginBottom: 2,
+	},
+	searchBarContainer: {
+		width: Dimensions.width * 358,
+		height: Dimensions.height * 44,
+		backgroundColor: Colors.LightGray,
+		borderRadius: 15,
+		flexDirection: 'row',
+		alignItems: 'center',
+		paddingHorizontal: Dimensions.width * 12,
+	},
+	searchBarInput: {
+		width: Dimensions.width * 278,
+		height: Dimensions.height * 44,
+		color: Colors.Black,
+	},
+	clearButton: {
+		width: Dimensions.width * 32,
+		height: Dimensions.height * 44,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+});
