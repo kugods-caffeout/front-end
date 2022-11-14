@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, Dimensions, Text, Pressable } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import Colors from '../constants/Colors';
+import Dimensions from '../constants/Dimensions';
 
 import RightArrowIcon from '../assets/right-arrow-icon.svg';
 
@@ -13,19 +14,19 @@ export default function DrinkItem(props: {
 		<Pressable
 			style={({ pressed }) => ({
 				opacity: pressed ? 0.5 : 1,
-				width: Dimensions.get('window').width,
-				height: 52,
+				width: Dimensions.width * 390,
+				height: Dimensions.height * 52,
 				backgroundColor: Colors.White,
 				flexDirection: 'row',
 				alignItems: 'center',
-				paddingHorizontal: 16,
+				paddingHorizontal: Dimensions.width * 16,
 				marginBottom: 2,
 				justifyContent: 'space-between',
 			})}
 		>
 			<View
 				style={{
-					width: Dimensions.get('window').width * 0.8,
+					width: Dimensions.width * 326,
 					flexDirection: 'row',
 					justifyContent: 'space-between',
 				}}
@@ -42,7 +43,7 @@ export default function DrinkItem(props: {
 					style={{
 						flexDirection: 'row',
 						justifyContent: 'space-between',
-						width: Dimensions.get('window').width * 0.6,
+						width: Dimensions.width * 254,
 					}}
 				>
 					<Text

@@ -1,15 +1,8 @@
 import * as React from 'react';
-import {
-	View,
-	Dimensions,
-	FlatList,
-	Text,
-	Pressable,
-	TextInput,
-} from 'react-native';
+import { View, FlatList, Text, Pressable, TextInput } from 'react-native';
 import { RootStackScreenProps } from '../types';
 import Colors from '../constants/Colors';
-
+import Dimensions from '../constants/Dimensions';
 import DrinkItem from '../component/DrinkItem';
 import { DrinkList } from '../data/DrinkList';
 
@@ -33,15 +26,15 @@ export default function SearchDrinkScreen({
 	return (
 		<View
 			style={{
-				width: Dimensions.get('window').width,
-				height: Dimensions.get('window').height,
+				width: Dimensions.width * 390,
+				height: Dimensions.height * 844,
 				backgroundColor: Colors.LightGray,
 			}}
 		>
 			<View
 				style={{
-					width: Dimensions.get('window').width,
-					height: 56,
+					width: Dimensions.width * 390,
+					height: Dimensions.height * 56,
 					backgroundColor: Colors.White,
 					justifyContent: 'center',
 					alignItems: 'center',
@@ -50,19 +43,21 @@ export default function SearchDrinkScreen({
 			>
 				<View
 					style={{
-						width: 358,
-						height: 44,
+						width: Dimensions.width * 358,
+						height: Dimensions.height * 44,
 						backgroundColor: Colors.LightGray,
 						borderRadius: 15,
 						flexDirection: 'row',
 						alignItems: 'center',
-						paddingHorizontal: 12,
+						paddingHorizontal: Dimensions.width * 12,
 					}}
 				>
 					<SearchIcon />
 					<TextInput
 						style={{
-							width: Dimensions.get('window').width * 0.73,
+							width: Dimensions.width * 278,
+							height: Dimensions.height * 44,
+							color: Colors.Black,
 						}}
 						value={drinkKeyword}
 						onChangeText={(keyword: string) => setDrinkKeyword(keyword)}
@@ -71,8 +66,8 @@ export default function SearchDrinkScreen({
 						<Pressable
 							style={({ pressed }) => ({
 								opacity: pressed ? 0.5 : 1,
-								width: 32,
-								height: 32,
+								width: Dimensions.width * 32,
+								height: Dimensions.height * 44,
 								justifyContent: 'center',
 								alignItems: 'center',
 							})}
