@@ -14,11 +14,24 @@ import { DrinkList } from '../data/DrinkList';
 
 import SearchIcon from '../assets/search-icon.svg';
 import ClearIcon from '../assets/clear-icon.svg';
+import axios from 'axios';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { getDrinkSelector } from '../recoil/selectors/getDrinkSelector';
+
 
 export default function SearchDrinkScreen({
 	navigation,
 }: RootStackScreenProps<'SearchDrink'>) {
 	const [drinkKeyword, setDrinkKeyword] = React.useState('');
+	const [drink, setDrink] = useRecoilValue(getDrinkSelector);
+	// console.log(drink)
+	const test = axios.get('http://ec2-52-78-225-87.ap-northeast-2.compute.amazonaws.com/api/drink')
+		.then(function (response) {
+			console.log(response)
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
 
 	function searchedDrinkList(drinkList: typeof DrinkList, keyword: string) {
 		if (keyword === '') {
