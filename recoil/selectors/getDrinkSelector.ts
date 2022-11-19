@@ -1,14 +1,14 @@
+import axios from 'axios';
 import { selector } from 'recoil';
+import { drink } from '../../types';
 import { getDrink } from '../apis/getDrink';
 import { drinkState } from '../atoms/drinkState';
 
-export const getDrinkSelector = selector({
-	key: 'getDrink',
-	get: async ({ get }) => {
+export const getDrinkSelector = selector<drink[]>({
+	key: 'drink',
+	get: async () => {
 		const { data } = await getDrink();
-		return data;
+		return data.data;
 	},
-	set: ({ set }, newValue) => {
-		set(drinkState, newValue);
-	},
+	set: ({ set }, newValue) => set(drinkState, newValue)
 });

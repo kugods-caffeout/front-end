@@ -6,9 +6,17 @@ import Dimensions from '../constants/Dimensions';
 import RightArrowIcon from '../assets/right-arrow-icon.svg';
 
 export default function DrinkItem(props: {
+	__v: number;
+	_id: string;
 	brand: string;
-	drinkName: string;
 	caffeine: number;
+	createdAt: string;
+	drink_name: string;
+	img: string;
+	kcal: number;
+	size: string;
+	temp: string;
+	updatedAt: string;
 	keyWord: string;
 }) {
 	return (
@@ -47,25 +55,34 @@ export default function DrinkItem(props: {
 						width: Dimensions.width * 254,
 					}}
 				>
-					{props.keyWord == '' ?
-					<Text
-					style={{
-						fontSize: 16,
-						color: Colors.Black,
-					}}
-				>
-						{props.drinkName}
-				</Text>
-						:
-						<View style ={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-						<Text style={{fontSize: 16, 
-								color: Colors.Black,}}>{props.drinkName.split(props.keyWord)[0]}</Text> 
-						<Text style={{fontSize: 16,
-								color: Colors.Brown}}>{props.keyWord}</Text> 
-						<Text style={{fontSize: 16,
-								color: Colors.Black,}}>{props.drinkName.split(props.keyWord)[1]}</Text>
+					{props.keyWord == '' ? (
+						<Text
+							style={{
+								fontSize: 16,
+								color: Colors.Black,
+							}}
+						>
+							{props.drink_name}
+						</Text>
+					) : (
+						<View
+							style={{
+								flexDirection: 'row',
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text style={{ fontSize: 16, color: Colors.Black }}>
+								{props.drink_name.split(props.keyWord)[0]}
+							</Text>
+							<Text style={{ fontSize: 16, color: Colors.Brown }}>
+								{props.keyWord}
+							</Text>
+							<Text style={{ fontSize: 16, color: Colors.Black }}>
+								{props.drink_name.split(props.keyWord)[1]}
+							</Text>
 						</View>
-					}
+					)}
 					<Text
 						style={{
 							fontSize: 16,
