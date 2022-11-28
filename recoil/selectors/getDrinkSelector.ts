@@ -6,9 +6,13 @@ import { drinkState } from '../atoms/drinkState';
 
 export const getDrinkSelector = selector<drink[]>({
 	key: 'drink',
-	get: async () => {
-		const { data } = await getDrink();
-		return data.data;
+	get: async ({ get }) => {
+		const defaultValue: drink[] = [];
+		let drink = get(drinkState);
+		if (drink === defaultValue) {
+			const { data } = await getDrink()
+			return data.data;
+		}
 	},
 	set: ({ set }, newValue) => set(drinkState, newValue)
 });

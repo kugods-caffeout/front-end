@@ -5,7 +5,7 @@ import {
 	Pressable,
 	TextInput,
 	StyleSheet,
-	ActivityIndicator,
+	Text,
 } from 'react-native';
 import { drink, RootStackScreenProps } from '../types';
 import Colors from '../constants/Colors';
@@ -57,7 +57,15 @@ export default function SearchDrinkScreen({
 					) : undefined}
 				</View>
 			</View>
-			<React.Suspense fallback={<ActivityIndicator />}>
+			<React.Suspense
+				fallback={
+					<View style={styles.topContainer}>
+						<Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>
+							로딩중...
+						</Text>
+					</View>
+				}
+			>
 				<FlatList
 					renderItem={({ item }) => (
 						<DrinkItem
