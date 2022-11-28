@@ -18,7 +18,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
 	return (
 		<Stack.Navigator>
-			<Stack.Screen name='SearchDrink' component={SearchDrinkScreen} />
+			<Stack.Screen
+				name='SearchDrink'
+				component={SearchDrinkScreen}
+				// options={{
+				// 	headerShown: false,
+				// }}
+			/>
 		</Stack.Navigator>
 	);
 }

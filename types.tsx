@@ -12,3 +12,17 @@ export type RootStackParamList = {
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 	NativeStackScreenProps<RootStackParamList, Screen>;
+
+export interface drink {
+	__v: number;
+	_id: string;
+	brand: string;
+	caffeine: number;
+	createdAt: string;
+	drink_name: string;
+	img: string;
+	kcal: number;
+	size: string;
+	temp: string;
+	updatedAt: string;
+}
