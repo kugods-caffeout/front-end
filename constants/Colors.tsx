@@ -7,4 +7,5 @@ export default {
 	DeepGray: '#8B8B8B',
 	DarkGray: '#D9D9D9',
 	White: '#FFFEFE',
+	DarkBrown: '#673105',
 };

@@ -8,6 +8,7 @@ declare global {
 
 export type RootStackParamList = {
 	SearchDrink: undefined;
+	DrinkDetail: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

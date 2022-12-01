@@ -3,6 +3,8 @@ import { StatusBar } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import Navigation from './navigation';
 
+
+
 export default function App() {
 	return (
 		<RecoilRoot>

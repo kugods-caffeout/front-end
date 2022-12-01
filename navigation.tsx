@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from './types';
 
 import SearchDrinkScreen from './screens/SearchDrinkScreen';
+import DrinkDetailScreen from './screens/DrinkDetailScreen';
 
 export default function Navigation() {
 	return (
@@ -18,6 +19,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
 	return (
 		<Stack.Navigator>
+			<Stack.Screen
+				name='DrinkDetail'
+				component={DrinkDetailScreen}
+				options={{
+				 	headerShown: false,
+				}}
+			/>
 			<Stack.Screen
 				name='SearchDrink'
 				component={SearchDrinkScreen}
