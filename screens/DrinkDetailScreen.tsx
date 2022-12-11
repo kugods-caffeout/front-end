@@ -76,11 +76,117 @@ export default function DrinkDetailScreen({
 							color: Colors.Black,
 							fontWeight: '700',
 							paddingTop: Dimensions.height * 20,
-							paddingLeft: 20,
+							paddingLeft: 25,
 						}}
 					>
 						사이즈
 					</Text>
+					<View style={{ flexDirection: 'row' }}>
+						<Pressable
+							style={{
+								width: Dimensions.width * 81,
+								height: Dimensions.height * 121,
+								marginTop: Dimensions.height * 20,
+								marginLeft: 25,
+								borderWidth: 1,
+								borderStyle: 'solid',
+								borderColor: '#D9D9D9',
+								borderRadius: 10,
+								backgroundColor: Colors.White,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text
+								style={{
+									color: Colors.DeepGray,
+									fontSize: 16,
+									fontWeight: '700',
+								}}
+							>
+								Short
+							</Text>
+							<Text style={{ color: '#C7C7C7', fontSize: 13 }}>236ml</Text>
+						</Pressable>
+						<Pressable
+							style={{
+								width: Dimensions.width * 81,
+								height: Dimensions.height * 121,
+								marginTop: Dimensions.height * 20,
+								marginLeft: 6,
+								borderWidth: 1,
+								borderStyle: 'solid',
+								borderColor: '#D9D9D9',
+								borderRadius: 10,
+								backgroundColor: Colors.White,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text
+								style={{
+									color: Colors.DeepGray,
+									fontSize: 16,
+									fontWeight: '700',
+								}}
+							>
+								Tall
+							</Text>
+							<Text style={{ color: '#C7C7C7', fontSize: 13 }}>354ml</Text>
+						</Pressable>
+						<Pressable
+							style={{
+								width: Dimensions.width * 81,
+								height: Dimensions.height * 121,
+								marginTop: Dimensions.height * 20,
+								marginLeft: 6,
+								borderWidth: 1,
+								borderStyle: 'solid',
+								borderColor: '#D9D9D9',
+								borderRadius: 10,
+								backgroundColor: Colors.White,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text
+								style={{
+									color: Colors.DeepGray,
+									fontSize: 16,
+									fontWeight: '700',
+								}}
+							>
+								Grande
+							</Text>
+							<Text style={{ color: '#C7C7C7', fontSize: 13 }}>473ml</Text>
+						</Pressable>
+						<Pressable
+							style={{
+								width: Dimensions.width * 81,
+								height: Dimensions.height * 121,
+								marginTop: Dimensions.height * 20,
+								marginLeft: 6,
+								borderWidth: 1,
+								borderStyle: 'solid',
+								borderColor: '#D9D9D9',
+								borderRadius: 10,
+								backgroundColor: Colors.White,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text
+								style={{
+									color: Colors.DeepGray,
+									fontSize: 16,
+									fontWeight: '700',
+								}}
+							>
+								Venti
+							</Text>
+							<Text style={{ color: '#C7C7C7', fontSize: 13 }}>591ml</Text>
+						</Pressable>
+					</View>
 					<View
 						style={{
 							width: Dimensions.width * 390,
@@ -158,6 +264,57 @@ export default function DrinkDetailScreen({
 					>
 						온도
 					</Text>
+					<View style={{ flexDirection: 'row' }}>
+						<Pressable
+							style={{
+								width: Dimensions.width * 171,
+								height: Dimensions.height * 40,
+								marginTop: Dimensions.height * 20,
+								marginLeft: 20,
+								borderWidth: 1,
+								borderStyle: 'solid',
+								borderColor: '#D9D9D9',
+								borderRadius: 5,
+								backgroundColor: Colors.White,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text
+								style={{
+									fontSize: 16,
+									color: Colors.DeepGray,
+									fontWeight: '700',
+								}}
+							>
+								HOT
+							</Text>
+						</Pressable>
+						<Pressable
+							style={{
+								width: Dimensions.width * 171,
+								height: Dimensions.height * 40,
+								marginTop: Dimensions.height * 20,
+								borderWidth: 1,
+								borderStyle: 'solid',
+								borderColor: '#D9D9D9',
+								borderRadius: 5,
+								backgroundColor: Colors.White,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text
+								style={{
+									fontSize: 16,
+									color: Colors.DeepGray,
+									fontWeight: '700',
+								}}
+							>
+								ICE
+							</Text>
+						</Pressable>
+					</View>
 					<Text
 						style={{
 							fontSize: 16,
@@ -169,6 +326,80 @@ export default function DrinkDetailScreen({
 					>
 						추가 옵션
 					</Text>
+					<View style={{ flexDirection: 'row' }}>
+						<Pressable
+							style={{
+								width: Dimensions.width * 58,
+								height: Dimensions.height * 28,
+								marginTop: Dimensions.height * 20,
+								marginLeft: 20,
+								borderWidth: 1,
+								borderStyle: 'solid',
+								borderColor: '#D9D9D9',
+								borderRadius: 5,
+								backgroundColor: Colors.White,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text
+								style={{
+									color: Colors.DeepGray,
+									fontSize: 16,
+								}}
+							>
+								블론드
+							</Text>
+						</Pressable>
+						<Pressable
+							style={{
+								width: Dimensions.width * 72,
+								height: Dimensions.height * 28,
+								marginTop: Dimensions.height * 20,
+								marginLeft: 20,
+								borderWidth: 1,
+								borderStyle: 'solid',
+								borderColor: '#D9D9D9',
+								borderRadius: 5,
+								backgroundColor: Colors.White,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text
+								style={{
+									color: Colors.DeepGray,
+									fontSize: 16,
+								}}
+							>
+								디카페인
+							</Text>
+						</Pressable>
+						<Pressable
+							style={{
+								width: Dimensions.width * 91,
+								height: Dimensions.height * 28,
+								marginTop: Dimensions.height * 20,
+								marginLeft: 20,
+								borderWidth: 1,
+								borderStyle: 'solid',
+								borderColor: '#D9D9D9',
+								borderRadius: 5,
+								backgroundColor: Colors.White,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Text
+								style={{
+									color: Colors.DeepGray,
+									fontSize: 16,
+								}}
+							>
+								1/2디카페인
+							</Text>
+						</Pressable>
+					</View>
 					<View
 						style={{
 							width: Dimensions.width * 390,
@@ -193,7 +424,7 @@ export default function DrinkDetailScreen({
 								alignItems: 'center',
 							}}
 							onPress={() => {
-								setSizeModalVisible(false);
+								setOptionModalVisible(false);
 							}}
 						>
 							<Text
@@ -577,4 +808,5 @@ const styles = StyleSheet.create({
 		borderRadius: 25,
 		paddingTop: Dimensions.height * 20,
 	},
+	sizeSelection: {},
 });
