@@ -57,7 +57,7 @@ export default function DrinkDetailScreen({
 						style={{
 							width: Dimensions.width * 390,
 							height: Dimensions.height * 844,
-							backgroundColor: 'black',
+							backgroundColor: Colors.Black,
 							opacity: 0.5,
 						}}
 					/>
@@ -240,7 +240,7 @@ export default function DrinkDetailScreen({
 						style={{
 							width: Dimensions.width * 390,
 							height: Dimensions.height * 844,
-							backgroundColor: 'black',
+							backgroundColor: Colors.Black,
 							opacity: 0.5,
 						}}
 					/>
