@@ -10,27 +10,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Arrow from "../assets/arrowBtn.svg";
 import Star from "../assets/starBtn.svg";
 import BigArrow from "../assets/bigArrow.svg";
-import YellowStar from "../assets/yellow-star.svg";
 
 export default function DrinkDetailScreen({
-    navigation,
+	navigation,
 }: RootStackScreenProps<'DrinkDetail'>) {
     const Size = ['Short', 'Tall', 'Grande', 'Venti']
     const Option = ['블론드', '디카페인', '1/2디카페인']
     const [caffeineCount, setCaffeineCount] = useState(0); 
     const [cupCount, setCupCount] = useState(0); 
-    const [isBookMark, setBookMark] = useState(false);
     const [selectSize, setSelectSize] = useState('Tall');
     const [selectOption, setSelectOption] = useState('선택 없음');
     const [caffeineGoal, setCaffeineGoal] = useState(60);
     const [selectTemperature, setTemperature] = useState('ICE');
-
     return (
         <SafeAreaView style={styles.topContainer}>
             <View style={styles.headerContainer}>
                 <View style={{flexDirection:'row',justifyContent:"space-between"}}>
-                    <Arrow />
-                    {isBookMark ? <YellowStar onPress={()=>{setBookMark(false)}} /> : <Star onPress={()=>{setBookMark(true)} } />}
+                    <Arrow/>
+                    <Star/>
                 </View>
                 <Text style={{ marginTop: Dimensions.height * 15, marginLeft: Dimensions.width * 2, fontSize: 16, color: Colors.White ,fontWeight:'700'}}>스타벅스</Text>
                 <View style={{flexDirection:'row', marginTop:Dimensions.height*4,marginLeft:Dimensions.width*2}}>
@@ -69,14 +66,42 @@ export default function DrinkDetailScreen({
                         )
                     })}
                 </View> */}
-            </Pressable>
-            <Pressable style={{ width: '100%', height: Dimensions.height * 73, borderBottomColor: '#DEDEDE', borderWidth: 1, borderRightWidth: 0, borderLeftWidth: 0, borderTopWidth: 0 ,paddingTop:Dimensions.height* 16,paddingHorizontal:Dimensions.width*27,flexDirection:'row'}}>
-                <View>
-                    <Text style={{ fontSize: 16, fontWeight: '600' }}>옵션</Text>
-                    <Text style={{ marginTop: 5 * Dimensions.height, fontSize: 16, color: Colors.DeepGray }}>{selectTemperature}, {selectOption}</Text>
-                </View>
-                <BigArrow style={{marginLeft: Dimensions.width*237, marginTop: Dimensions.height*6}}></BigArrow>
-                {/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
+			</Pressable>
+			<Pressable
+				style={{
+					width: '100%',
+					height: Dimensions.height * 73,
+					backgroundColor: Colors.White,
+					borderBottomColor: '#DEDEDE',
+					borderWidth: 1,
+					borderRightWidth: 0,
+					borderLeftWidth: 0,
+					borderTopWidth: 0,
+					paddingTop: Dimensions.height * 16,
+					paddingHorizontal: Dimensions.width * 27,
+					flexDirection: 'row',
+				}}
+				onPress={() => setOptionModalVisible(true)}
+			>
+				<View>
+					<Text style={{ fontSize: 16, fontWeight: '600' }}>옵션</Text>
+					<Text
+						style={{
+							marginTop: 5 * Dimensions.height,
+							fontSize: 16,
+							color: Colors.DeepGray,
+						}}
+					>
+						{selectTemperature}, {selectOption}
+					</Text>
+				</View>
+				<BigArrow
+					style={{
+						marginLeft: Dimensions.width * 237,
+						marginTop: Dimensions.height * 6,
+					}}
+				></BigArrow>
+				{/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
                     {Option.map((item) => {
                         return (
                             <Pressable style={{ minWidth: Dimensions.width * 39, height: Dimensions.height * 28, borderColor: Colors.DarkGray, borderWidth: 1, borderRadius: 5, paddingHorizontal: 8, paddingVertical: 4, marginRight: Dimensions.width * 19, backgroundColor:item === selectOption ? Colors.Brown : Colors.White}}
@@ -90,64 +115,60 @@ export default function DrinkDetailScreen({
             <View style={{ width: '100%', height: Dimensions.height * 59, borderBottomColor: '#DEDEDE', borderWidth: 1, borderRightWidth: 0, borderLeftWidth: 0, borderTopWidth: 0 ,paddingTop:Dimensions.height* 20,paddingHorizontal:Dimensions.width*27,flexDirection:'row'}}>
                 <Text style={{ fontSize: 16, fontWeight: '600' }}>샷 추가</Text>
                 <View style={{flexDirection:'row',marginLeft: Dimensions.width*196, justifyContent:'space-between',width:Dimensions.width * 92}}>
-                    <Minus width="16" height="16" viewBox="0 0 16 16" fill={caffeineCount ? Colors.Black: Colors.White} onPress={()=>{if(caffeineCount!=0)setCaffeineCount(caffeineCount-1)}}></Minus>
+                    <Minus width="16" height="16" viewBox="0 0 16 16" onPress={()=>{if(caffeineCount!=0)setCaffeineCount(caffeineCount-1)}}></Minus>
                     <Text>{caffeineCount}</Text>
                     <Plus  width="16" height="16" viewBox="0 0 16 16" onPress={()=>{setCaffeineCount(caffeineCount+1)}}></Plus> 
                 </View>    
             </View>
-            <View style={{ width: '100%', height: Dimensions.height * 95 ,paddingTop:Dimensions.height*19,paddingHorizontal:Dimensions.width*27}}>
+            <View style={{ width: '100%', height: Dimensions.height * 59, justifyContent: 'center',paddingHorizontal:Dimensions.width*27}}>
                  <Text style={{ fontSize: 16, fontWeight: '600' }}>날짜</Text>
             </View>
-            <View style={{width:'100%', height:Dimensions.height*130,justifyContent:'center',alignItems:'center',shadowColor:Colors.Black,shadowOffset:{width:0,height:-5},shadowOpacity:0.1,shadowRadius:7,backgroundColor:Colors.White}}>
-                <Pressable style={styles.tailContainter}>
-                  <Text style={{color:Colors.White,fontSize:16, fontWeight:'700'}}>음료 추가</Text>
-                </Pressable>
-            </View>
+            <Pressable style={{ width: Dimensions.width * 358, height: Dimensions.height * 44, marginTop: Dimensions.height * 65, borderRadius: 30, backgroundColor: Colors.DarkBrown ,justifyContent:'center',alignItems:'center'}}>
+                <Text style={{color:Colors.White,fontSize:16, fontWeight:'700'}}>음료 추가</Text>
+            </Pressable>
         </SafeAreaView>
     )
 }
-
-
 
 const styles = StyleSheet.create({
 	topContainer: {
 		width: Dimensions.width * 390,
 		height: Dimensions.height * 844,
-        backgroundColor: Colors.LightGray,
-        alignItems:'center',
+		backgroundColor: Colors.LightGray,
+		alignItems: 'center',
 	},
 	headerContainer: {
 		width: Dimensions.width * 390,
 		height: Dimensions.height * 211,
-        backgroundColor: Colors.DarkBrown,
-        paddingHorizontal: Dimensions.width * 12,
-        paddingVertical:Dimensions.height * 12,
+		backgroundColor: Colors.DarkBrown,
+		paddingHorizontal: Dimensions.width * 12,
+		paddingVertical: Dimensions.height * 12,
 		marginBottom: 2,
 	},
 	BottomContainer: {
 		width: Dimensions.width * 358,
 		height: Dimensions.height * 150,
-        backgroundColor: Colors.White,
-        position: 'absolute',
-        top: Dimensions.height * 202.81, 
-        right: Dimensions.width * 16,
-        borderRadius: 10,
-        ...Platform.select({
-            ios: {
-                shadowColor: Colors.Black,
-                shadowOffset: {
-                    widhth: 0.5,
-                    height: 0.5
-                },
-                shadowOpacity: 0.5,
-                shadowRadius: 7,
-            },
-            android: {
-                evevation: 20
-            }, //여기 수정부탁
-        }),
-        paddingHorizontal: Dimensions.width * 20,
-        paddingVertical :Dimensions.width * 15,
+		backgroundColor: Colors.White,
+		position: 'absolute',
+		top: Dimensions.height * 202.81,
+		right: Dimensions.width * 16,
+		borderRadius: 10,
+		...Platform.select({
+			ios: {
+				shadowColor: Colors.Black,
+				shadowOffset: {
+					width: 0.5,
+					height: 0.5,
+				},
+				shadowOpacity: 0.5,
+				shadowRadius: 7,
+			},
+			android: {
+				evevation: 20,
+			}, //여기 수정부탁
+		}),
+		paddingHorizontal: Dimensions.width * 20,
+		paddingVertical: Dimensions.width * 15,
 	},
 	searchBarInput: {
 		width: Dimensions.width * 278,
@@ -159,13 +180,5 @@ const styles = StyleSheet.create({
 		height: Dimensions.height * 44,
 		justifyContent: 'center',
 		alignItems: 'center',
-    },
-    tailContainter: {
-        width: Dimensions.width * 358,
-        height: Dimensions.height * 44,
-        borderRadius: 30,
-        backgroundColor: Colors.DarkBrown,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+	},
 });
