@@ -553,6 +553,7 @@ export default function DrinkDetailScreen({
 			<View style={{ height: Dimensions.height * 80 }}></View>
 			<Pressable
 				style={{
+					backgroundColor: Colors.White,
 					width: '100%',
 					height: Dimensions.height * 99,
 					borderBottomColor: '#DEDEDE',
@@ -564,6 +565,7 @@ export default function DrinkDetailScreen({
 					paddingTop: Dimensions.height * 37,
 					flexDirection: 'row',
 				}}
+				onPress={() => setSizeModalVisible(true)}
 			>
 				<View>
 					<Text style={{ fontSize: 16, fontWeight: '600' }}>사이즈</Text>
