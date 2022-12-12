@@ -12,9 +12,13 @@ import { RootStackScreenProps } from '../types';
 import Dimensions from '../constants/Dimensions';
 import DatePicker from 'react-native-date-picker';
 import Colors from '../constants/Colors';
-import Plus from '../assets/plusBtn.svg';
-import Minus from '../assets/minusBtn.svg';
+import WhitePlus from '../assets/white-plus.svg';
+import DisabledWhiteMinus from '../assets/disabled-white-minus.svg';
+import ActivatedWhiteMinus from '../assets/activated-white-minus.svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import BlackPlus from '../assets/black-plus.svg';
+import DisabledBlackMinus from '../assets/disabled-black-minus.svg';
+import ActivatedBlackMinus from '../assets/activated-black-minus.svg';
 import Arrow from '../assets/arrowBtn.svg';
 import Star from '../assets/starBtn.svg';
 import BigArrow from '../assets/bigArrow.svg';
@@ -28,7 +32,7 @@ export default function DrinkDetailScreen({
 	const Size = ['Short', 'Tall', 'Grande', 'Venti'];
 	const Option = ['블론드', '디카페인', '1/2디카페인'];
 	const [caffeineCount, setCaffeineCount] = useState(0);
-	const [cupCount, setCupCount] = useState(0);
+	const [cupCount, setCupCount] = useState(1);
 	const [isBookMark, setBookMark] = useState(false);
 	const [selectSize, setSelectSize] = useState('Tall');
 	const [selectOption, setSelectOption] = useState('선택 없음');
@@ -492,27 +496,31 @@ export default function DrinkDetailScreen({
 							alignItems: 'center',
 						}}
 					>
-						<Minus
-							width='18'
-							height='18'
-							viewBox='0 0 18 18'
-							onPress={() => {
-								if (cupCount != 0) setCupCount(cupCount - 1);
-							}}
-						></Minus>
+						{cupCount === 1 ? (
+							<DisabledWhiteMinus />
+						) : (
+							<ActivatedWhiteMinus
+								width='18'
+								height='18'
+								viewBox='0 0 18 18'
+								onPress={() => {
+									if (cupCount != 1) setCupCount(cupCount - 1);
+								}}
+							></ActivatedWhiteMinus>
+						)}
 						<Text
 							style={{ fontSize: 21, color: Colors.White, fontWeight: '700' }}
 						>
 							{cupCount}잔
 						</Text>
-						<Plus
+						<WhitePlus
 							width='18'
 							height='18'
 							viewBox='0 0 18 18'
 							onPress={() => {
 								setCupCount(cupCount + 1);
 							}}
-						></Plus>
+						></WhitePlus>
 					</View>
 				</View>
 			</View>
@@ -666,23 +674,27 @@ export default function DrinkDetailScreen({
 						width: Dimensions.width * 92,
 					}}
 				>
-					<Minus
-						width='16'
-						height='16'
-						viewBox='0 0 16 16'
-						onPress={() => {
-							if (caffeineCount != 0) setCaffeineCount(caffeineCount - 1);
-						}}
-					></Minus>
+					{caffeineCount === 0 ? (
+						<DisabledBlackMinus />
+					) : (
+						<ActivatedBlackMinus
+							width='16'
+							height='16'
+							viewBox='0 0 16 16'
+							onPress={() => {
+								if (caffeineCount != 0) setCaffeineCount(caffeineCount - 1);
+							}}
+						></ActivatedBlackMinus>
+					)}
 					<Text>{caffeineCount}</Text>
-					<Plus
+					<BlackPlus
 						width='16'
 						height='16'
 						viewBox='0 0 16 16'
 						onPress={() => {
 							setCaffeineCount(caffeineCount + 1);
 						}}
-					></Plus>
+					></BlackPlus>
 				</View>
 			</View>
 			<View
