@@ -760,7 +760,7 @@ const styles = StyleSheet.create({
 	topContainer: {
 		width: Dimensions.width * 390,
 		height: Dimensions.height * 844,
-		backgroundColor: Colors.LightGray,
+		backgroundColor: Colors.White,
 		alignItems: 'center',
 	},
 	headerContainer: {
