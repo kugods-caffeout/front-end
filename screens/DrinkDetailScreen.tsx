@@ -534,9 +534,15 @@ export default function DrinkDetailScreen({
 				}}
 			></View>
 			<View style={styles.BottomContainer}>
-				<Text style={{ fontSize: 14, marginBottom: 4 }}>총 카페인 함량</Text>
-				<Text style={{ fontSize: 30, fontWeight: '700' }}>155mg</Text>
-				<Text style={{ marginTop: Dimensions.height * 22 }}>
+				<Text style={{ color: Colors.Black, fontSize: 14, marginBottom: 4 }}>
+					총 카페인 함량
+				</Text>
+				<Text style={{ color: Colors.Black, fontSize: 30, fontWeight: '700' }}>
+					155mg
+				</Text>
+				<Text
+					style={{ color: Colors.Black, marginTop: Dimensions.height * 22 }}
+				>
 					하루 카페인 섭취 목표량의 {caffeineGoal}%
 				</Text>
 				<View
