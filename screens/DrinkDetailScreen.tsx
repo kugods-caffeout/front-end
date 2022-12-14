@@ -576,7 +576,11 @@ export default function DrinkDetailScreen({
 				onPress={() => setSizeModalVisible(true)}
 			>
 				<View>
-					<Text style={{ fontSize: 16, fontWeight: '600' }}>사이즈</Text>
+					<Text
+						style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
+					>
+						사이즈
+					</Text>
 					<Text
 						style={{
 							marginTop: 5 * Dimensions.height,
@@ -622,7 +626,11 @@ export default function DrinkDetailScreen({
 				onPress={() => setOptionModalVisible(true)}
 			>
 				<View>
-					<Text style={{ fontSize: 16, fontWeight: '600' }}>옵션</Text>
+					<Text
+						style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
+					>
+						옵션
+					</Text>
 					<Text
 						style={{
 							marginTop: 5 * Dimensions.height,
@@ -665,7 +673,9 @@ export default function DrinkDetailScreen({
 					flexDirection: 'row',
 				}}
 			>
-				<Text style={{ fontSize: 16, fontWeight: '600' }}>샷 추가</Text>
+				<Text style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}>
+					샷 추가
+				</Text>
 				<View
 					style={{
 						flexDirection: 'row',
@@ -686,7 +696,11 @@ export default function DrinkDetailScreen({
 							}}
 						></ActivatedBlackMinus>
 					)}
-					<Text>{caffeineCount}</Text>
+					<Text
+						style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
+					>
+						{caffeineCount}
+					</Text>
 					<BlackPlus
 						width='16'
 						height='16'
