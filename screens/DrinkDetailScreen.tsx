@@ -25,6 +25,7 @@ import BigArrow from '../assets/bigArrow.svg';
 import ModalLine from '../assets/modalLine.svg';
 import CalendarIcon from '../assets/calendar-icon.svg';
 import YellowStar from '../assets/yellow-star.svg';
+import SizeItem from '../component/SizeItem';
 
 export default function DrinkDetailScreen({
 	navigation,
@@ -67,128 +68,62 @@ export default function DrinkDetailScreen({
 					/>
 				</TouchableWithoutFeedback>
 				<View style={styles.modal}>
+					<ModalLine
+						style={{
+							alignSelf: 'center',
+							marginBottom: Dimensions.height * 6,
+						}}
+					/>
 					<View
 						style={{
-							alignItems: 'center',
+							height: Dimensions.height * 48,
+							justifyContent: 'center',
 						}}
 					>
-						<ModalLine />
+						<Text
+							style={{
+								fontSize: 16,
+								color: Colors.Black,
+								fontWeight: 'bold',
+							}}
+						>
+							사이즈
+						</Text>
 					</View>
-					<Text
+
+					<View
 						style={{
-							fontSize: 16,
-							color: Colors.Black,
-							fontWeight: '700',
-							paddingTop: Dimensions.height * 20,
-							paddingLeft: 25,
+							flexDirection: 'row',
+							justifyContent: 'space-between',
 						}}
 					>
-						사이즈
-					</Text>
-					<View style={{ flexDirection: 'row' }}>
-						<Pressable
-							style={{
-								width: Dimensions.width * 81,
-								height: Dimensions.height * 121,
-								marginTop: Dimensions.height * 20,
-								marginLeft: 25,
-								borderWidth: 1,
-								borderStyle: 'solid',
-								borderColor: Colors.DarkGray,
-								borderRadius: 10,
-								backgroundColor: Colors.White,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						>
-							<Text
-								style={{
-									color: Colors.DeepGray,
-									fontSize: 16,
-									fontWeight: '700',
-								}}
-							>
-								Short
-							</Text>
-							<Text style={{ color: '#C7C7C7', fontSize: 13 }}>236ml</Text>
+						<Pressable onPress={() => setSelectSize('Short')}>
+							<SizeItem
+								size='Short'
+								volume={236}
+								isSelected={selectSize === 'Short'}
+							/>
 						</Pressable>
-						<Pressable
-							style={{
-								width: Dimensions.width * 81,
-								height: Dimensions.height * 121,
-								marginTop: Dimensions.height * 20,
-								marginLeft: 6,
-								borderWidth: 1,
-								borderStyle: 'solid',
-								borderColor: Colors.DarkGray,
-								borderRadius: 10,
-								backgroundColor: Colors.White,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						>
-							<Text
-								style={{
-									color: Colors.DeepGray,
-									fontSize: 16,
-									fontWeight: '700',
-								}}
-							>
-								Tall
-							</Text>
-							<Text style={{ color: '#C7C7C7', fontSize: 13 }}>354ml</Text>
+						<Pressable onPress={() => setSelectSize('Tall')}>
+							<SizeItem
+								size='Tall'
+								volume={354}
+								isSelected={selectSize === 'Tall'}
+							/>
 						</Pressable>
-						<Pressable
-							style={{
-								width: Dimensions.width * 81,
-								height: Dimensions.height * 121,
-								marginTop: Dimensions.height * 20,
-								marginLeft: 6,
-								borderWidth: 1,
-								borderStyle: 'solid',
-								borderColor: Colors.DarkGray,
-								borderRadius: 10,
-								backgroundColor: Colors.White,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						>
-							<Text
-								style={{
-									color: Colors.DeepGray,
-									fontSize: 16,
-									fontWeight: '700',
-								}}
-							>
-								Grande
-							</Text>
-							<Text style={{ color: '#C7C7C7', fontSize: 13 }}>473ml</Text>
+						<Pressable onPress={() => setSelectSize('Grande')}>
+							<SizeItem
+								size='Grande'
+								volume={473}
+								isSelected={selectSize === 'Grande'}
+							/>
 						</Pressable>
-						<Pressable
-							style={{
-								width: Dimensions.width * 81,
-								height: Dimensions.height * 121,
-								marginTop: Dimensions.height * 20,
-								marginLeft: 6,
-								borderWidth: 1,
-								borderStyle: 'solid',
-								borderColor: Colors.DarkGray,
-								borderRadius: 10,
-								backgroundColor: Colors.White,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						>
-							<Text
-								style={{
-									color: Colors.DeepGray,
-									fontSize: 16,
-									fontWeight: '700',
-								}}
-							>
-								Venti
-							</Text>
-							<Text style={{ color: '#C7C7C7', fontSize: 13 }}>591ml</Text>
+						<Pressable onPress={() => setSelectSize('Venti')}>
+							<SizeItem
+								size='Venti'
+								volume={591}
+								isSelected={selectSize === 'Venti'}
+							/>
 						</Pressable>
 					</View>
 					<View
@@ -874,7 +809,8 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		borderTopRightRadius: 25,
 		borderTopLeftRadius: 25,
-		paddingTop: Dimensions.height * 20,
+		paddingTop: Dimensions.height * 18,
+		paddingHorizontal: Dimensions.width * 25,
 	},
 	tailContainter: {
 		width: Dimensions.width * 358,
