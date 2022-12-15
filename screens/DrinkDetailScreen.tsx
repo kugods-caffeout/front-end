@@ -596,45 +596,57 @@ export default function DrinkDetailScreen({
 						</View>
 					</View>
 				</View>
-				<Pressable
+				<View
 					style={{
 						backgroundColor: Colors.White,
 						width: Dimensions.width * 390,
 						height: Dimensions.height * 208,
 						borderBottomColor: Colors.LightGray,
-						borderWidth: 1,
-						borderRightWidth: 0,
-						borderLeftWidth: 0,
-						borderTopWidth: 0,
+						borderBottomWidth: 1,
 						paddingTop: Dimensions.height * 131,
-						flexDirection: 'row',
+						paddingHorizontal: Dimensions.width * 25,
 					}}
-					onPress={() => setSizeModalVisible(true)}
 				>
-					<View>
-						<Text
-							style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
-						>
-							사이즈
-						</Text>
-						<Text
+					<Pressable
+						onPress={() => setSizeModalVisible(true)}
+						style={({ pressed }) => ({
+							opacity: pressed ? 0.5 : 1,
+							height: Dimensions.height * 76,
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+							backgroundColor: Colors.White,
+						})}
+					>
+						<View
 							style={{
-								marginTop: 5 * Dimensions.height,
-								fontSize: 16,
-								color: Colors.DeepGray,
+								backgroundColor: Colors.White,
+								height: Dimensions.height * 43,
+								justifyContent: 'space-between',
 							}}
 						>
-							{selectSize} (355ml)
-						</Text>
-					</View>
-					<BigArrow
-						style={{
-							marginLeft: Dimensions.width * 237,
-							marginTop: Dimensions.height * 6,
-						}}
-					></BigArrow>
-					{/* 355ml 목업데이터라 사이즈에 맞게 Ml수정 작업 필요 */}
-					{/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
+							<Text
+								style={{
+									color: Colors.Black,
+									fontSize: 16,
+									fontWeight: 'bold',
+								}}
+							>
+								사이즈
+							</Text>
+							<Text
+								style={{
+									fontSize: 16,
+									color: Colors.DeepGray,
+									fontWeight: '500',
+								}}
+							>
+								{selectSize} (355ml)
+							</Text>
+						</View>
+						<BigArrow />
+						{/* 355ml 목업데이터라 사이즈에 맞게 Ml수정 작업 필요 */}
+						{/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
                     {Size.map((item) => {
                         return (
                             <Pressable style={{ minWidth: Dimensions.width * 39, height: Dimensions.height * 28, borderColor: Colors.DarkGray, borderWidth: 1, borderRadius: 5, paddingHorizontal: 8, paddingVertical: 4, marginRight: Dimensions.width * 19,backgroundColor:item === selectSize ? Colors.Brown : Colors.White}}
@@ -644,7 +656,8 @@ export default function DrinkDetailScreen({
                         )
                     })}
                 </View> */}
-				</Pressable>
+					</Pressable>
+				</View>
 				<Pressable
 					style={{
 						width: '100%',
