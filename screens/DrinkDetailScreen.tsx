@@ -442,7 +442,14 @@ export default function DrinkDetailScreen({
 			</Modal>
 
 			<View style={styles.headerContainer}>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+				<View
+					style={{
+						height: Dimensions.height * 48,
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
+				>
 					<Arrow />
 					{isBookMark ? (
 						<YellowStar
@@ -460,28 +467,26 @@ export default function DrinkDetailScreen({
 				</View>
 				<Text
 					style={{
-						marginTop: Dimensions.height * 15,
-						marginLeft: Dimensions.width * 2,
 						fontSize: 16,
 						color: Colors.White,
-						fontWeight: '700',
+						fontWeight: 'bold',
 					}}
 				>
 					스타벅스
 				</Text>
 				<View
 					style={{
+						height: Dimensions.height * 30,
 						flexDirection: 'row',
-						marginTop: Dimensions.height * 4,
-						marginLeft: Dimensions.width * 2,
+						justifyContent: 'space-between',
+						alignItems: 'center',
 					}}
 				>
 					<Text
 						style={{
 							color: Colors.White,
 							fontSize: 25,
-							fontWeight: '700',
-							width: Dimensions.width * 143,
+							fontWeight: 'bold',
 						}}
 					>
 						돌체 콜드 브루
@@ -489,8 +494,6 @@ export default function DrinkDetailScreen({
 					<View
 						style={{
 							flexDirection: 'row',
-							marginLeft: Dimensions.width * 79,
-							height: Dimensions.height * 25,
 							width: Dimensions.width * 135,
 							justifyContent: 'space-between',
 							alignItems: 'center',
@@ -520,7 +523,7 @@ export default function DrinkDetailScreen({
 							onPress={() => {
 								setCupCount(cupCount + 1);
 							}}
-						></WhitePlus>
+						/>
 					</View>
 				</View>
 			</View>
@@ -800,8 +803,6 @@ const styles = StyleSheet.create({
 		height: Dimensions.height * 211,
 		backgroundColor: Colors.DarkBrown,
 		paddingHorizontal: Dimensions.width * 12,
-		paddingVertical: Dimensions.height * 12,
-		marginBottom: 2,
 	},
 	BottomContainer: {
 		width: Dimensions.width * 358,
