@@ -43,7 +43,7 @@ export default function DrinkDetailScreen({
 	const [calendarOpen, setCalendarOpen] = useState(false);
 	const [dateToAddDrink, setDateToAddDrink] = useState(new Date());
 	return (
-		<SafeAreaView style={styles.topContainer}>
+		<>
 			<Modal
 				animationType='fade'
 				transparent={true}
@@ -441,173 +441,176 @@ export default function DrinkDetailScreen({
 				</View>
 			</Modal>
 
-			<View style={styles.headerContainer}>
-				<View
-					style={{
-						height: Dimensions.height * 48,
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-					}}
-				>
-					<Arrow />
-					{isBookMark ? (
-						<YellowStar
-							onPress={() => {
-								setBookMark(false);
-							}}
-						/>
-					) : (
-						<Star
-							onPress={() => {
-								setBookMark(true);
-							}}
-						/>
-					)}
-				</View>
-				<Text
-					style={{
-						fontSize: 16,
-						color: Colors.White,
-						fontWeight: 'bold',
-					}}
-				>
-					스타벅스
-				</Text>
-				<View
-					style={{
-						height: Dimensions.height * 30,
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-					}}
-				>
-					<Text
-						style={{
-							color: Colors.White,
-							fontSize: 25,
-							fontWeight: 'bold',
-						}}
-					>
-						돌체 콜드 브루
-					</Text>
+			<SafeAreaView style={styles.topContainer}>
+				<View style={styles.headerContainer}>
 					<View
 						style={{
+							height: Dimensions.height * 48,
 							flexDirection: 'row',
-							width: Dimensions.width * 135,
 							justifyContent: 'space-between',
 							alignItems: 'center',
 						}}
 					>
-						{cupCount === 1 ? (
-							<DisabledWhiteMinus />
+						<Arrow />
+						{isBookMark ? (
+							<YellowStar
+								onPress={() => {
+									setBookMark(false);
+								}}
+							/>
 						) : (
-							<ActivatedWhiteMinus
+							<Star
+								onPress={() => {
+									setBookMark(true);
+								}}
+							/>
+						)}
+					</View>
+					<Text
+						style={{
+							fontSize: 16,
+							color: Colors.White,
+							fontWeight: 'bold',
+						}}
+					>
+						스타벅스
+					</Text>
+					<View
+						style={{
+							height: Dimensions.height * 30,
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+						}}
+					>
+						<Text
+							style={{
+								color: Colors.White,
+								fontSize: 25,
+								fontWeight: 'bold',
+							}}
+						>
+							돌체 콜드 브루
+						</Text>
+						<View
+							style={{
+								flexDirection: 'row',
+								width: Dimensions.width * 135,
+								justifyContent: 'space-between',
+								alignItems: 'center',
+							}}
+						>
+							{cupCount === 1 ? (
+								<DisabledWhiteMinus />
+							) : (
+								<ActivatedWhiteMinus
+									width='18'
+									height='18'
+									viewBox='0 0 18 18'
+									onPress={() => {
+										if (cupCount != 1) setCupCount(cupCount - 1);
+									}}
+								></ActivatedWhiteMinus>
+							)}
+							<Text
+								style={{ fontSize: 21, color: Colors.White, fontWeight: '700' }}
+							>
+								{cupCount}잔
+							</Text>
+							<WhitePlus
 								width='18'
 								height='18'
 								viewBox='0 0 18 18'
 								onPress={() => {
-									if (cupCount != 1) setCupCount(cupCount - 1);
+									setCupCount(cupCount + 1);
 								}}
-							></ActivatedWhiteMinus>
-						)}
-						<Text
-							style={{ fontSize: 21, color: Colors.White, fontWeight: '700' }}
-						>
-							{cupCount}잔
-						</Text>
-						<WhitePlus
-							width='18'
-							height='18'
-							viewBox='0 0 18 18'
-							onPress={() => {
-								setCupCount(cupCount + 1);
-							}}
-						/>
+							/>
+						</View>
 					</View>
 				</View>
-			</View>
-			<View
-				style={{
-					width: Dimensions.width * 358,
-					height: 1,
-					marginTop: Dimensions.height * 27,
-					backgroundColor: Colors.LightGray,
-					zIndex: 1,
-				}}
-			></View>
-			<View style={styles.BottomContainer}>
-				<Text style={{ color: Colors.Black, fontSize: 14, marginBottom: 4 }}>
-					총 카페인 함량
-				</Text>
-				<Text style={{ color: Colors.Black, fontSize: 30, fontWeight: '700' }}>
-					155mg
-				</Text>
-				<Text
-					style={{ color: Colors.Black, marginTop: Dimensions.height * 22 }}
-				>
-					하루 카페인 섭취 목표량의 {caffeineGoal}%
-				</Text>
 				<View
 					style={{
-						width: Dimensions.width * 319,
-						height: Dimensions.height * 10.69,
-						borderRadius: 20,
-						backgroundColor: Colors.DarkGray,
-						marginTop: Dimensions.height * 9.65,
+						width: Dimensions.width * 358,
+						height: 1,
+						marginTop: Dimensions.height * 27,
+						backgroundColor: Colors.LightGray,
+						zIndex: 1,
 					}}
-				>
+				></View>
+				<View style={styles.BottomContainer}>
+					<Text style={{ color: Colors.Black, fontSize: 14, marginBottom: 4 }}>
+						총 카페인 함량
+					</Text>
+					<Text
+						style={{ color: Colors.Black, fontSize: 30, fontWeight: '700' }}
+					>
+						155mg
+					</Text>
+					<Text
+						style={{ color: Colors.Black, marginTop: Dimensions.height * 22 }}
+					>
+						하루 카페인 섭취 목표량의 {caffeineGoal}%
+					</Text>
 					<View
 						style={{
-							width: caffeineGoal + '%',
+							width: Dimensions.width * 319,
 							height: Dimensions.height * 10.69,
 							borderRadius: 20,
-							backgroundColor: Colors.Brown,
-						}}
-					></View>
-				</View>
-			</View>
-			<View style={{ height: Dimensions.height * 80 }}></View>
-			<Pressable
-				style={{
-					backgroundColor: Colors.White,
-					width: '100%',
-					height: Dimensions.height * 99,
-					borderBottomColor: Colors.LightGray,
-					borderWidth: 1,
-					borderRightWidth: 0,
-					borderLeftWidth: 0,
-					borderTopWidth: 0,
-					paddingHorizontal: Dimensions.width * 27,
-					paddingTop: Dimensions.height * 37,
-					flexDirection: 'row',
-				}}
-				onPress={() => setSizeModalVisible(true)}
-			>
-				<View>
-					<Text
-						style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
-					>
-						사이즈
-					</Text>
-					<Text
-						style={{
-							marginTop: 5 * Dimensions.height,
-							fontSize: 16,
-							color: Colors.DeepGray,
+							backgroundColor: Colors.DarkGray,
+							marginTop: Dimensions.height * 9.65,
 						}}
 					>
-						{selectSize} (355ml)
-					</Text>
+						<View
+							style={{
+								width: caffeineGoal + '%',
+								height: Dimensions.height * 10.69,
+								borderRadius: 20,
+								backgroundColor: Colors.Brown,
+							}}
+						></View>
+					</View>
 				</View>
-				<BigArrow
+				<View style={{ height: Dimensions.height * 80 }}></View>
+				<Pressable
 					style={{
-						marginLeft: Dimensions.width * 237,
-						marginTop: Dimensions.height * 6,
+						backgroundColor: Colors.White,
+						width: '100%',
+						height: Dimensions.height * 99,
+						borderBottomColor: Colors.LightGray,
+						borderWidth: 1,
+						borderRightWidth: 0,
+						borderLeftWidth: 0,
+						borderTopWidth: 0,
+						paddingHorizontal: Dimensions.width * 27,
+						paddingTop: Dimensions.height * 37,
+						flexDirection: 'row',
 					}}
-				></BigArrow>
-				{/* 355ml 목업데이터라 사이즈에 맞게 Ml수정 작업 필요 */}
-				{/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
+					onPress={() => setSizeModalVisible(true)}
+				>
+					<View>
+						<Text
+							style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
+						>
+							사이즈
+						</Text>
+						<Text
+							style={{
+								marginTop: 5 * Dimensions.height,
+								fontSize: 16,
+								color: Colors.DeepGray,
+							}}
+						>
+							{selectSize} (355ml)
+						</Text>
+					</View>
+					<BigArrow
+						style={{
+							marginLeft: Dimensions.width * 237,
+							marginTop: Dimensions.height * 6,
+						}}
+					></BigArrow>
+					{/* 355ml 목업데이터라 사이즈에 맞게 Ml수정 작업 필요 */}
+					{/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
                     {Size.map((item) => {
                         return (
                             <Pressable style={{ minWidth: Dimensions.width * 39, height: Dimensions.height * 28, borderColor: Colors.DarkGray, borderWidth: 1, borderRadius: 5, paddingHorizontal: 8, paddingVertical: 4, marginRight: Dimensions.width * 19,backgroundColor:item === selectSize ? Colors.Brown : Colors.White}}
@@ -617,46 +620,46 @@ export default function DrinkDetailScreen({
                         )
                     })}
                 </View> */}
-			</Pressable>
-			<Pressable
-				style={{
-					width: '100%',
-					height: Dimensions.height * 73,
-					backgroundColor: Colors.White,
-					borderBottomColor: Colors.LightGray,
-					borderWidth: 1,
-					borderRightWidth: 0,
-					borderLeftWidth: 0,
-					borderTopWidth: 0,
-					paddingTop: Dimensions.height * 16,
-					paddingHorizontal: Dimensions.width * 27,
-					flexDirection: 'row',
-				}}
-				onPress={() => setOptionModalVisible(true)}
-			>
-				<View>
-					<Text
-						style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
-					>
-						옵션
-					</Text>
-					<Text
-						style={{
-							marginTop: 5 * Dimensions.height,
-							fontSize: 16,
-							color: Colors.DeepGray,
-						}}
-					>
-						{selectTemperature}, {selectOption}
-					</Text>
-				</View>
-				<BigArrow
+				</Pressable>
+				<Pressable
 					style={{
-						marginLeft: Dimensions.width * 237,
-						marginTop: Dimensions.height * 6,
+						width: '100%',
+						height: Dimensions.height * 73,
+						backgroundColor: Colors.White,
+						borderBottomColor: Colors.LightGray,
+						borderWidth: 1,
+						borderRightWidth: 0,
+						borderLeftWidth: 0,
+						borderTopWidth: 0,
+						paddingTop: Dimensions.height * 16,
+						paddingHorizontal: Dimensions.width * 27,
+						flexDirection: 'row',
 					}}
-				></BigArrow>
-				{/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
+					onPress={() => setOptionModalVisible(true)}
+				>
+					<View>
+						<Text
+							style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
+						>
+							옵션
+						</Text>
+						<Text
+							style={{
+								marginTop: 5 * Dimensions.height,
+								fontSize: 16,
+								color: Colors.DeepGray,
+							}}
+						>
+							{selectTemperature}, {selectOption}
+						</Text>
+					</View>
+					<BigArrow
+						style={{
+							marginLeft: Dimensions.width * 237,
+							marginTop: Dimensions.height * 6,
+						}}
+					></BigArrow>
+					{/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
                     {Option.map((item) => {
                         return (
                             <Pressable style={{ minWidth: Dimensions.width * 39, height: Dimensions.height * 28, borderColor: Colors.DarkGray, borderWidth: 1, borderRadius: 5, paddingHorizontal: 8, paddingVertical: 4, marginRight: Dimensions.width * 19, backgroundColor:item === selectOption ? Colors.Brown : Colors.White}}
@@ -666,128 +669,135 @@ export default function DrinkDetailScreen({
                         )
                     })}
                 </View> */}
-			</Pressable>
-			<View
-				style={{
-					width: '100%',
-					height: Dimensions.height * 59,
-					backgroundColor: Colors.White,
-					borderBottomColor: Colors.LightGray,
-					borderWidth: 1,
-					borderRightWidth: 0,
-					borderLeftWidth: 0,
-					borderTopWidth: 0,
-					paddingTop: Dimensions.height * 20,
-					paddingHorizontal: Dimensions.width * 27,
-					flexDirection: 'row',
-				}}
-			>
-				<Text style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}>
-					샷 추가
-				</Text>
+				</Pressable>
 				<View
 					style={{
+						width: '100%',
+						height: Dimensions.height * 59,
+						backgroundColor: Colors.White,
+						borderBottomColor: Colors.LightGray,
+						borderWidth: 1,
+						borderRightWidth: 0,
+						borderLeftWidth: 0,
+						borderTopWidth: 0,
+						paddingTop: Dimensions.height * 20,
+						paddingHorizontal: Dimensions.width * 27,
 						flexDirection: 'row',
-						marginLeft: Dimensions.width * 196,
-						justifyContent: 'space-between',
-						width: Dimensions.width * 92,
 					}}
 				>
-					{caffeineCount === 0 ? (
-						<DisabledBlackMinus />
-					) : (
-						<ActivatedBlackMinus
+					<Text
+						style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
+					>
+						샷 추가
+					</Text>
+					<View
+						style={{
+							flexDirection: 'row',
+							marginLeft: Dimensions.width * 196,
+							justifyContent: 'space-between',
+							width: Dimensions.width * 92,
+						}}
+					>
+						{caffeineCount === 0 ? (
+							<DisabledBlackMinus />
+						) : (
+							<ActivatedBlackMinus
+								width='16'
+								height='16'
+								viewBox='0 0 16 16'
+								onPress={() => {
+									if (caffeineCount != 0) setCaffeineCount(caffeineCount - 1);
+								}}
+							></ActivatedBlackMinus>
+						)}
+						<Text
+							style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
+						>
+							{caffeineCount}
+						</Text>
+						<BlackPlus
 							width='16'
 							height='16'
 							viewBox='0 0 16 16'
 							onPress={() => {
-								if (caffeineCount != 0) setCaffeineCount(caffeineCount - 1);
+								setCaffeineCount(caffeineCount + 1);
 							}}
-						></ActivatedBlackMinus>
-					)}
-					<Text
-						style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
-					>
-						{caffeineCount}
-					</Text>
-					<BlackPlus
-						width='16'
-						height='16'
-						viewBox='0 0 16 16'
-						onPress={() => {
-							setCaffeineCount(caffeineCount + 1);
-						}}
-					></BlackPlus>
+						></BlackPlus>
+					</View>
 				</View>
-			</View>
-			<View
-				style={{
-					width: '100%',
-					height: Dimensions.height * 59,
-					backgroundColor: Colors.White,
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					paddingHorizontal: Dimensions.width * 27,
-				}}
-			>
-				<Text style={{ fontSize: 16, color: Colors.Black, fontWeight: '600' }}>
-					날짜
-				</Text>
-				<Pressable
-					style={({ pressed }) => ({
-						opacity: pressed ? 0.5 : 1,
+				<View
+					style={{
+						width: '100%',
+						height: Dimensions.height * 59,
+						backgroundColor: Colors.White,
 						flexDirection: 'row',
+						justifyContent: 'space-between',
 						alignItems: 'center',
-					})}
-					onPress={() => setCalendarOpen(true)}
+						paddingHorizontal: Dimensions.width * 27,
+					}}
 				>
-					<Text style={{ fontSize: 16, color: Colors.Black }}>
-						{dateToAddDrink.getFullYear() +
-							'년 ' +
-							(dateToAddDrink.getMonth() + 1) +
-							'월 ' +
-							dateToAddDrink.getDate() +
-							'일'}
+					<Text
+						style={{ fontSize: 16, color: Colors.Black, fontWeight: '600' }}
+					>
+						날짜
 					</Text>
-					<CalendarIcon
-						style={{
-							marginLeft: Dimensions.width * 15,
-						}}
-					/>
+					<Pressable
+						style={({ pressed }) => ({
+							opacity: pressed ? 0.5 : 1,
+							flexDirection: 'row',
+							alignItems: 'center',
+						})}
+						onPress={() => setCalendarOpen(true)}
+					>
+						<Text style={{ fontSize: 16, color: Colors.Black }}>
+							{dateToAddDrink.getFullYear() +
+								'년 ' +
+								(dateToAddDrink.getMonth() + 1) +
+								'월 ' +
+								dateToAddDrink.getDate() +
+								'일'}
+						</Text>
+						<CalendarIcon
+							style={{
+								marginLeft: Dimensions.width * 15,
+							}}
+						/>
+					</Pressable>
+				</View>
+				<Pressable
+					style={{
+						width: Dimensions.width * 358,
+						height: Dimensions.height * 44,
+						marginTop: Dimensions.height * 65,
+						borderRadius: 30,
+						backgroundColor: Colors.DarkBrown,
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}
+				>
+					<Text
+						style={{ color: Colors.White, fontSize: 16, fontWeight: '700' }}
+					>
+						음료 추가
+					</Text>
 				</Pressable>
-			</View>
-			<Pressable
-				style={{
-					width: Dimensions.width * 358,
-					height: Dimensions.height * 44,
-					marginTop: Dimensions.height * 65,
-					borderRadius: 30,
-					backgroundColor: Colors.DarkBrown,
-					justifyContent: 'center',
-					alignItems: 'center',
-				}}
-			>
-				<Text style={{ color: Colors.White, fontSize: 16, fontWeight: '700' }}>
-					음료 추가
-				</Text>
-			</Pressable>
-			<DatePicker
-				modal={true}
-				open={calendarOpen}
-				date={dateToAddDrink}
-				onConfirm={(date) => {
-					setDateToAddDrink(date);
-					setCalendarOpen(false);
-				}}
-				onCancel={() => setCalendarOpen(false)}
-				mode={'date'}
-				locale={'ko'}
-				title={'음료를 추가할 날짜 선택'}
-				confirmText='확인'
-				cancelText='취소'
-			/>
-		</SafeAreaView>
+				<DatePicker
+					modal={true}
+					open={calendarOpen}
+					date={dateToAddDrink}
+					onConfirm={(date) => {
+						setDateToAddDrink(date);
+						setCalendarOpen(false);
+					}}
+					onCancel={() => setCalendarOpen(false)}
+					mode={'date'}
+					locale={'ko'}
+					title={'음료를 추가할 날짜 선택'}
+					confirmText='확인'
+					cancelText='취소'
+				/>
+			</SafeAreaView>
+		</>
 	);
 }
 
