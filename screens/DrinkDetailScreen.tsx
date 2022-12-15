@@ -872,7 +872,8 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.White,
 		position: 'absolute',
 		bottom: 0,
-		borderRadius: 25,
+		borderTopRightRadius: 25,
+		borderTopLeftRadius: 25,
 		paddingTop: Dimensions.height * 20,
 	},
 	tailContainter: {
