@@ -528,61 +528,85 @@ export default function DrinkDetailScreen({
 						</View>
 					</View>
 				</View>
-				<View
-					style={{
-						width: Dimensions.width * 358,
-						height: 1,
-						marginTop: Dimensions.height * 27,
-						backgroundColor: Colors.LightGray,
-						zIndex: 1,
-					}}
-				></View>
 				<View style={styles.BottomContainer}>
-					<Text style={{ color: Colors.Black, fontSize: 14, marginBottom: 4 }}>
-						총 카페인 함량
-					</Text>
-					<Text
-						style={{ color: Colors.Black, fontSize: 30, fontWeight: '700' }}
-					>
-						155mg
-					</Text>
-					<Text
-						style={{ color: Colors.Black, marginTop: Dimensions.height * 22 }}
-					>
-						하루 카페인 섭취 목표량의 {caffeineGoal}%
-					</Text>
 					<View
 						style={{
-							width: Dimensions.width * 319,
-							height: Dimensions.height * 10.69,
-							borderRadius: 20,
-							backgroundColor: Colors.DarkGray,
-							marginTop: Dimensions.height * 9.65,
+							height: Dimensions.height * 56,
+							justifyContent: 'space-between',
+						}}
+					>
+						<Text style={{ color: Colors.Black, fontSize: 14 }}>
+							총 카페인 함량
+						</Text>
+
+						<Text
+							style={{ color: Colors.Black, fontSize: 30, fontWeight: 'bold' }}
+						>
+							155mg
+						</Text>
+					</View>
+					<View
+						style={{
+							height: Dimensions.height * 40,
+							justifyContent: 'space-between',
 						}}
 					>
 						<View
 							style={{
-								width: caffeineGoal + '%',
+								height: Dimensions.height * 19,
+								flexDirection: 'row',
+								alignItems: 'center',
+							}}
+						>
+							<Text
+								style={{
+									color: Colors.Black,
+								}}
+							>
+								{`하루 카페인 섭취 목표량의  `}
+							</Text>
+							<Text
+								style={{
+									color: Colors.Black,
+									fontSize: 16,
+									fontWeight: 'bold',
+								}}
+							>
+								{caffeineGoal}%
+							</Text>
+						</View>
+
+						<View
+							style={{
+								width: Dimensions.width * 319,
 								height: Dimensions.height * 10.69,
 								borderRadius: 20,
-								backgroundColor: Colors.Brown,
+								backgroundColor: Colors.DarkGray,
+								marginTop: Dimensions.height * 9.65,
 							}}
-						></View>
+						>
+							<View
+								style={{
+									width: caffeineGoal + '%',
+									height: Dimensions.height * 10.69,
+									borderRadius: 20,
+									backgroundColor: Colors.Brown,
+								}}
+							/>
+						</View>
 					</View>
 				</View>
-				<View style={{ height: Dimensions.height * 80 }}></View>
 				<Pressable
 					style={{
 						backgroundColor: Colors.White,
-						width: '100%',
-						height: Dimensions.height * 99,
+						width: Dimensions.width * 390,
+						height: Dimensions.height * 208,
 						borderBottomColor: Colors.LightGray,
 						borderWidth: 1,
 						borderRightWidth: 0,
 						borderLeftWidth: 0,
 						borderTopWidth: 0,
-						paddingHorizontal: Dimensions.width * 27,
-						paddingTop: Dimensions.height * 37,
+						paddingTop: Dimensions.height * 131,
 						flexDirection: 'row',
 					}}
 					onPress={() => setSizeModalVisible(true)}
@@ -632,7 +656,7 @@ export default function DrinkDetailScreen({
 						borderLeftWidth: 0,
 						borderTopWidth: 0,
 						paddingTop: Dimensions.height * 16,
-						paddingHorizontal: Dimensions.width * 27,
+						paddingHorizontal: Dimensions.width * 25,
 						flexDirection: 'row',
 					}}
 					onPress={() => setOptionModalVisible(true)}
@@ -819,8 +843,9 @@ const styles = StyleSheet.create({
 		height: Dimensions.height * 150,
 		backgroundColor: Colors.White,
 		position: 'absolute',
-		top: Dimensions.height * 202.81,
+		top: Dimensions.height * 157,
 		right: Dimensions.width * 16,
+		zIndex: 2000,
 		borderRadius: 10,
 		...Platform.select({
 			ios: {
@@ -838,6 +863,7 @@ const styles = StyleSheet.create({
 		}),
 		paddingHorizontal: Dimensions.width * 20,
 		paddingVertical: Dimensions.width * 15,
+		justifyContent: 'space-between',
 	},
 	searchBarInput: {
 		width: Dimensions.width * 278,
