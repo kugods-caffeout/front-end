@@ -742,25 +742,28 @@ export default function DrinkDetailScreen({
 				</View>
 				<View
 					style={{
-						width: '100%',
-						height: Dimensions.height * 59,
+						width: Dimensions.width * 390,
+						height: Dimensions.height * 66,
 						backgroundColor: Colors.White,
 						flexDirection: 'row',
 						justifyContent: 'space-between',
 						alignItems: 'center',
-						paddingHorizontal: Dimensions.width * 27,
+						paddingHorizontal: Dimensions.width * 25,
 					}}
 				>
 					<Text
-						style={{ fontSize: 16, color: Colors.Black, fontWeight: '600' }}
+						style={{ fontSize: 16, color: Colors.Black, fontWeight: 'bold' }}
 					>
 						날짜
 					</Text>
 					<Pressable
 						style={({ pressed }) => ({
 							opacity: pressed ? 0.5 : 1,
+							width: Dimensions.width * 140,
 							flexDirection: 'row',
 							alignItems: 'center',
+							justifyContent: 'space-between',
+							backgroundColor: Colors.White,
 						})}
 						onPress={() => setCalendarOpen(true)}
 					>
@@ -772,11 +775,7 @@ export default function DrinkDetailScreen({
 								dateToAddDrink.getDate() +
 								'일'}
 						</Text>
-						<CalendarIcon
-							style={{
-								marginLeft: Dimensions.width * 15,
-							}}
-						/>
+						<CalendarIcon />
 					</Pressable>
 				</View>
 				<Pressable
