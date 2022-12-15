@@ -645,17 +645,6 @@ export default function DrinkDetailScreen({
 							</Text>
 						</View>
 						<BigArrow />
-						{/* 355ml 목업데이터라 사이즈에 맞게 Ml수정 작업 필요 */}
-						{/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
-                    {Size.map((item) => {
-                        return (
-                            <Pressable style={{ minWidth: Dimensions.width * 39, height: Dimensions.height * 28, borderColor: Colors.DarkGray, borderWidth: 1, borderRadius: 5, paddingHorizontal: 8, paddingVertical: 4, marginRight: Dimensions.width * 19,backgroundColor:item === selectSize ? Colors.Brown : Colors.White}}
-                                       onPress={()=>{setSelectSize(item)}}>
-                                <Text style={{fontSize:16,color: item===selectSize?Colors.White:Colors.Black }}>{item}</Text>
-                            </Pressable>
-                        )
-                    })}
-                </View> */}
 					</Pressable>
 				</View>
 				<Pressable
