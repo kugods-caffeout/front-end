@@ -97,34 +97,15 @@ export default function DrinkDetailScreen({
 							justifyContent: 'space-between',
 						}}
 					>
-						<Pressable onPress={() => setSelectSize('Short')}>
-							<SizeItem
-								size='Short'
-								volume={236}
-								isSelected={selectSize === 'Short'}
-							/>
-						</Pressable>
-						<Pressable onPress={() => setSelectSize('Tall')}>
-							<SizeItem
-								size='Tall'
-								volume={354}
-								isSelected={selectSize === 'Tall'}
-							/>
-						</Pressable>
-						<Pressable onPress={() => setSelectSize('Grande')}>
-							<SizeItem
-								size='Grande'
-								volume={473}
-								isSelected={selectSize === 'Grande'}
-							/>
-						</Pressable>
-						<Pressable onPress={() => setSelectSize('Venti')}>
-							<SizeItem
-								size='Venti'
-								volume={591}
-								isSelected={selectSize === 'Venti'}
-							/>
-						</Pressable>
+						{Size.map((size) => (
+							<Pressable onPress={() => setSelectSize(size)}>
+								<SizeItem
+									size={size}
+									volume={236}
+									isSelected={selectSize === size}
+								/>
+							</Pressable>
+						))}
 					</View>
 					<View
 						style={{
