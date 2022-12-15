@@ -690,70 +690,54 @@ export default function DrinkDetailScreen({
 						</Text>
 					</View>
 					<BigArrow />
-					{/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
-                    {Option.map((item) => {
-                        return (
-                            <Pressable style={{ minWidth: Dimensions.width * 39, height: Dimensions.height * 28, borderColor: Colors.DarkGray, borderWidth: 1, borderRadius: 5, paddingHorizontal: 8, paddingVertical: 4, marginRight: Dimensions.width * 19, backgroundColor:item === selectOption ? Colors.Brown : Colors.White}}
-                                       onPress={()=>{setSelectOption(item)}}>
-                                <Text style={{fontSize:16,color: item===selectOption?Colors.White:Colors.Black}}>{item}</Text>
-                            </Pressable>
-                        )
-                    })}
-                </View> */}
 				</Pressable>
 				<View
 					style={{
-						width: '100%',
-						height: Dimensions.height * 59,
+						width: Dimensions.width * 390,
+						height: Dimensions.height * 66,
 						backgroundColor: Colors.White,
 						borderBottomColor: Colors.LightGray,
-						borderWidth: 1,
-						borderRightWidth: 0,
-						borderLeftWidth: 0,
-						borderTopWidth: 0,
-						paddingTop: Dimensions.height * 20,
-						paddingHorizontal: Dimensions.width * 27,
+						borderBottomWidth: 1,
+						paddingHorizontal: Dimensions.width * 25,
 						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
 					}}
 				>
 					<Text
-						style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
+						style={{ color: Colors.Black, fontSize: 16, fontWeight: 'bold' }}
 					>
 						샷 추가
 					</Text>
 					<View
 						style={{
 							flexDirection: 'row',
-							marginLeft: Dimensions.width * 196,
 							justifyContent: 'space-between',
+							alignItems: 'center',
 							width: Dimensions.width * 92,
+							height: Dimensions.height * 19,
+							backgroundColor: Colors.White,
 						}}
 					>
 						{caffeineCount === 0 ? (
 							<DisabledBlackMinus />
 						) : (
 							<ActivatedBlackMinus
-								width='16'
-								height='16'
-								viewBox='0 0 16 16'
 								onPress={() => {
 									if (caffeineCount != 0) setCaffeineCount(caffeineCount - 1);
 								}}
-							></ActivatedBlackMinus>
+							/>
 						)}
 						<Text
-							style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
+							style={{ color: Colors.Black, fontSize: 16, fontWeight: 'bold' }}
 						>
 							{caffeineCount}
 						</Text>
 						<BlackPlus
-							width='16'
-							height='16'
-							viewBox='0 0 16 16'
 							onPress={() => {
 								setCaffeineCount(caffeineCount + 1);
 							}}
-						></BlackPlus>
+						/>
 					</View>
 				</View>
 				<View
