@@ -601,21 +601,22 @@ export default function DrinkDetailScreen({
 						backgroundColor: Colors.White,
 						width: Dimensions.width * 390,
 						height: Dimensions.height * 208,
-						borderBottomColor: Colors.LightGray,
-						borderBottomWidth: 1,
 						paddingTop: Dimensions.height * 131,
-						paddingHorizontal: Dimensions.width * 25,
 					}}
 				>
 					<Pressable
 						onPress={() => setSizeModalVisible(true)}
 						style={({ pressed }) => ({
 							opacity: pressed ? 0.5 : 1,
+							width: Dimensions.width * 390,
 							height: Dimensions.height * 76,
 							flexDirection: 'row',
 							justifyContent: 'space-between',
 							alignItems: 'center',
 							backgroundColor: Colors.White,
+							borderBottomColor: Colors.LightGray,
+							borderBottomWidth: 1,
+							paddingHorizontal: Dimensions.width * 25,
 						})}
 					>
 						<View
@@ -648,43 +649,47 @@ export default function DrinkDetailScreen({
 					</Pressable>
 				</View>
 				<Pressable
-					style={{
-						width: '100%',
-						height: Dimensions.height * 73,
+					style={({ pressed }) => ({
+						opacity: pressed ? 0.5 : 1,
+						width: Dimensions.width * 390,
+						height: Dimensions.height * 76,
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
 						backgroundColor: Colors.White,
 						borderBottomColor: Colors.LightGray,
-						borderWidth: 1,
-						borderRightWidth: 0,
-						borderLeftWidth: 0,
-						borderTopWidth: 0,
-						paddingTop: Dimensions.height * 16,
+						borderBottomWidth: 1,
 						paddingHorizontal: Dimensions.width * 25,
-						flexDirection: 'row',
-					}}
+					})}
 					onPress={() => setOptionModalVisible(true)}
 				>
-					<View>
+					<View
+						style={{
+							backgroundColor: Colors.White,
+							height: Dimensions.height * 43,
+							justifyContent: 'space-between',
+						}}
+					>
 						<Text
-							style={{ color: Colors.Black, fontSize: 16, fontWeight: '600' }}
+							style={{
+								color: Colors.Black,
+								fontSize: 16,
+								fontWeight: 'bold',
+							}}
 						>
 							옵션
 						</Text>
 						<Text
 							style={{
-								marginTop: 5 * Dimensions.height,
 								fontSize: 16,
 								color: Colors.DeepGray,
+								fontWeight: '500',
 							}}
 						>
 							{selectTemperature}, {selectOption}
 						</Text>
 					</View>
-					<BigArrow
-						style={{
-							marginLeft: Dimensions.width * 237,
-							marginTop: Dimensions.height * 6,
-						}}
-					></BigArrow>
+					<BigArrow />
 					{/* <View style={{width:'100%',flexDirection:'row',marginTop:Dimensions.height* 15}}>
                     {Option.map((item) => {
                         return (
