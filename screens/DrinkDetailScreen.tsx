@@ -142,7 +142,7 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						<Text
-							style={{ color: Colors.White, fontSize: 16, fontWeight: '700' }}
+							style={{ color: Colors.White, fontSize: 16, fontWeight: 'bold' }}
 						>
 							적용하기
 						</Text>
@@ -212,7 +212,7 @@ export default function DrinkDetailScreen({
 								style={{
 									fontSize: 16,
 									color: Colors.DeepGray,
-									fontWeight: '700',
+									fontWeight: 'bold',
 								}}
 							>
 								HOT
@@ -235,7 +235,7 @@ export default function DrinkDetailScreen({
 								style={{
 									fontSize: 16,
 									color: Colors.DeepGray,
-									fontWeight: '700',
+									fontWeight: 'bold',
 								}}
 							>
 								ICE
@@ -316,7 +316,11 @@ export default function DrinkDetailScreen({
 							}}
 						>
 							<Text
-								style={{ color: Colors.White, fontSize: 16, fontWeight: '700' }}
+								style={{
+									color: Colors.White,
+									fontSize: 16,
+									fontWeight: 'bold',
+								}}
 							>
 								적용하기
 							</Text>
@@ -405,7 +409,11 @@ export default function DrinkDetailScreen({
 								></ActivatedWhiteMinus>
 							)}
 							<Text
-								style={{ fontSize: 21, color: Colors.White, fontWeight: '700' }}
+								style={{
+									fontSize: 21,
+									color: Colors.White,
+									fontWeight: 'bold',
+								}}
 							>
 								{cupCount}잔
 							</Text>
@@ -691,7 +699,7 @@ export default function DrinkDetailScreen({
 					}}
 				>
 					<Text
-						style={{ color: Colors.White, fontSize: 16, fontWeight: '700' }}
+						style={{ color: Colors.White, fontSize: 16, fontWeight: 'bold' }}
 					>
 						음료 추가
 					</Text>
