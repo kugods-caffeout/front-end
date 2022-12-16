@@ -15,7 +15,6 @@ import Colors from '../constants/Colors';
 import WhitePlus from '../assets/white-plus.svg';
 import DisabledWhiteMinus from '../assets/disabled-white-minus.svg';
 import ActivatedWhiteMinus from '../assets/activated-white-minus.svg';
-// import { View } from 'react-native-safe-area-context';
 import BlackPlus from '../assets/black-plus.svg';
 import DisabledBlackMinus from '../assets/disabled-black-minus.svg';
 import ActivatedBlackMinus from '../assets/activated-black-minus.svg';
@@ -46,7 +45,9 @@ export default function DrinkDetailScreen({
 	const [selectSizeTemp, setSelectSizeTemp] = useState(selectSize);
 	const [selectOption, setSelectOption] = useState('선택 없음');
 	const [caffeineGoal, setCaffeineGoal] = useState(60);
-	const [selectTemperature, setTemperature] = useState('ICE');
+	const [selectTemperature, setSelectTemperature] = useState('ICE');
+	const [selectTemperatureTemp, setSelectTemperatureTemp] =
+		useState(selectTemperature);
 	const [optionModalVisible, setOptionModalVisible] = useState(false);
 	const [sizeModalVisible, setSizeModalVisible] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
@@ -159,6 +160,7 @@ export default function DrinkDetailScreen({
 			>
 				<TouchableWithoutFeedback
 					onPress={() => {
+						setSelectTemperatureTemp(selectTemperature);
 						setOptionModalVisible(false);
 					}}
 				>
@@ -194,53 +196,44 @@ export default function DrinkDetailScreen({
 							온도
 						</Text>
 					</View>
-					<View style={{ flexDirection: 'row' }}>
-						<Pressable
-							style={{
-								width: Dimensions.width * 171,
-								height: Dimensions.height * 40,
-								borderWidth: 1,
-								borderColor: Colors.DarkGray,
-								borderTopLeftRadius: 5,
-								borderBottomLeftRadius: 5,
-								backgroundColor: Colors.White,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						>
-							<Text
+					<View
+						style={{
+							flexDirection: 'row',
+							borderRadius: 5,
+							borderWidth: 1,
+							borderColor: Colors.DarkGray,
+						}}
+					>
+						{temperatureList.map((temperature) => (
+							<Pressable
 								style={{
-									fontSize: 16,
-									color: Colors.DeepGray,
-									fontWeight: 'bold',
+									width: Dimensions.width * 171,
+									height: Dimensions.height * 40,
+									borderWidth: 0.5,
+									borderColor: Colors.DarkGray,
+									backgroundColor:
+										selectTemperatureTemp === temperature
+											? Colors.Brown
+											: Colors.White,
+									justifyContent: 'center',
+									alignItems: 'center',
 								}}
+								onPress={() => setSelectTemperatureTemp(temperature)}
 							>
-								HOT
-							</Text>
-						</Pressable>
-						<Pressable
-							style={{
-								width: Dimensions.width * 171,
-								height: Dimensions.height * 40,
-								borderWidth: 1,
-								borderColor: Colors.DarkGray,
-								borderTopRightRadius: 5,
-								borderBottomRightRadius: 5,
-								backgroundColor: Colors.White,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						>
-							<Text
-								style={{
-									fontSize: 16,
-									color: Colors.DeepGray,
-									fontWeight: 'bold',
-								}}
-							>
-								ICE
-							</Text>
-						</Pressable>
+								<Text
+									style={{
+										fontSize: 16,
+										color:
+											selectTemperatureTemp === temperature
+												? Colors.White
+												: Colors.DeepGray,
+										fontWeight: 'bold',
+									}}
+								>
+									{temperature}
+								</Text>
+							</Pressable>
+						))}
 					</View>
 					<View
 						style={{
@@ -312,6 +305,7 @@ export default function DrinkDetailScreen({
 								alignItems: 'center',
 							}}
 							onPress={() => {
+								setSelectTemperature(selectTemperatureTemp);
 								setOptionModalVisible(false);
 							}}
 						>
