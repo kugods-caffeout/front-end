@@ -172,35 +172,37 @@ export default function DrinkDetailScreen({
 					/>
 				</TouchableWithoutFeedback>
 				<View style={styles.modal}>
+					<ModalLine
+						style={{
+							alignSelf: 'center',
+							marginBottom: Dimensions.height * 6,
+						}}
+					/>
 					<View
 						style={{
-							alignItems: 'center',
+							height: Dimensions.height * 48,
+							justifyContent: 'center',
 						}}
 					>
-						<ModalLine />
+						<Text
+							style={{
+								fontSize: 16,
+								color: Colors.Black,
+								fontWeight: 'bold',
+							}}
+						>
+							온도
+						</Text>
 					</View>
-					<Text
-						style={{
-							fontSize: 16,
-							color: Colors.Black,
-							fontWeight: '700',
-							paddingTop: Dimensions.height * 20,
-							paddingLeft: 20,
-						}}
-					>
-						온도
-					</Text>
 					<View style={{ flexDirection: 'row' }}>
 						<Pressable
 							style={{
 								width: Dimensions.width * 171,
 								height: Dimensions.height * 40,
-								marginTop: Dimensions.height * 20,
-								marginLeft: 20,
 								borderWidth: 1,
-								borderStyle: 'solid',
 								borderColor: Colors.DarkGray,
-								borderRadius: 5,
+								borderTopLeftRadius: 5,
+								borderBottomLeftRadius: 5,
 								backgroundColor: Colors.White,
 								justifyContent: 'center',
 								alignItems: 'center',
@@ -220,11 +222,10 @@ export default function DrinkDetailScreen({
 							style={{
 								width: Dimensions.width * 171,
 								height: Dimensions.height * 40,
-								marginTop: Dimensions.height * 20,
 								borderWidth: 1,
-								borderStyle: 'solid',
 								borderColor: Colors.DarkGray,
-								borderRadius: 5,
+								borderTopRightRadius: 5,
+								borderBottomRightRadius: 5,
 								backgroundColor: Colors.White,
 								justifyContent: 'center',
 								alignItems: 'center',
@@ -241,90 +242,51 @@ export default function DrinkDetailScreen({
 							</Text>
 						</Pressable>
 					</View>
-					<Text
+					<View
 						style={{
-							fontSize: 16,
-							color: Colors.Black,
-							fontWeight: '700',
-							paddingTop: Dimensions.height * 20,
-							paddingLeft: 20,
+							height: Dimensions.height * 48,
+							justifyContent: 'center',
 						}}
 					>
-						추가 옵션
-					</Text>
-					<View style={{ flexDirection: 'row' }}>
-						<Pressable
+						<Text
 							style={{
-								width: Dimensions.width * 58,
-								height: Dimensions.height * 28,
-								marginTop: Dimensions.height * 20,
-								marginLeft: 20,
-								borderWidth: 1,
-								borderStyle: 'solid',
-								borderColor: Colors.DarkGray,
-								borderRadius: 5,
-								backgroundColor: Colors.White,
-								justifyContent: 'center',
-								alignItems: 'center',
+								fontSize: 16,
+								color: Colors.Black,
+								fontWeight: 'bold',
 							}}
 						>
-							<Text
+							추가 옵션
+						</Text>
+					</View>
+					<View
+						style={{
+							flexDirection: 'row',
+						}}
+					>
+						{additionalOptionList.map((option) => (
+							<Pressable
 								style={{
-									color: Colors.DeepGray,
-									fontSize: 16,
+									paddingHorizontal: Dimensions.width * 8,
+									height: Dimensions.height * 28,
+									borderWidth: 1,
+									borderColor: Colors.DarkGray,
+									borderRadius: 5,
+									backgroundColor: Colors.White,
+									justifyContent: 'center',
+									alignItems: 'center',
+									marginRight: Dimensions.width * 17,
 								}}
 							>
-								블론드
-							</Text>
-						</Pressable>
-						<Pressable
-							style={{
-								width: Dimensions.width * 72,
-								height: Dimensions.height * 28,
-								marginTop: Dimensions.height * 20,
-								marginLeft: 20,
-								borderWidth: 1,
-								borderStyle: 'solid',
-								borderColor: Colors.DarkGray,
-								borderRadius: 5,
-								backgroundColor: Colors.White,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						>
-							<Text
-								style={{
-									color: Colors.DeepGray,
-									fontSize: 16,
-								}}
-							>
-								디카페인
-							</Text>
-						</Pressable>
-						<Pressable
-							style={{
-								width: Dimensions.width * 91,
-								height: Dimensions.height * 28,
-								marginTop: Dimensions.height * 20,
-								marginLeft: 20,
-								borderWidth: 1,
-								borderStyle: 'solid',
-								borderColor: Colors.DarkGray,
-								borderRadius: 5,
-								backgroundColor: Colors.White,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						>
-							<Text
-								style={{
-									color: Colors.DeepGray,
-									fontSize: 16,
-								}}
-							>
-								1/2디카페인
-							</Text>
-						</Pressable>
+								<Text
+									style={{
+										color: Colors.DeepGray,
+										fontSize: 16,
+									}}
+								>
+									{option}
+								</Text>
+							</Pressable>
+						))}
 					</View>
 					<View
 						style={{
