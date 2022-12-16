@@ -31,12 +31,19 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 export default function DrinkDetailScreen({
 	navigation,
 }: RootStackScreenProps<'DrinkDetail'>) {
-	const Size = ['Short', 'Tall', 'Grande', 'Venti'];
-	const Option = ['블론드', '디카페인', '1/2디카페인'];
+	const sizeList = [
+		{ size: 'Short', volume: 236 },
+		{ size: 'Tall', volume: 354 },
+		{ size: 'Grande', volume: 473 },
+		{ size: 'Venti', volume: 591 },
+	];
+	const temperatureList = ['HOT', 'ICE'];
+	const additionalOptionList = ['블론드', '디카페인', '1/2디카페인'];
 	const [caffeineCount, setCaffeineCount] = useState(0);
 	const [cupCount, setCupCount] = useState(1);
 	const [isBookMark, setBookMark] = useState(false);
-	const [selectSize, setSelectSize] = useState('Tall');
+	const [selectSize, setSelectSize] = useState({ size: 'Tall', volume: 354 });
+	const [selectSizeTemp, setSelectSizeTemp] = useState(selectSize);
 	const [selectOption, setSelectOption] = useState('선택 없음');
 	const [caffeineGoal, setCaffeineGoal] = useState(60);
 	const [selectTemperature, setTemperature] = useState('ICE');
@@ -56,6 +63,7 @@ export default function DrinkDetailScreen({
 			>
 				<TouchableWithoutFeedback
 					onPress={() => {
+						setSelectSizeTemp(selectSize);
 						setSizeModalVisible(false);
 					}}
 				>
@@ -98,50 +106,47 @@ export default function DrinkDetailScreen({
 							justifyContent: 'space-between',
 						}}
 					>
-						{Size.map((size) => (
-							<Pressable onPress={() => setSelectSize(size)}>
+						{sizeList.map((item) => (
+							<Pressable
+								onPress={() =>
+									setSelectSizeTemp({
+										size: item.size,
+										volume: item.volume,
+									})
+								}
+							>
 								<SizeItem
-									size={size}
-									volume={236}
-									isSelected={selectSize === size}
+									size={item.size}
+									volume={item.volume}
+									isSelected={selectSizeTemp.size === item.size}
 								/>
 							</Pressable>
 						))}
 					</View>
-					<View
+
+					<Pressable
 						style={{
-							width: Dimensions.width * 390,
-							height: Dimensions.height * 130,
-							backgroundColor: Colors.White,
-							alignItems: 'center',
-							justifyContent: 'center',
+							width: Dimensions.width * 358,
+							height: Dimensions.height * 44,
 							position: 'absolute',
-							bottom: 75,
+							bottom: useSafeAreaInsets().bottom,
+							borderRadius: 30,
+							backgroundColor: Colors.DarkBrown,
+							justifyContent: 'center',
+							alignItems: 'center',
+							alignSelf: 'center',
+						}}
+						onPress={() => {
+							setSelectSize(selectSizeTemp);
+							setSizeModalVisible(false);
 						}}
 					>
-						<Pressable
-							style={{
-								width: Dimensions.width * 358,
-								height: Dimensions.height * 44,
-								marginTop: Dimensions.height * 65,
-								position: 'absolute',
-								bottom: 0,
-								borderRadius: 30,
-								backgroundColor: Colors.DarkBrown,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-							onPress={() => {
-								setSizeModalVisible(false);
-							}}
+						<Text
+							style={{ color: Colors.White, fontSize: 16, fontWeight: '700' }}
 						>
-							<Text
-								style={{ color: Colors.White, fontSize: 16, fontWeight: '700' }}
-							>
-								적용하기
-							</Text>
-						</Pressable>
-					</View>
+							적용하기
+						</Text>
+					</Pressable>
 				</View>
 			</Modal>
 			<Modal
@@ -576,7 +581,7 @@ export default function DrinkDetailScreen({
 									fontWeight: '500',
 								}}
 							>
-								{selectSize} (355ml)
+								{selectSize.size} ({selectSize.volume}ml)
 							</Text>
 						</View>
 						<BigArrow />
