@@ -15,7 +15,7 @@ import Colors from '../constants/Colors';
 import WhitePlus from '../assets/white-plus.svg';
 import DisabledWhiteMinus from '../assets/disabled-white-minus.svg';
 import ActivatedWhiteMinus from '../assets/activated-white-minus.svg';
-import { SafeAreaView } from 'react-native-safe-area-context';
+// import { View } from 'react-native-safe-area-context';
 import BlackPlus from '../assets/black-plus.svg';
 import DisabledBlackMinus from '../assets/disabled-black-minus.svg';
 import ActivatedBlackMinus from '../assets/activated-black-minus.svg';
@@ -26,6 +26,7 @@ import ModalLine from '../assets/modalLine.svg';
 import CalendarIcon from '../assets/calendar-icon.svg';
 import YellowStar from '../assets/yellow-star.svg';
 import SizeItem from '../component/SizeItem';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function DrinkDetailScreen({
 	navigation,
@@ -357,7 +358,15 @@ export default function DrinkDetailScreen({
 				</View>
 			</Modal>
 
-			<SafeAreaView style={styles.topContainer}>
+			<View
+				style={[
+					styles.topContainer,
+					{
+						paddingTop: useSafeAreaInsets().top,
+						paddingBottom: useSafeAreaInsets().bottom,
+					},
+				]}
+			>
 				<View style={styles.headerContainer}>
 					<View
 						style={{
@@ -444,7 +453,16 @@ export default function DrinkDetailScreen({
 						</View>
 					</View>
 				</View>
-				<View style={styles.BottomContainer}>
+				<View
+					style={[
+						styles.BottomContainer,
+						{
+							position: 'absolute',
+							top: useSafeAreaInsets().top + Dimensions.height * 157,
+							right: useSafeAreaInsets().right + Dimensions.width * 16,
+						},
+					]}
+				>
 					<View
 						style={{
 							height: Dimensions.height * 56,
@@ -726,7 +744,7 @@ export default function DrinkDetailScreen({
 					confirmText='확인'
 					cancelText='취소'
 				/>
-			</SafeAreaView>
+			</View>
 		</>
 	);
 }
@@ -748,9 +766,6 @@ const styles = StyleSheet.create({
 		width: Dimensions.width * 358,
 		height: Dimensions.height * 150,
 		backgroundColor: Colors.White,
-		position: 'absolute',
-		top: Dimensions.height * 157,
-		right: Dimensions.width * 16,
 		zIndex: 2000,
 		borderRadius: 10,
 		...Platform.select({
