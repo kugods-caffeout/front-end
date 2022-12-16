@@ -284,11 +284,7 @@ export default function DrinkDetailScreen({
 									alignItems: 'center',
 									marginRight: Dimensions.width * 17,
 								}}
-								onPress={() => {
-									console.log(selectAdditionalOptionTemp);
-									console.log(item);
-									setSelectAdditionalOptionTemp(item);
-								}}
+								onPress={() => setSelectAdditionalOptionTemp(item)}
 							>
 								<Text
 									style={{
