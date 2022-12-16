@@ -37,13 +37,24 @@ export default function DrinkDetailScreen({
 		{ size: 'Venti', volume: 591 },
 	];
 	const temperatureList = ['HOT', 'ICE'];
-	const additionalOptionList = ['블론드', '디카페인', '1/2디카페인'];
+	const additionalOptionList = [
+		{ option: '선택 없음', multiplier: 1 },
+		{ option: '블론드', multiplier: 1 },
+		{ option: '디카페인', multiplier: 0.1 },
+		{ option: '1/2디카페인', multiplier: 0.5 },
+	];
 	const [caffeineCount, setCaffeineCount] = useState(0);
 	const [cupCount, setCupCount] = useState(1);
 	const [isBookMark, setBookMark] = useState(false);
 	const [selectSize, setSelectSize] = useState({ size: 'Tall', volume: 354 });
 	const [selectSizeTemp, setSelectSizeTemp] = useState(selectSize);
-	const [selectOption, setSelectOption] = useState('선택 없음');
+	const [selectAdditionalOption, setSelectAdditionalOption] = useState({
+		option: '선택 없음',
+		multiplier: 1,
+	});
+	const [selectAdditionalOptionTemp, setSelectAdditionalOptionTemp] = useState(
+		selectAdditionalOption,
+	);
 	const [caffeineGoal, setCaffeineGoal] = useState(60);
 	const [selectTemperature, setSelectTemperature] = useState('ICE');
 	const [selectTemperatureTemp, setSelectTemperatureTemp] =
@@ -160,6 +171,7 @@ export default function DrinkDetailScreen({
 			>
 				<TouchableWithoutFeedback
 					onPress={() => {
+						setSelectAdditionalOptionTemp(selectAdditionalOption);
 						setSelectTemperatureTemp(selectTemperature);
 						setOptionModalVisible(false);
 					}}
@@ -256,7 +268,7 @@ export default function DrinkDetailScreen({
 							flexDirection: 'row',
 						}}
 					>
-						{additionalOptionList.map((option) => (
+						{additionalOptionList.map((item) => (
 							<Pressable
 								style={{
 									paddingHorizontal: Dimensions.width * 8,
@@ -264,19 +276,30 @@ export default function DrinkDetailScreen({
 									borderWidth: 1,
 									borderColor: Colors.DarkGray,
 									borderRadius: 5,
-									backgroundColor: Colors.White,
+									backgroundColor:
+										selectAdditionalOptionTemp.option === item.option
+											? Colors.Brown
+											: Colors.White,
 									justifyContent: 'center',
 									alignItems: 'center',
 									marginRight: Dimensions.width * 17,
 								}}
+								onPress={() => {
+									console.log(selectAdditionalOptionTemp);
+									console.log(item);
+									setSelectAdditionalOptionTemp(item);
+								}}
 							>
 								<Text
 									style={{
-										color: Colors.DeepGray,
+										color:
+											selectAdditionalOptionTemp.option === item.option
+												? Colors.White
+												: Colors.DeepGray,
 										fontSize: 16,
 									}}
 								>
-									{option}
+									{item.option}
 								</Text>
 							</Pressable>
 						))}
@@ -306,6 +329,7 @@ export default function DrinkDetailScreen({
 							}}
 							onPress={() => {
 								setSelectTemperature(selectTemperatureTemp);
+								setSelectAdditionalOption(selectAdditionalOptionTemp);
 								setOptionModalVisible(false);
 							}}
 						>
@@ -589,7 +613,7 @@ export default function DrinkDetailScreen({
 								fontWeight: '500',
 							}}
 						>
-							{selectTemperature}, {selectOption}
+							{selectTemperature}, {selectAdditionalOption.option}
 						</Text>
 					</View>
 					<BigArrow />
