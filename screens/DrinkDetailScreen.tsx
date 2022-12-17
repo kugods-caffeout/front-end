@@ -39,7 +39,7 @@ export default function DrinkDetailScreen({
 	const temperatureList = ['HOT', 'ICE'];
 	const additionalOptionList = [
 		{ option: '선택 없음', multiplier: 1 },
-		{ option: '블론드', multiplier: 1 },
+		{ option: '블론드', multiplier: 1.2 },
 		{ option: '디카페인', multiplier: 0.1 },
 		{ option: '1/2디카페인', multiplier: 0.5 },
 	];
@@ -67,7 +67,9 @@ export default function DrinkDetailScreen({
 
 	function calcuateTotalCaffeine(initialCaffeine: number) {
 		const calcuatedTotalCaffeine =
-			((initialCaffeine / 354) * selectSize.volume + shotCount * 75) * cupCount;
+			((initialCaffeine / 354) * selectSize.volume + shotCount * 75) *
+			selectAdditionalOption.multiplier *
+			cupCount;
 		return calcuatedTotalCaffeine.toFixed();
 	}
 	return (
