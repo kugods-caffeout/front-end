@@ -43,7 +43,7 @@ export default function DrinkDetailScreen({
 		{ option: '디카페인', multiplier: 0.1 },
 		{ option: '1/2디카페인', multiplier: 0.5 },
 	];
-	const [totalCaffeine, setTotalCaffeine] = useState(155);
+	const initialCaffeine = 155;
 	const [shotCount, setShotCount] = useState(0);
 	const [cupCount, setCupCount] = useState(1);
 	const [isBookMark, setBookMark] = useState(false);
@@ -67,8 +67,8 @@ export default function DrinkDetailScreen({
 
 	function calcuateTotalCaffeine(initialCaffeine: number) {
 		const calcuatedTotalCaffeine =
-			(initialCaffeine + shotCount * 75) * cupCount;
-		return calcuatedTotalCaffeine;
+			((initialCaffeine / 354) * selectSize.volume + shotCount * 75) * cupCount;
+		return calcuatedTotalCaffeine.toFixed();
 	}
 	return (
 		<>
@@ -515,7 +515,7 @@ export default function DrinkDetailScreen({
 								fontWeight: 'bold',
 							}}
 						>
-							{calcuateTotalCaffeine(totalCaffeine)}mg
+							{calcuateTotalCaffeine(initialCaffeine)}mg
 						</Text>
 					</View>
 					<View
