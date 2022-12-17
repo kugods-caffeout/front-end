@@ -135,34 +135,56 @@ export default function DrinkDetailScreen({
 							</Pressable>
 						))}
 					</View>
-
-					<Pressable
+					<View
 						style={{
-							width: Dimensions.width * 358,
-							height: Dimensions.height * 44,
+							width: Dimensions.width * 390,
+							height: Dimensions.height * 130,
 							position: 'absolute',
 							bottom: useSafeAreaInsets().bottom,
-							borderRadius: 30,
-							backgroundColor: Colors.DarkBrown,
+							backgroundColor: Colors.White,
 							justifyContent: 'center',
 							alignItems: 'center',
-							alignSelf: 'center',
-						}}
-						onPress={() => {
-							setSelectSize(selectSizeTemp);
-							setSizeModalVisible(false);
+							...Platform.select({
+								ios: {
+									shadowColor: 'black',
+									shadowOffset: {
+										width: 0,
+										height: 4,
+									},
+									shadowOpacity: 0.1,
+								},
+								android: {
+									shadowColor: '#00000010',
+									evevation: 20,
+								}, //적용 안됨
+							}),
 						}}
 					>
-						<Text
+						<Pressable
 							style={{
-								color: Colors.White,
-								fontSize: Dimensions.height * 16,
-								fontWeight: 'bold',
+								width: Dimensions.width * 358,
+								height: Dimensions.height * 44,
+								borderRadius: 30,
+								backgroundColor: Colors.DarkBrown,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+							onPress={() => {
+								setSelectSize(selectSizeTemp);
+								setSizeModalVisible(false);
 							}}
 						>
-							적용하기
-						</Text>
-					</Pressable>
+							<Text
+								style={{
+									color: Colors.White,
+									fontSize: Dimensions.height * 16,
+									fontWeight: 'bold',
+								}}
+							>
+								적용하기
+							</Text>
+						</Pressable>
+					</View>
 				</View>
 			</Modal>
 			<Modal
@@ -270,6 +292,7 @@ export default function DrinkDetailScreen({
 					<View
 						style={{
 							flexDirection: 'row',
+							justifyContent: 'space-between',
 						}}
 					>
 						{additionalOptionList.map((item) => (
@@ -286,7 +309,6 @@ export default function DrinkDetailScreen({
 											: Colors.White,
 									justifyContent: 'center',
 									alignItems: 'center',
-									marginRight: Dimensions.width * 17,
 								}}
 								onPress={() => setSelectAdditionalOptionTemp(item)}
 							>
@@ -308,20 +330,31 @@ export default function DrinkDetailScreen({
 						style={{
 							width: Dimensions.width * 390,
 							height: Dimensions.height * 130,
-							backgroundColor: Colors.White,
-							alignItems: 'center',
-							justifyContent: 'center',
 							position: 'absolute',
-							bottom: 75,
+							bottom: useSafeAreaInsets().bottom,
+							backgroundColor: Colors.White,
+							justifyContent: 'center',
+							alignItems: 'center',
+							...Platform.select({
+								ios: {
+									shadowColor: 'black',
+									shadowOffset: {
+										width: 0,
+										height: 4,
+									},
+									shadowOpacity: 0.1,
+								},
+								android: {
+									shadowColor: '#00000010',
+									evevation: 20,
+								}, //적용 안됨
+							}),
 						}}
 					>
 						<Pressable
 							style={{
 								width: Dimensions.width * 358,
 								height: Dimensions.height * 44,
-								marginTop: Dimensions.height * 65,
-								position: 'absolute',
-								bottom: 0,
 								borderRadius: 30,
 								backgroundColor: Colors.DarkBrown,
 								justifyContent: 'center',
@@ -725,27 +758,54 @@ export default function DrinkDetailScreen({
 						<CalendarIcon />
 					</Pressable>
 				</View>
-				<Pressable
+				<View
 					style={{
-						width: Dimensions.width * 358,
-						height: Dimensions.height * 44,
-						marginTop: Dimensions.height * 65,
-						borderRadius: 30,
-						backgroundColor: Colors.DarkBrown,
+						width: Dimensions.width * 390,
+						height: Dimensions.height * 130,
+						position: 'absolute',
+						bottom:
+							useSafeAreaInsets().bottom +
+							Dimensions.androidBottomNavigationBarHeight,
+						backgroundColor: Colors.White,
 						justifyContent: 'center',
 						alignItems: 'center',
+						...Platform.select({
+							ios: {
+								shadowColor: 'black',
+								shadowOffset: {
+									width: 0,
+									height: 4,
+								},
+								shadowOpacity: 0.1,
+							},
+							android: {
+								shadowColor: '#00000010',
+								evevation: 20,
+							}, //적용 안됨
+						}),
 					}}
 				>
-					<Text
+					<Pressable
 						style={{
-							color: Colors.White,
-							fontSize: Dimensions.height * 16,
-							fontWeight: 'bold',
+							width: Dimensions.width * 358,
+							height: Dimensions.height * 44,
+							borderRadius: 30,
+							backgroundColor: Colors.DarkBrown,
+							justifyContent: 'center',
+							alignItems: 'center',
 						}}
 					>
-						음료 추가
-					</Text>
-				</Pressable>
+						<Text
+							style={{
+								color: Colors.White,
+								fontSize: Dimensions.height * 16,
+								fontWeight: 'bold',
+							}}
+						>
+							음료 추가
+						</Text>
+					</Pressable>
+				</View>
 				<DatePicker
 					modal={true}
 					open={calendarOpen}
