@@ -103,7 +103,7 @@ export default function DrinkDetailScreen({
 					>
 						<Text
 							style={{
-								fontSize: 16,
+								fontSize: Dimensions.height * 16,
 								color: Colors.Black,
 								fontWeight: 'bold',
 							}}
@@ -154,7 +154,11 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						<Text
-							style={{ color: Colors.White, fontSize: 16, fontWeight: 'bold' }}
+							style={{
+								color: Colors.White,
+								fontSize: Dimensions.height * 16,
+								fontWeight: 'bold',
+							}}
 						>
 							적용하기
 						</Text>
@@ -200,7 +204,7 @@ export default function DrinkDetailScreen({
 					>
 						<Text
 							style={{
-								fontSize: 16,
+								fontSize: Dimensions.height * 16,
 								color: Colors.Black,
 								fontWeight: 'bold',
 							}}
@@ -234,7 +238,7 @@ export default function DrinkDetailScreen({
 							>
 								<Text
 									style={{
-										fontSize: 16,
+										fontSize: Dimensions.height * 16,
 										color:
 											selectTemperatureTemp === temperature
 												? Colors.White
@@ -255,7 +259,7 @@ export default function DrinkDetailScreen({
 					>
 						<Text
 							style={{
-								fontSize: 16,
+								fontSize: Dimensions.height * 16,
 								color: Colors.Black,
 								fontWeight: 'bold',
 							}}
@@ -292,7 +296,7 @@ export default function DrinkDetailScreen({
 											selectAdditionalOptionTemp.option === item.option
 												? Colors.White
 												: Colors.DeepGray,
-										fontSize: 16,
+										fontSize: Dimensions.height * 16,
 									}}
 								>
 									{item.option}
@@ -332,7 +336,7 @@ export default function DrinkDetailScreen({
 							<Text
 								style={{
 									color: Colors.White,
-									fontSize: 16,
+									fontSize: Dimensions.height * 16,
 									fontWeight: 'bold',
 								}}
 							>
@@ -378,7 +382,7 @@ export default function DrinkDetailScreen({
 					</View>
 					<Text
 						style={{
-							fontSize: 16,
+							fontSize: Dimensions.height * 16,
 							color: Colors.White,
 							fontWeight: 'bold',
 						}}
@@ -396,7 +400,7 @@ export default function DrinkDetailScreen({
 						<Text
 							style={{
 								color: Colors.White,
-								fontSize: 25,
+								fontSize: Dimensions.height * 25,
 								fontWeight: 'bold',
 							}}
 						>
@@ -424,7 +428,7 @@ export default function DrinkDetailScreen({
 							)}
 							<Text
 								style={{
-									fontSize: 21,
+									fontSize: Dimensions.height * 21,
 									color: Colors.White,
 									fontWeight: 'bold',
 								}}
@@ -458,12 +462,18 @@ export default function DrinkDetailScreen({
 							justifyContent: 'space-between',
 						}}
 					>
-						<Text style={{ color: Colors.Black, fontSize: 14 }}>
+						<Text
+							style={{ color: Colors.Black, fontSize: Dimensions.height * 14 }}
+						>
 							총 카페인 함량
 						</Text>
 
 						<Text
-							style={{ color: Colors.Black, fontSize: 30, fontWeight: 'bold' }}
+							style={{
+								color: Colors.Black,
+								fontSize: Dimensions.height * 30,
+								fontWeight: 'bold',
+							}}
 						>
 							155mg
 						</Text>
@@ -491,7 +501,7 @@ export default function DrinkDetailScreen({
 							<Text
 								style={{
 									color: Colors.Black,
-									fontSize: 16,
+									fontSize: Dimensions.height * 16,
 									fontWeight: 'bold',
 								}}
 							>
@@ -552,7 +562,7 @@ export default function DrinkDetailScreen({
 							<Text
 								style={{
 									color: Colors.Black,
-									fontSize: 16,
+									fontSize: Dimensions.height * 16,
 									fontWeight: 'bold',
 								}}
 							>
@@ -560,7 +570,7 @@ export default function DrinkDetailScreen({
 							</Text>
 							<Text
 								style={{
-									fontSize: 16,
+									fontSize: Dimensions.height * 16,
 									color: Colors.DeepGray,
 									fontWeight: '500',
 								}}
@@ -596,7 +606,7 @@ export default function DrinkDetailScreen({
 						<Text
 							style={{
 								color: Colors.Black,
-								fontSize: 16,
+								fontSize: Dimensions.height * 16,
 								fontWeight: 'bold',
 							}}
 						>
@@ -604,7 +614,7 @@ export default function DrinkDetailScreen({
 						</Text>
 						<Text
 							style={{
-								fontSize: 16,
+								fontSize: Dimensions.height * 16,
 								color: Colors.DeepGray,
 								fontWeight: '500',
 							}}
@@ -628,7 +638,11 @@ export default function DrinkDetailScreen({
 					}}
 				>
 					<Text
-						style={{ color: Colors.Black, fontSize: 16, fontWeight: 'bold' }}
+						style={{
+							color: Colors.Black,
+							fontSize: Dimensions.height * 16,
+							fontWeight: 'bold',
+						}}
 					>
 						샷 추가
 					</Text>
@@ -652,7 +666,11 @@ export default function DrinkDetailScreen({
 							/>
 						)}
 						<Text
-							style={{ color: Colors.Black, fontSize: 16, fontWeight: 'bold' }}
+							style={{
+								color: Colors.Black,
+								fontSize: Dimensions.height * 16,
+								fontWeight: 'bold',
+							}}
 						>
 							{caffeineCount}
 						</Text>
@@ -675,7 +693,11 @@ export default function DrinkDetailScreen({
 					}}
 				>
 					<Text
-						style={{ fontSize: 16, color: Colors.Black, fontWeight: 'bold' }}
+						style={{
+							fontSize: Dimensions.height * 16,
+							color: Colors.Black,
+							fontWeight: 'bold',
+						}}
 					>
 						날짜
 					</Text>
@@ -690,7 +712,9 @@ export default function DrinkDetailScreen({
 						})}
 						onPress={() => setCalendarOpen(true)}
 					>
-						<Text style={{ fontSize: 16, color: Colors.Black }}>
+						<Text
+							style={{ fontSize: Dimensions.height * 16, color: Colors.Black }}
+						>
 							{dateToAddDrink.getFullYear() +
 								'년 ' +
 								(dateToAddDrink.getMonth() + 1) +
@@ -713,7 +737,11 @@ export default function DrinkDetailScreen({
 					}}
 				>
 					<Text
-						style={{ color: Colors.White, fontSize: 16, fontWeight: 'bold' }}
+						style={{
+							color: Colors.White,
+							fontSize: Dimensions.height * 16,
+							fontWeight: 'bold',
+						}}
 					>
 						음료 추가
 					</Text>
