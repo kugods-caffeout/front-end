@@ -44,7 +44,7 @@ export default function DrinkDetailScreen({
 		{ option: '1/2디카페인', multiplier: 0.5 },
 	];
 	const [totalCaffeine, setTotalCaffeine] = useState(155);
-	const [caffeineCount, setCaffeineCount] = useState(0);
+	const [shotCount, setShotCount] = useState(0);
 	const [cupCount, setCupCount] = useState(1);
 	const [isBookMark, setBookMark] = useState(false);
 	const [selectSize, setSelectSize] = useState({ size: 'Tall', volume: 354 });
@@ -66,7 +66,8 @@ export default function DrinkDetailScreen({
 	const [dateToAddDrink, setDateToAddDrink] = useState(new Date());
 
 	function calcuateTotalCaffeine(initialCaffeine: number) {
-		const calcuatedTotalCaffeine = initialCaffeine * cupCount;
+		const calcuatedTotalCaffeine =
+			(initialCaffeine + shotCount * 75) * cupCount;
 		return calcuatedTotalCaffeine;
 	}
 	return (
@@ -695,12 +696,12 @@ export default function DrinkDetailScreen({
 							backgroundColor: Colors.White,
 						}}
 					>
-						{caffeineCount === 0 ? (
+						{shotCount === 0 ? (
 							<DisabledBlackMinus />
 						) : (
 							<ActivatedBlackMinus
 								onPress={() => {
-									if (caffeineCount != 0) setCaffeineCount(caffeineCount - 1);
+									if (shotCount != 0) setShotCount(shotCount - 1);
 								}}
 							/>
 						)}
@@ -711,11 +712,11 @@ export default function DrinkDetailScreen({
 								fontWeight: 'bold',
 							}}
 						>
-							{caffeineCount}
+							{shotCount}
 						</Text>
 						<BlackPlus
 							onPress={() => {
-								setCaffeineCount(caffeineCount + 1);
+								setShotCount(shotCount + 1);
 							}}
 						/>
 					</View>
