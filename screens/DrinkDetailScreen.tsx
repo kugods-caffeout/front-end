@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { RootStackScreenProps } from '../types';
 import Dimensions from '../constants/Dimensions';
-import DatePicker from 'react-native-date-picker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Colors from '../constants/Colors';
 import WhitePlus from '../assets/white-plus.svg';
 import DisabledWhiteMinus from '../assets/disabled-white-minus.svg';
@@ -737,16 +737,18 @@ export default function DrinkDetailScreen({
 					<Pressable
 						style={({ pressed }) => ({
 							opacity: pressed ? 0.5 : 1,
-							width: Dimensions.width * 140,
 							flexDirection: 'row',
 							alignItems: 'center',
-							justifyContent: 'space-between',
 							backgroundColor: Colors.White,
 						})}
 						onPress={() => setCalendarOpen(true)}
 					>
 						<Text
-							style={{ fontSize: Dimensions.height * 16, color: Colors.Black }}
+							style={{
+								fontSize: Dimensions.height * 16,
+								color: Colors.Black,
+								marginRight: Dimensions.width * 15,
+							}}
 						>
 							{dateToAddDrink.getFullYear() +
 								'년 ' +
@@ -806,20 +808,20 @@ export default function DrinkDetailScreen({
 						</Text>
 					</Pressable>
 				</View>
-				<DatePicker
-					modal={true}
-					open={calendarOpen}
-					date={dateToAddDrink}
+				<DateTimePickerModal
+					isVisible={calendarOpen}
+					mode={'date'}
 					onConfirm={(date) => {
 						setDateToAddDrink(date);
 						setCalendarOpen(false);
 					}}
 					onCancel={() => setCalendarOpen(false)}
-					mode={'date'}
+					display={'inline'}
 					locale={'ko'}
-					title={'음료를 추가할 날짜 선택'}
-					confirmText='확인'
-					cancelText='취소'
+					confirmTextIOS={'확인'}
+					cancelTextIOS={'취소'}
+					accentColor={Colors.Brown}
+					date={dateToAddDrink}
 				/>
 			</View>
 		</>
