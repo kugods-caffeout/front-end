@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 	searchBarContainer: {
 		width: Dimensions.width * 358,
 		height: Dimensions.height * 44,
-		backgroundColor: '#F6F6F6아',
+		backgroundColor: '#F6F6F6',
 		borderRadius: 15,
 		flexDirection: 'row',
 		alignItems: 'center',
