@@ -30,7 +30,12 @@ function RootNavigator() {
 			<Stack.Screen
 				name='Root'
 				component={BottomTabNavigator}
-				options={{ headerShown: false, animation: 'fade' }}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name='DrinkDetail'
+				component={DrinkDetailScreen}
+				options={{ headerShown: false }}
 			/>
 		</Stack.Navigator>
 	);
@@ -63,7 +68,6 @@ function BottomTabNavigator() {
 						focused ? <HomeScreenIconSelected /> : <HomeScreenIconUnselected />,
 				}}
 			/>
-			<BottomTab.Screen name='DrinkDetail' component={DrinkDetailScreen} />
 			<BottomTab.Screen
 				name='SearchDrink'
 				component={SearchDrinkScreen}
