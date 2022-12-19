@@ -8,7 +8,7 @@ import {
 	Modal,
 	TouchableWithoutFeedback,
 } from 'react-native';
-import { RootTabScreenProps } from '../types';
+import { RootStackScreenProps } from '../types';
 import Dimensions from '../constants/Dimensions';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Colors from '../constants/Colors';
@@ -26,16 +26,21 @@ import CalendarIcon from '../assets/calendar-icon.svg';
 import YellowStar from '../assets/yellow-star.svg';
 import SizeItem from '../component/SizeItem';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import getBrandSizeTable from '../data/BrandSizeTable';
 
 export default function DrinkDetailScreen({
 	navigation,
-}: RootTabScreenProps<'DrinkDetail'>) {
-	const sizeList = [
-		{ size: 'Short', volume: 236 },
-		{ size: 'Tall', volume: 354 },
-		{ size: 'Grande', volume: 473 },
-		{ size: 'Venti', volume: 591 },
-	];
+	route,
+}: RootStackScreenProps<'DrinkDetail'>) {
+	const drinkName = route.params.drink.drink_name;
+	const brand = route.params.drink.brand;
+	const sizeList = getBrandSizeTable(brand);
+	const initalSize = sizeList?.find(
+		(item) => route.params.drink.size === item.size,
+	);
+	const initalTemperature =
+		route.params.drink.temp === '' ? 'HOT' : route.params.drink.temp;
+	const initialCaffeine = route.params.drink.caffeine;
 	const temperatureList = ['HOT', 'ICE'];
 	const additionalOptionList = [
 		{ option: '선택 없음', multiplier: 1 },
@@ -43,11 +48,10 @@ export default function DrinkDetailScreen({
 		{ option: '디카페인', multiplier: 0.1 },
 		{ option: '1/2디카페인', multiplier: 0.5 },
 	];
-	const initialCaffeine = 155;
 	const [shotCount, setShotCount] = useState(0);
 	const [cupCount, setCupCount] = useState(1);
 	const [isBookMark, setBookMark] = useState(false);
-	const [selectSize, setSelectSize] = useState({ size: 'Tall', volume: 354 });
+	const [selectSize, setSelectSize] = useState(initalSize);
 	const [selectSizeTemp, setSelectSizeTemp] = useState(selectSize);
 	const [selectAdditionalOption, setSelectAdditionalOption] = useState({
 		option: '선택 없음',
@@ -57,7 +61,7 @@ export default function DrinkDetailScreen({
 		selectAdditionalOption,
 	);
 	const [caffeineGoal, setCaffeineGoal] = useState(60);
-	const [selectTemperature, setSelectTemperature] = useState('ICE');
+	const [selectTemperature, setSelectTemperature] = useState(initalTemperature);
 	const [selectTemperatureTemp, setSelectTemperatureTemp] =
 		useState(selectTemperature);
 	const [optionModalVisible, setOptionModalVisible] = useState(false);
@@ -67,7 +71,8 @@ export default function DrinkDetailScreen({
 
 	function calcuateTotalCaffeine(initialCaffeine: number) {
 		const calcuatedTotalCaffeine =
-			((initialCaffeine / 354) * selectSize.volume + shotCount * 75) *
+			((initialCaffeine / initalSize?.volume) * selectSize?.volume +
+				shotCount * 75) *
 			selectAdditionalOption.multiplier *
 			cupCount;
 		return calcuatedTotalCaffeine.toFixed();
@@ -127,7 +132,7 @@ export default function DrinkDetailScreen({
 							justifyContent: 'space-between',
 						}}
 					>
-						{sizeList.map((item) => (
+						{sizeList?.map((item) => (
 							<Pressable
 								onPress={() =>
 									setSelectSizeTemp({
@@ -139,7 +144,7 @@ export default function DrinkDetailScreen({
 								<SizeItem
 									size={item.size}
 									volume={item.volume}
-									isSelected={selectSizeTemp.size === item.size}
+									isSelected={selectSizeTemp?.size === item.size}
 								/>
 							</Pressable>
 						))}
@@ -407,7 +412,7 @@ export default function DrinkDetailScreen({
 							alignItems: 'center',
 						}}
 					>
-						<Arrow />
+						<Arrow onPress={() => navigation.goBack()} />
 						{isBookMark ? (
 							<YellowStar
 								onPress={() => {
@@ -429,7 +434,7 @@ export default function DrinkDetailScreen({
 							fontWeight: 'bold',
 						}}
 					>
-						스타벅스
+						{brand}
 					</Text>
 					<View
 						style={{
@@ -446,7 +451,7 @@ export default function DrinkDetailScreen({
 								fontWeight: 'bold',
 							}}
 						>
-							돌체 콜드 브루
+							{drinkName}
 						</Text>
 						<View
 							style={{
@@ -617,7 +622,8 @@ export default function DrinkDetailScreen({
 									fontWeight: '500',
 								}}
 							>
-								{selectSize.size} ({selectSize.volume}ml)
+								{selectSize?.size} ({(selectSize?.volume * 29.5735).toFixed()}
+								ml)
 							</Text>
 						</View>
 						<BigArrow />
