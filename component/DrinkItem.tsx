@@ -18,6 +18,7 @@ export default function DrinkItem(props: {
 	temp: string;
 	updatedAt: string;
 	keyWord: string;
+	navigation: any;
 }) {
 	return (
 		<Pressable
@@ -32,6 +33,7 @@ export default function DrinkItem(props: {
 				marginBottom: 2,
 				justifyContent: 'space-between',
 			})}
+			onPress={() => props.navigation.navigate('DrinkDetail', { drink: props })}
 		>
 			<View
 				style={{
