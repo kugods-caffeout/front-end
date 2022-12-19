@@ -8,7 +8,7 @@ import {
 	Modal,
 	TouchableWithoutFeedback,
 } from 'react-native';
-import { RootStackScreenProps } from '../types';
+import { RootTabScreenProps } from '../types';
 import Dimensions from '../constants/Dimensions';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Colors from '../constants/Colors';
@@ -29,7 +29,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function DrinkDetailScreen({
 	navigation,
-}: RootStackScreenProps<'DrinkDetail'>) {
+}: RootTabScreenProps<'DrinkDetail'>) {
 	const sizeList = [
 		{ size: 'Short', volume: 236 },
 		{ size: 'Tall', volume: 354 },
@@ -805,6 +805,7 @@ export default function DrinkDetailScreen({
 							justifyContent: 'center',
 							alignItems: 'center',
 						}}
+						onPress={() => navigation.navigate('SearchDrink')}
 					>
 						<Text
 							style={{
