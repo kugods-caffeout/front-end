@@ -21,7 +21,6 @@ export default function SearchDrinkScreen({
 		if (keyword === '') {
 			return drinkList;
 		} else {
-			console.log(keyword.trim());
 			return drinkList.filter(
 				(drink: drink) =>
 					drink.drink_name.includes(keyword) ||

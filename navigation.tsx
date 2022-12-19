@@ -44,7 +44,6 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-	console.log();
 	return (
 		<BottomTab.Navigator
 			initialRouteName='Home'

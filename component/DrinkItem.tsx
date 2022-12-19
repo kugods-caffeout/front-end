@@ -20,12 +20,6 @@ export default function DrinkItem(props: {
 	keyWord: string;
 	navigation: any;
 }) {
-	// const regex = new RegExp(`[${props.keyWord}]`);
-	// const regex = new RegExp(`스타벅`);
-	// console.log('스타벅스'.match(regex));
-	// console.log('스타'.match(regex));
-	// console.log('스타벅스'.search(regex));
-	// console.log('스타'.search(regex));
 	function createRegex(keyword: string) {
 		const keywordList = keyword.split('');
 		const regexList = [];
