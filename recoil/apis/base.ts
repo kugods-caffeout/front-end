@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-export const API_URL =
-	'http://ec2-52-78-225-87.ap-northeast-2.compute.amazonaws.com';
+export const API_URL = 'http://52.78.225.87';
 
 /* axios 공통 config */
 export const axiosInstance = axios.create({
@@ -18,4 +17,3 @@ const baseAPI = {
 };
 
 export default baseAPI;
-
