@@ -3,31 +3,31 @@ export default function getBrandSizeTable(brand: string) {
 		case '스타벅스':
 			return [
 				{
-					size: 'Short',
+					size: '숏',
 					volume: 8,
 				},
 				{
-					size: 'Tall',
+					size: '톨',
 					volume: 12,
 				},
 				{
-					size: 'Grande',
+					size: '그란데',
 					volume: 16,
 				},
 				{
-					size: 'Venti',
+					size: '벤티',
 					volume: 20,
 				},
 				{
-					size: 'Solo',
+					size: '솔로',
 					volume: 4,
 				},
 				{
-					size: 'Double',
+					size: '더블',
 					volume: 7,
 				},
 				{
-					size: 'Bottle',
+					size: '보틀',
 					volume: 7,
 				},
 			];
