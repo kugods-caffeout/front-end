@@ -21,8 +21,13 @@ export default function SearchDrinkScreen({
 		if (keyword === '') {
 			return drinkList;
 		} else {
-			return drinkList.filter((drink: drink) =>
-				drink.drink_name.includes(keyword),
+			console.log(keyword.trim());
+			return drinkList.filter(
+				(drink: drink) =>
+					drink.drink_name.includes(keyword) ||
+					drink.drink_name.includes(keyword.split(' ').join('')) ||
+					drink.brand.includes(keyword) ||
+					drink.brand.includes(keyword.split(' ').join('')),
 			);
 		}
 	}
