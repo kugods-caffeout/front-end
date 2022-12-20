@@ -52,8 +52,6 @@ function BottomTabNavigator() {
 				tabBarStyle: {
 					backgroundColor: Colors.DarkBrown,
 					borderTopWidth: 0,
-					height: 48 + useSafeAreaInsets().bottom,
-					paddingBottom: useSafeAreaInsets().bottom,
 				},
 				tabBarHideOnKeyboard: true,
 				headerShown: false,
