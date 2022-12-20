@@ -8,7 +8,7 @@ import {
 	Modal,
 	TouchableWithoutFeedback,
 } from 'react-native';
-import { RootStackScreenProps } from '../types';
+import { drink, RootStackScreenProps } from '../types';
 import Dimensions from '../constants/Dimensions';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Colors from '../constants/Colors';
@@ -27,11 +27,14 @@ import YellowStar from '../assets/yellow-star.svg';
 import SizeItem from '../component/SizeItem';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import getBrandSizeTable from '../data/BrandSizeTable';
+import { useRecoilValue } from 'recoil';
+import { getDrinkSelector } from '../recoil/selectors/getDrinkSelector';
 
 export default function DrinkDetailScreen({
 	navigation,
 	route,
 }: RootStackScreenProps<'DrinkDetail'>) {
+	const drinkSelector = useRecoilValue<drink[]>(getDrinkSelector);
 	const drinkName = route.params.drink.drink_name;
 	const brand = route.params.drink.brand;
 	const sizeList = getBrandSizeTable(brand);
@@ -70,8 +73,18 @@ export default function DrinkDetailScreen({
 	const [dateToAddDrink, setDateToAddDrink] = useState(new Date());
 
 	function calcuateTotalCaffeine(initialCaffeine: number) {
+		const initialCaffeineWithTemperature =
+			route.params.drink.temp === ''
+				? initialCaffeine
+				: drinkSelector.filter(
+						(drink) =>
+							drink.brand === brand &&
+							drink.drink_name === drinkName &&
+							drink.temp === selectTemperature,
+				  )[0].caffeine;
 		const calcuatedTotalCaffeine =
-			((initialCaffeine / initalSize?.volume) * selectSize?.volume +
+			((initialCaffeineWithTemperature / initalSize?.volume) *
+				selectSize?.volume +
 				shotCount * 75) *
 			selectAdditionalOption.multiplier *
 			cupCount;
@@ -811,7 +824,7 @@ export default function DrinkDetailScreen({
 							justifyContent: 'center',
 							alignItems: 'center',
 						}}
-						onPress={() => navigation.navigate('SearchDrink')}
+						onPress={() => navigation.goBack()}
 					>
 						<Text
 							style={{
