@@ -18,18 +18,18 @@ export default function getBrandSizeTable(brand: string) {
 					size: '벤티',
 					volume: 20,
 				},
-				{
-					size: '솔로',
-					volume: 4,
-				},
-				{
-					size: '더블',
-					volume: 7,
-				},
-				{
-					size: '보틀',
-					volume: 7,
-				},
+				// {
+				// 	size: '솔로',
+				// 	volume: 4,
+				// },
+				// {
+				// 	size: '더블',
+				// 	volume: 7,
+				// },
+				// {
+				// 	size: '보틀',
+				// 	volume: 7,
+				// },
 			];
 		case '공차':
 			return [
