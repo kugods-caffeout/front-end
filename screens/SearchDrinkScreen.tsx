@@ -8,14 +8,17 @@ import DrinkItem from '../component/DrinkItem';
 import SearchIcon from '../assets/search-icon.svg';
 import ClearIcon from '../assets/clear-icon.svg';
 import { useRecoilValue } from 'recoil';
-import { getDrinkSelector } from '../recoil/selectors/getDrinkSelector';
+import {
+	getDrinkSelector,
+	getFilteredDrinkSelector,
+} from '../recoil/selectors/getDrinkSelector';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function SearchDrinkScreen({
 	navigation,
 }: RootTabScreenProps<'SearchDrink'>) {
 	const [drinkKeyword, setDrinkKeyword] = React.useState('');
-	const drinkSelector = useRecoilValue<drink[]>(getDrinkSelector);
+	const filteredSelector = useRecoilValue<drink[]>(getFilteredDrinkSelector);
 
 	function searchedDrinkList(drinkList: drink[], keyword: string) {
 		if (keyword === '') {
@@ -81,7 +84,7 @@ export default function SearchDrinkScreen({
 						navigation={navigation}
 					/>
 				)}
-				data={searchedDrinkList(drinkSelector, drinkKeyword)}
+				data={searchedDrinkList(filteredSelector, drinkKeyword)}
 			/>
 		</View>
 	);
