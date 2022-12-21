@@ -26,10 +26,20 @@ export default function SearchDrinkScreen({
 		} else {
 			return drinkList.filter(
 				(drink: drink) =>
-					drink.drink_name.includes(keyword) ||
-					drink.drink_name.includes(keyword.split(' ').join('')) ||
-					drink.brand.includes(keyword) ||
-					drink.brand.includes(keyword.split(' ').join('')),
+					(drink.brand + drink.drink_name).includes(keyword) ||
+					(drink.brand + drink.drink_name).includes(
+						keyword.split(' ').join(''),
+					) ||
+					(drink.brand + drink.drink_name.split(' ').join('')).includes(
+						keyword,
+					) ||
+					(drink.brand + drink.drink_name.split(' ').join('')).includes(
+						keyword.split(' ').join(''),
+					) ||
+					(drink.brand + ' ' + drink.drink_name).includes(keyword) ||
+					(drink.brand + ' ' + drink.drink_name).includes(
+						keyword.split(' ').join(''),
+					),
 			);
 		}
 	}
