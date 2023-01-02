@@ -88,37 +88,12 @@ export default function DrinkDetailScreen({
 						setSizeModalVisible(false);
 					}}
 				>
-					<View
-						style={{
-							width: Dimensions.width * 390,
-							height: Dimensions.height * 844,
-							backgroundColor: Colors.Black,
-							opacity: 0.5,
-						}}
-					/>
+					<View style={styles.modalBackground} />
 				</TouchableWithoutFeedback>
 				<View style={styles.modal}>
-					<ModalLine
-						style={{
-							alignSelf: 'center',
-							marginBottom: Dimensions.height * 6,
-						}}
-					/>
-					<View
-						style={{
-							height: Dimensions.height * 48,
-							justifyContent: 'center',
-						}}
-					>
-						<Text
-							style={{
-								fontSize: Dimensions.height * 16,
-								color: Colors.Black,
-								fontWeight: 'bold',
-							}}
-						>
-							사이즈
-						</Text>
+					<ModalLine style={styles.modalLine} />
+					<View style={styles.modalSubtitle}>
+						<Text style={styles.boldBlackText}>사이즈</Text>
 					</View>
 
 					<View
@@ -170,28 +145,13 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						<Pressable
-							style={{
-								width: Dimensions.width * 358,
-								height: Dimensions.height * 44,
-								borderRadius: 30,
-								backgroundColor: Colors.DarkBrown,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
+							style={styles.applyButton}
 							onPress={() => {
 								setSelectSize(selectSizeTemp);
 								setSizeModalVisible(false);
 							}}
 						>
-							<Text
-								style={{
-									color: Colors.White,
-									fontSize: Dimensions.height * 16,
-									fontWeight: 'bold',
-								}}
-							>
-								적용하기
-							</Text>
+							<Text style={styles.boldWhiteText}>적용하기</Text>
 						</Pressable>
 					</View>
 				</View>
@@ -211,37 +171,12 @@ export default function DrinkDetailScreen({
 						setOptionModalVisible(false);
 					}}
 				>
-					<View
-						style={{
-							width: Dimensions.width * 390,
-							height: Dimensions.height * 844,
-							backgroundColor: Colors.Black,
-							opacity: 0.5,
-						}}
-					/>
+					<View style={styles.modalBackground} />
 				</TouchableWithoutFeedback>
 				<View style={styles.modal}>
-					<ModalLine
-						style={{
-							alignSelf: 'center',
-							marginBottom: Dimensions.height * 6,
-						}}
-					/>
-					<View
-						style={{
-							height: Dimensions.height * 48,
-							justifyContent: 'center',
-						}}
-					>
-						<Text
-							style={{
-								fontSize: Dimensions.height * 16,
-								color: Colors.Black,
-								fontWeight: 'bold',
-							}}
-						>
-							온도
-						</Text>
+					<ModalLine style={styles.modalLine} />
+					<View style={styles.modalSubtitle}>
+						<Text style={styles.boldBlackText}>온도</Text>
 					</View>
 					<View
 						style={{
@@ -282,21 +217,8 @@ export default function DrinkDetailScreen({
 							</Pressable>
 						))}
 					</View>
-					<View
-						style={{
-							height: Dimensions.height * 48,
-							justifyContent: 'center',
-						}}
-					>
-						<Text
-							style={{
-								fontSize: Dimensions.height * 16,
-								color: Colors.Black,
-								fontWeight: 'bold',
-							}}
-						>
-							추가 옵션
-						</Text>
+					<View style={styles.modalSubtitle}>
+						<Text style={styles.boldBlackText}>추가 옵션</Text>
 					</View>
 					<View
 						style={{
@@ -361,29 +283,14 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						<Pressable
-							style={{
-								width: Dimensions.width * 358,
-								height: Dimensions.height * 44,
-								borderRadius: 30,
-								backgroundColor: Colors.DarkBrown,
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
+							style={styles.applyButton}
 							onPress={() => {
 								setSelectTemperature(selectTemperatureTemp);
 								setSelectAdditionalOption(selectAdditionalOptionTemp);
 								setOptionModalVisible(false);
 							}}
 						>
-							<Text
-								style={{
-									color: Colors.White,
-									fontSize: Dimensions.height * 16,
-									fontWeight: 'bold',
-								}}
-							>
-								적용하기
-							</Text>
+							<Text style={styles.boldWhiteText}>적용하기</Text>
 						</Pressable>
 					</View>
 				</View>
@@ -422,15 +329,7 @@ export default function DrinkDetailScreen({
 							/>
 						)}
 					</View>
-					<Text
-						style={{
-							fontSize: Dimensions.height * 16,
-							color: Colors.White,
-							fontWeight: 'bold',
-						}}
-					>
-						스타벅스
-					</Text>
+					<Text style={styles.boldWhiteText}>스타벅스</Text>
 					<View
 						style={{
 							height: Dimensions.height * 30,
@@ -540,15 +439,7 @@ export default function DrinkDetailScreen({
 							>
 								{`하루 카페인 섭취 목표량의  `}
 							</Text>
-							<Text
-								style={{
-									color: Colors.Black,
-									fontSize: Dimensions.height * 16,
-									fontWeight: 'bold',
-								}}
-							>
-								{caffeineGoal}%
-							</Text>
+							<Text style={styles.boldBlackText}>{caffeineGoal}%</Text>
 						</View>
 
 						<View
@@ -601,15 +492,7 @@ export default function DrinkDetailScreen({
 								justifyContent: 'space-between',
 							}}
 						>
-							<Text
-								style={{
-									color: Colors.Black,
-									fontSize: Dimensions.height * 16,
-									fontWeight: 'bold',
-								}}
-							>
-								사이즈
-							</Text>
+							<Text style={styles.boldBlackText}>사이즈</Text>
 							<Text
 								style={{
 									fontSize: Dimensions.height * 16,
@@ -624,6 +507,7 @@ export default function DrinkDetailScreen({
 					</Pressable>
 				</View>
 				<Pressable
+					onPress={() => setOptionModalVisible(true)}
 					style={({ pressed }) => ({
 						opacity: pressed ? 0.5 : 1,
 						width: Dimensions.width * 390,
@@ -636,7 +520,6 @@ export default function DrinkDetailScreen({
 						borderBottomWidth: 1,
 						paddingHorizontal: Dimensions.width * 25,
 					})}
-					onPress={() => setOptionModalVisible(true)}
 				>
 					<View
 						style={{
@@ -645,15 +528,7 @@ export default function DrinkDetailScreen({
 							justifyContent: 'space-between',
 						}}
 					>
-						<Text
-							style={{
-								color: Colors.Black,
-								fontSize: Dimensions.height * 16,
-								fontWeight: 'bold',
-							}}
-						>
-							옵션
-						</Text>
+						<Text style={styles.boldBlackText}>옵션</Text>
 						<Text
 							style={{
 								fontSize: Dimensions.height * 16,
@@ -679,15 +554,7 @@ export default function DrinkDetailScreen({
 						alignItems: 'center',
 					}}
 				>
-					<Text
-						style={{
-							color: Colors.Black,
-							fontSize: Dimensions.height * 16,
-							fontWeight: 'bold',
-						}}
-					>
-						샷 추가
-					</Text>
+					<Text style={styles.boldBlackText}>샷 추가</Text>
 					<View
 						style={{
 							flexDirection: 'row',
@@ -707,15 +574,7 @@ export default function DrinkDetailScreen({
 								}}
 							/>
 						)}
-						<Text
-							style={{
-								color: Colors.Black,
-								fontSize: Dimensions.height * 16,
-								fontWeight: 'bold',
-							}}
-						>
-							{shotCount}
-						</Text>
+						<Text style={styles.boldBlackText}>{shotCount}</Text>
 						<BlackPlus
 							onPress={() => {
 								setShotCount(shotCount + 1);
@@ -734,15 +593,7 @@ export default function DrinkDetailScreen({
 						paddingHorizontal: Dimensions.width * 25,
 					}}
 				>
-					<Text
-						style={{
-							fontSize: Dimensions.height * 16,
-							color: Colors.Black,
-							fontWeight: 'bold',
-						}}
-					>
-						날짜
-					</Text>
+					<Text style={styles.boldBlackText}>날짜</Text>
 					<Pressable
 						style={({ pressed }) => ({
 							opacity: pressed ? 0.5 : 1,
@@ -796,25 +647,8 @@ export default function DrinkDetailScreen({
 						}),
 					}}
 				>
-					<Pressable
-						style={{
-							width: Dimensions.width * 358,
-							height: Dimensions.height * 44,
-							borderRadius: 30,
-							backgroundColor: Colors.DarkBrown,
-							justifyContent: 'center',
-							alignItems: 'center',
-						}}
-					>
-						<Text
-							style={{
-								color: Colors.White,
-								fontSize: Dimensions.height * 16,
-								fontWeight: 'bold',
-							}}
-						>
-							음료 추가
-						</Text>
+					<Pressable style={styles.applyButton}>
+						<Text style={styles.boldWhiteText}>음료 추가</Text>
 					</Pressable>
 				</View>
 				<DateTimePickerModal
@@ -896,6 +730,39 @@ const styles = StyleSheet.create({
 		paddingTop: Dimensions.height * 18,
 		paddingHorizontal: Dimensions.width * 25,
 	},
+	modalBackground: {
+		width: Dimensions.width * 390,
+		height: Dimensions.height * 844,
+		backgroundColor: Colors.Black,
+		opacity: 0.5,
+	},
+	modalLine: {
+		alignSelf: 'center',
+		marginBottom: Dimensions.height * 6,
+	},
+	modalSubtitle: {
+		height: Dimensions.height * 48,
+		justifyContent: 'center',
+	},
+	applyButton: {
+		width: Dimensions.width * 358,
+		height: Dimensions.height * 44,
+		borderRadius: 30,
+		backgroundColor: Colors.DarkBrown,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	optionChange: {
+		width: Dimensions.width * 390,
+		height: Dimensions.height * 76,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		backgroundColor: Colors.White,
+		borderBottomColor: Colors.LightGray,
+		borderBottomWidth: 1,
+		paddingHorizontal: Dimensions.width * 25,
+	},
 	tailContainter: {
 		width: Dimensions.width * 358,
 		height: Dimensions.height * 44,
@@ -903,5 +770,15 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.DarkBrown,
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	boldBlackText: {
+		fontSize: Dimensions.height * 16,
+		color: Colors.Black,
+		fontWeight: 'bold',
+	},
+	boldWhiteText: {
+		color: Colors.White,
+		fontSize: Dimensions.height * 16,
+		fontWeight: 'bold',
 	},
 });
