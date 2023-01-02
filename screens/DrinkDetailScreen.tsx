@@ -26,6 +26,9 @@ import CalendarIcon from '../assets/calendar-icon.svg';
 import YellowStar from '../assets/yellow-star.svg';
 import SizeItem from '../component/SizeItem';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import TemperatureList from '../component/TemperatureList';
+import AdditionalOptionList from '../component/AdditionalOpitonList';
+import SizeList from '../component/SizeList';
 
 export default function DrinkDetailScreen({
 	navigation,
@@ -103,20 +106,11 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						{sizeList.map((item) => (
-							<Pressable
-								onPress={() =>
-									setSelectSizeTemp({
-										size: item.size,
-										volume: item.volume,
-									})
-								}
-							>
-								<SizeItem
-									size={item.size}
-									volume={item.volume}
-									isSelected={selectSizeTemp.size === item.size}
-								/>
-							</Pressable>
+							<SizeList
+								item={item}
+								selectSizeTemp={selectSizeTemp}
+								setSelectSizeTemp={setSelectSizeTemp}
+							/>
 						))}
 					</View>
 					<View
@@ -187,34 +181,11 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						{temperatureList.map((temperature) => (
-							<Pressable
-								style={{
-									width: Dimensions.width * 171,
-									height: Dimensions.height * 40,
-									borderWidth: 0.5,
-									borderColor: Colors.DarkGray,
-									backgroundColor:
-										selectTemperatureTemp === temperature
-											? Colors.Brown
-											: Colors.White,
-									justifyContent: 'center',
-									alignItems: 'center',
-								}}
-								onPress={() => setSelectTemperatureTemp(temperature)}
-							>
-								<Text
-									style={{
-										fontSize: Dimensions.height * 16,
-										color:
-											selectTemperatureTemp === temperature
-												? Colors.White
-												: Colors.DeepGray,
-										fontWeight: 'bold',
-									}}
-								>
-									{temperature}
-								</Text>
-							</Pressable>
+							<TemperatureList
+								temperature={temperature}
+								selectTemperatureTemp={selectTemperatureTemp}
+								setSelectTemperatureTemp={setSelectTemperatureTemp}
+							/>
 						))}
 					</View>
 					<View style={styles.modalSubtitle}>
@@ -227,34 +198,11 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						{additionalOptionList.map((item) => (
-							<Pressable
-								style={{
-									paddingHorizontal: Dimensions.width * 8,
-									height: Dimensions.height * 28,
-									borderWidth: 1,
-									borderColor: Colors.DarkGray,
-									borderRadius: 5,
-									backgroundColor:
-										selectAdditionalOptionTemp.option === item.option
-											? Colors.Brown
-											: Colors.White,
-									justifyContent: 'center',
-									alignItems: 'center',
-								}}
-								onPress={() => setSelectAdditionalOptionTemp(item)}
-							>
-								<Text
-									style={{
-										color:
-											selectAdditionalOptionTemp.option === item.option
-												? Colors.White
-												: Colors.DeepGray,
-										fontSize: Dimensions.height * 16,
-									}}
-								>
-									{item.option}
-								</Text>
-							</Pressable>
+							<AdditionalOptionList
+								item={item}
+								selectAdditionalOpitonTemp={selectAdditionalOptionTemp}
+								setSelectAdditionalOptionTemp={setSelectAdditionalOptionTemp}
+							/>
 						))}
 					</View>
 					<View
