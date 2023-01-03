@@ -28,8 +28,13 @@ function RootNavigator() {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
-				name='Root'
-				component={BottomTabNavigator}
+				name='Home'
+				component={HomeScreen}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name='SearchDrink'
+				component={SearchDrinkScreen}
 				options={{ headerShown: false }}
 			/>
 			<Stack.Screen
@@ -41,42 +46,42 @@ function RootNavigator() {
 	);
 }
 
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+// const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
-function BottomTabNavigator() {
-	return (
-		<BottomTab.Navigator
-			initialRouteName='Home'
-			screenOptions={{
-				tabBarShowLabel: false,
-				tabBarStyle: {
-					backgroundColor: Colors.DarkBrown,
-					borderTopWidth: 0,
-				},
-				tabBarHideOnKeyboard: true,
-				headerShown: false,
-			}}
-		>
-			<BottomTab.Screen
-				name='Home'
-				component={HomeScreen}
-				options={{
-					tabBarIcon: ({ focused }) =>
-						focused ? <HomeScreenIconSelected /> : <HomeScreenIconUnselected />,
-				}}
-			/>
-			<BottomTab.Screen
-				name='SearchDrink'
-				component={SearchDrinkScreen}
-				options={{
-					tabBarIcon: ({ focused }) =>
-						focused ? (
-							<SearchDrinkScreenIconSelected />
-						) : (
-							<SearchDrinkScreenIconUnselected />
-						),
-				}}
-			/>
-		</BottomTab.Navigator>
-	);
-}
+// function BottomTabNavigator() {
+// 	return (
+// 		<BottomTab.Navigator
+// 			initialRouteName='Home'
+// 			screenOptions={{
+// 				tabBarShowLabel: false,
+// 				tabBarStyle: {
+// 					backgroundColor: Colors.DarkBrown,
+// 					borderTopWidth: 0,
+// 				},
+// 				tabBarHideOnKeyboard: true,
+// 				headerShown: false,
+// 			}}
+// 		>
+// 			<BottomTab.Screen
+// 				name='Home'
+// 				component={HomeScreen}
+// 				options={{
+// 					tabBarIcon: ({ focused }) =>
+// 						focused ? <HomeScreenIconSelected /> : <HomeScreenIconUnselected />,
+// 				}}
+// 			/>
+// 			<BottomTab.Screen
+// 				name='SearchDrink'
+// 				component={SearchDrinkScreen}
+// 				options={{
+// 					tabBarIcon: ({ focused }) =>
+// 						focused ? (
+// 							<SearchDrinkScreenIconSelected />
+// 						) : (
+// 							<SearchDrinkScreenIconUnselected />
+// 						),
+// 				}}
+// 			/>
+// 		</BottomTab.Navigator>
+// 	);
+// }
