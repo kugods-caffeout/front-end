@@ -800,20 +800,20 @@ export default function DrinkDetailScreen({
 						backgroundColor: Colors.White,
 						justifyContent: 'center',
 						alignItems: 'center',
-						...Platform.select({
-							ios: {
-								shadowColor: 'black',
-								shadowOffset: {
-									width: 0,
-									height: 4,
-								},
-								shadowOpacity: 0.1,
-							},
-							android: {
-								shadowColor: '#00000010',
-								evevation: 20,
-							}, //적용 안됨
-						}),
+						// ...Platform.select({
+						// 	ios: {
+						// 		shadowColor: 'black',
+						// 		shadowOffset: {
+						// 			width: 0,
+						// 			height: 4,
+						// 		},
+						// 		shadowOpacity: 0.1,
+						// 	},
+						// 	android: {
+						// 		shadowColor: '#00000010',
+						// 		evevation: 20,
+						// 	}, //적용 안됨
+						// }),
 					}}
 				>
 					<Pressable

@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { View, FlatList, Pressable, TextInput, StyleSheet } from 'react-native';
-import { drink, RootTabScreenProps } from '../types';
+import { drink, RootStackScreenProps } from '../types';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
 import DrinkItem from '../component/DrinkItem';
-
 import SearchIcon from '../assets/search-icon.svg';
 import ClearIcon from '../assets/clear-icon.svg';
 import { useRecoilValue } from 'recoil';
@@ -13,12 +12,14 @@ import {
 	getFilteredDrinkSelector,
 } from '../recoil/selectors/getDrinkSelector';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 export default function SearchDrinkScreen({
 	navigation,
-}: RootTabScreenProps<'SearchDrink'>) {
+}: RootStackScreenProps<'SearchDrink'>) {
 	const [drinkKeyword, setDrinkKeyword] = React.useState('');
 	const filteredSelector = useRecoilValue<drink[]>(getFilteredDrinkSelector);
+	
 
 	function searchedDrinkList(drinkList: drink[], keyword: string) {
 		if (keyword === '') {
