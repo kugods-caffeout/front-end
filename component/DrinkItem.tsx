@@ -18,7 +18,18 @@ export default function DrinkItem(props: {
 	temp: string;
 	updatedAt: string;
 	keyWord: string;
+	navigation: any;
 }) {
+	function createRegex(keyword: string) {
+		const keywordList = keyword.split('');
+		const regexList = [];
+		for (let i = 0; i < keywordList.length; i++) {
+			const regex = new RegExp(`[${keywordList[i]}]`);
+			regexList.push(regex);
+		}
+		return regexList;
+	}
+
 	return (
 		<Pressable
 			style={({ pressed }) => ({
@@ -32,22 +43,59 @@ export default function DrinkItem(props: {
 				marginBottom: 2,
 				justifyContent: 'space-between',
 			})}
+			onPress={() => props.navigation.navigate('DrinkDetail', { drink: props })}
 		>
 			<View
 				style={{
 					width: Dimensions.width * 326,
 					flexDirection: 'row',
 					justifyContent: 'space-between',
+					alignItems: 'center',
 				}}
 			>
-				<Text
+				<View
 					style={{
-						fontSize: 16,
-						color: Colors.Black,
+						flexDirection: 'row',
 					}}
 				>
-					{props.brand}
-				</Text>
+					{props.keyWord === '' ? (
+						<Text
+							style={{
+								color: Colors.Black,
+								fontSize: 16,
+							}}
+						>
+							{props.brand}
+						</Text>
+					) : (
+						props.brand.split('').map((letter) => {
+							for (let i = 0; i < createRegex(props.keyWord).length; i++) {
+								if (letter.match(createRegex(props.keyWord)[i])) {
+									return (
+										<Text
+											style={{
+												color: Colors.Brown,
+												fontSize: 16,
+											}}
+										>
+											{letter}
+										</Text>
+									);
+								}
+							}
+							return (
+								<Text
+									style={{
+										color: Colors.Black,
+										fontSize: 16,
+									}}
+								>
+									{letter}
+								</Text>
+							);
+						})
+					)}
+				</View>
 				<View
 					style={{
 						flexDirection: 'row',
@@ -55,34 +103,49 @@ export default function DrinkItem(props: {
 						width: Dimensions.width * 254,
 					}}
 				>
-					{props.keyWord == '' ? (
-						<Text
-							style={{
-								fontSize: 16,
-								color: Colors.Black,
-							}}
-						>
-							{props.drink_name}
-						</Text>
-					) : (
-						<View
-							style={{
-								flexDirection: 'row',
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
-						>
-							<Text style={{ fontSize: 16, color: Colors.Black }}>
-								{props.drink_name.split(props.keyWord)[0]}
+					<View
+						style={{
+							flexDirection: 'row',
+						}}
+					>
+						{props.keyWord === '' ? (
+							<Text
+								style={{
+									color: Colors.Black,
+									fontSize: 16,
+								}}
+							>
+								{props.drink_name}
 							</Text>
-							<Text style={{ fontSize: 16, color: Colors.Brown }}>
-								{props.keyWord}
-							</Text>
-							<Text style={{ fontSize: 16, color: Colors.Black }}>
-								{props.drink_name.split(props.keyWord)[1]}
-							</Text>
-						</View>
-					)}
+						) : (
+							props.drink_name.split('').map((letter) => {
+								for (let i = 0; i < createRegex(props.keyWord).length; i++) {
+									if (letter.match(createRegex(props.keyWord)[i])) {
+										return (
+											<Text
+												style={{
+													color: Colors.Brown,
+													fontSize: 16,
+												}}
+											>
+												{letter}
+											</Text>
+										);
+									}
+								}
+								return (
+									<Text
+										style={{
+											color: Colors.Black,
+											fontSize: 16,
+										}}
+									>
+										{letter}
+									</Text>
+								);
+							})
+						)}
+					</View>
 					<Text
 						style={{
 							fontSize: 16,

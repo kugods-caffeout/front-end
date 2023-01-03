@@ -37,7 +37,7 @@ export default function SizeItem(props: {
 					fontSize: 13,
 				}}
 			>
-				{props.volume}ml
+				{(props.volume * 29.5735).toFixed()}ml
 			</Text>
 		</View>
 	);

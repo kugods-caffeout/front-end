@@ -1,13 +1,6 @@
 import * as React from 'react';
-import {
-	View,
-	FlatList,
-	Pressable,
-	TextInput,
-	StyleSheet,
-	Text,
-} from 'react-native';
-import { drink, RootStackScreenProps } from '../types';
+import { View, FlatList, Pressable, TextInput, StyleSheet } from 'react-native';
+import { drink, RootTabScreenProps } from '../types';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
 import DrinkItem from '../component/DrinkItem';
@@ -15,25 +8,51 @@ import DrinkItem from '../component/DrinkItem';
 import SearchIcon from '../assets/search-icon.svg';
 import ClearIcon from '../assets/clear-icon.svg';
 import { useRecoilValue } from 'recoil';
-import { getDrinkSelector } from '../recoil/selectors/getDrinkSelector';
+import {
+	getDrinkSelector,
+	getFilteredDrinkSelector,
+} from '../recoil/selectors/getDrinkSelector';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function SearchDrinkScreen({
 	navigation,
-}: RootStackScreenProps<'SearchDrink'>) {
+}: RootTabScreenProps<'SearchDrink'>) {
 	const [drinkKeyword, setDrinkKeyword] = React.useState('');
-	const drinkSelector = useRecoilValue<drink[]>(getDrinkSelector);
+	const filteredSelector = useRecoilValue<drink[]>(getFilteredDrinkSelector);
 
 	function searchedDrinkList(drinkList: drink[], keyword: string) {
 		if (keyword === '') {
 			return drinkList;
 		} else {
-			return drinkList.filter((drink: drink) =>
-				drink.drink_name.includes(keyword),
+			return drinkList.filter(
+				(drink: drink) =>
+					(drink.brand + drink.drink_name).includes(keyword) ||
+					(drink.brand + drink.drink_name).includes(
+						keyword.split(' ').join(''),
+					) ||
+					(drink.brand + drink.drink_name.split(' ').join('')).includes(
+						keyword,
+					) ||
+					(drink.brand + drink.drink_name.split(' ').join('')).includes(
+						keyword.split(' ').join(''),
+					) ||
+					(drink.brand + ' ' + drink.drink_name).includes(keyword) ||
+					(drink.brand + ' ' + drink.drink_name).includes(
+						keyword.split(' ').join(''),
+					),
 			);
 		}
 	}
 	return (
-		<View style={styles.topContainer}>
+		<View
+			style={[
+				styles.topContainer,
+				{
+					paddingTop: useSafeAreaInsets().top,
+					paddingBottom: useSafeAreaInsets().bottom,
+				},
+			]}
+		>
 			<View style={styles.headerContainer}>
 				<View style={styles.searchBarContainer}>
 					<SearchIcon />
@@ -57,35 +76,26 @@ export default function SearchDrinkScreen({
 					) : undefined}
 				</View>
 			</View>
-			<React.Suspense
-				fallback={
-					<View style={styles.topContainer}>
-						<Text style={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}>
-							로딩중...
-						</Text>
-					</View>
-				}
-			>
-				<FlatList
-					renderItem={({ item }) => (
-						<DrinkItem
-							__v={item.__v}
-							_id={item._id}
-							brand={item.brand}
-							caffeine={item.caffeine}
-							createdAt={item.createdAt}
-							drink_name={item.drink_name}
-							img={item.img}
-							kcal={item.kcal}
-							size={item.size}
-							temp={item.temp}
-							updatedAt={item.updatedAt}
-							keyWord={drinkKeyword}
-						/>
-					)}
-					data={searchedDrinkList(drinkSelector, drinkKeyword)}
-				/>
-			</React.Suspense>
+			<FlatList
+				renderItem={({ item }) => (
+					<DrinkItem
+						__v={item.__v}
+						_id={item._id}
+						brand={item.brand}
+						caffeine={item.caffeine}
+						createdAt={item.createdAt}
+						drink_name={item.drink_name}
+						img={item.img}
+						kcal={item.kcal}
+						size={item.size}
+						temp={item.temp}
+						updatedAt={item.updatedAt}
+						keyWord={drinkKeyword}
+						navigation={navigation}
+					/>
+				)}
+				data={searchedDrinkList(filteredSelector, drinkKeyword)}
+			/>
 		</View>
 	);
 }
@@ -94,7 +104,7 @@ const styles = StyleSheet.create({
 	topContainer: {
 		width: Dimensions.width * 390,
 		height: Dimensions.height * 844,
-		backgroundColor: Colors.LightGray,
+		backgroundColor: Colors.White,
 	},
 	headerContainer: {
 		width: Dimensions.width * 390,
@@ -107,7 +117,7 @@ const styles = StyleSheet.create({
 	searchBarContainer: {
 		width: Dimensions.width * 358,
 		height: Dimensions.height * 44,
-		backgroundColor: Colors.LightGray,
+		backgroundColor: '#F6F6F6',
 		borderRadius: 15,
 		flexDirection: 'row',
 		alignItems: 'center',
