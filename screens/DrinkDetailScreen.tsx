@@ -25,9 +25,9 @@ import ModalLine from '../assets/modalLine.svg';
 import CalendarIcon from '../assets/calendar-icon.svg';
 import YellowStar from '../assets/yellow-star.svg';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import TemperatureList from '../component/TemperatureList';
-import AdditionalOptionList from '../component/AdditionalOpitonList';
-import SizeList from '../component/SizeList';
+import TemperatureItem from '../component/TemperatureItem';
+import AdditionalOptionItem from '../component/AdditionalOpitonItem';
+import SizeItem from '../component/SizeItem';
 import getBrandSizeTable from '../data/BrandSizeTable';
 import { useRecoilValue } from 'recoil';
 import { getDrinkSelector } from '../recoil/selectors/getDrinkSelector';
@@ -123,7 +123,7 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						{sizeList.map((item) => (
-							<SizeList
+							<SizeItem
 								item={item}
 								selectSizeTemp={sizeTemp}
 								setSelectSizeTemp={setSizeTemp}
@@ -198,7 +198,7 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						{temperatureList.map((temperature) => (
-							<TemperatureList
+							<TemperatureItem
 								temperature={temperature}
 								selectTemperatureTemp={temperatureTemp}
 								setSelectTemperatureTemp={setTemperatureTemp}
@@ -215,7 +215,7 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						{additionalOptionList.map((item) => (
-							<AdditionalOptionList
+							<AdditionalOptionItem
 								item={item}
 								selectAdditionalOpitonTemp={additionalOptionTemp}
 								setSelectAdditionalOptionTemp={setAdditionalOptionTemp}

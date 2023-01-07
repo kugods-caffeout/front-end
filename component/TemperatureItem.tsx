@@ -3,7 +3,7 @@ import { Text, Pressable } from 'react-native';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
 
-export default function TemperatureList(props: {
+export default function TemperatureItem(props: {
 	temperature: string;
 	selectTemperatureTemp: string;
 	setSelectTemperatureTemp: React.Dispatch<React.SetStateAction<string>>;

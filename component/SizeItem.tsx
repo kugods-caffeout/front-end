@@ -3,7 +3,7 @@ import { Text, Pressable } from 'react-native';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
 
-export default function SizeList(props: {
+export default function SizeItem(props: {
 	item: {
 		size: string;
 		volume: number;
