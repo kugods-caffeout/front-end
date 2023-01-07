@@ -11,9 +11,34 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
 import { RootStackScreenProps } from '../types';
+import {
+	KakaoOAuthToken,
+	KakaoProfile,
+	getProfile as getKaKaoProfile,
+	login,
+	logout,
+	getProfile,
+} from '@react-native-seoul/kakao-login';
+
 export default function LoginScreen({
 	navigation,
 }: RootStackScreenProps<'Login'>) {
+	const logInWithKakao = async () => {
+		const token: KakaoOAuthToken = await login();
+		console.log(token);
+		return JSON.stringify(token);
+	};
+	const logOutWithKakao = async () => {
+		const logOutMessage = await logout();
+		console.log(logOutMessage);
+		return logOutMessage;
+	};
+
+	const getKaKaoProfile = async () => {
+		const profile: KakaoProfile = await getProfile();
+		return JSON.stringify(profile);
+	};
+
 	return (
 		<View
 			style={[
@@ -40,8 +65,20 @@ export default function LoginScreen({
 					},
 					styles.loginButton,
 				]}
+				onPress={logInWithKakao}
 			>
 				<Text>로그인</Text>
+			</Pressable>
+			<Pressable
+				style={({ pressed }) => [
+					{
+						opacity: pressed ? 0.5 : 1,
+					},
+					styles.loginButton,
+				]}
+				onPress={logOutWithKakao}
+			>
+				<Text>로그아웃</Text>
 			</Pressable>
 		</View>
 	);
