@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { View, Text, Pressable } from 'react-native';
-
-import SizeItem from './SizeItem';
+import { Text, Pressable } from 'react-native';
+import Colors from '../constants/Colors';
+import Dimensions from '../constants/Dimensions';
 
 export default function SizeList(props: {
 	item: {
@@ -27,12 +27,44 @@ export default function SizeList(props: {
 					volume: props.item.volume,
 				})
 			}
+			style={{
+				width: Dimensions.width * 81,
+				height: Dimensions.height * 121,
+				borderWidth: 1,
+				borderStyle: 'solid',
+				borderColor: Colors.DarkGray,
+				borderRadius: 10,
+				backgroundColor:
+					props.selectSizeTemp.size === props.item.size
+						? Colors.Brown
+						: Colors.White,
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}
 		>
-			<SizeItem
-				size={props.item.size}
-				volume={props.item.volume}
-				isSelected={props.selectSizeTemp.size === props.item.size}
-			/>
+			<Text
+				style={{
+					color:
+						props.selectSizeTemp.size === props.item.size
+							? Colors.White
+							: Colors.DeepGray,
+					fontSize: 16,
+					fontWeight: '700',
+				}}
+			>
+				{props.item.size}
+			</Text>
+			<Text
+				style={{
+					color:
+						props.selectSizeTemp.size === props.item.size
+							? Colors.White
+							: '#C7C7C7',
+					fontSize: 13,
+				}}
+			>
+				{(props.item.volume * 29.5735).toFixed()}ml
+			</Text>
 		</Pressable>
 	);
 }
