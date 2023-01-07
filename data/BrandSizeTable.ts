@@ -175,5 +175,20 @@ export default function getBrandSizeTable(brand: string) {
 					volume: 16,
 				},
 			];
+		default:
+			return [
+				{
+					size: '스몰',
+					volume: 12,
+				},
+				{
+					size: '레귤러',
+					volume: 16,
+				},
+				{
+					size: '라지',
+					volume: 20,
+				},
+			];
 	}
 }
