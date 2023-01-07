@@ -15,21 +15,11 @@ export type RootStackParamList = {
 	Home: undefined;
 	DrinkDetail: { drink: drink };
 	SearchDrink: undefined;
-};
-
-export type RootTabParamList = {
-	SearchDrink: undefined;
-	Home: undefined;
+	Login: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 	NativeStackScreenProps<RootStackParamList, Screen>;
-
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
-	CompositeScreenProps<
-		BottomTabScreenProps<RootTabParamList, Screen>,
-		NativeStackScreenProps<RootStackParamList>
-	>;
 
 export interface drink {
 	__v: number;

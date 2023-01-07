@@ -1,19 +1,13 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { RootStackParamList, RootTabParamList } from './types';
+import { RootStackParamList } from './types';
 
 import SearchDrinkScreen from './screens/SearchDrinkScreen';
 import DrinkDetailScreen from './screens/DrinkDetailScreen';
 import HomeScreen from './screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
 
-import HomeScreenIconSelected from './assets/homeScreenIconSelected.svg';
-import HomeScreenIconUnselected from './assets/homeScreenIconUnselected.svg';
-import SearchDrinkScreenIconSelected from './assets/searchDrinkScreenIconSelected.svg';
-import SearchDrinkScreenIconUnselected from './assets/searchDrinkScreenIconUnselected.svg';
-import Colors from './constants/Colors';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 export default function Navigation() {
 	return (
 		<NavigationContainer>
@@ -27,6 +21,11 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
 	return (
 		<Stack.Navigator>
+			<Stack.Screen
+				name='Login'
+				component={LoginScreen}
+				options={{ headerShown: false }}
+			/>
 			<Stack.Screen
 				name='Home'
 				component={HomeScreen}
@@ -45,43 +44,3 @@ function RootNavigator() {
 		</Stack.Navigator>
 	);
 }
-
-// const BottomTab = createBottomTabNavigator<RootTabParamList>();
-
-// function BottomTabNavigator() {
-// 	return (
-// 		<BottomTab.Navigator
-// 			initialRouteName='Home'
-// 			screenOptions={{
-// 				tabBarShowLabel: false,
-// 				tabBarStyle: {
-// 					backgroundColor: Colors.DarkBrown,
-// 					borderTopWidth: 0,
-// 				},
-// 				tabBarHideOnKeyboard: true,
-// 				headerShown: false,
-// 			}}
-// 		>
-// 			<BottomTab.Screen
-// 				name='Home'
-// 				component={HomeScreen}
-// 				options={{
-// 					tabBarIcon: ({ focused }) =>
-// 						focused ? <HomeScreenIconSelected /> : <HomeScreenIconUnselected />,
-// 				}}
-// 			/>
-// 			<BottomTab.Screen
-// 				name='SearchDrink'
-// 				component={SearchDrinkScreen}
-// 				options={{
-// 					tabBarIcon: ({ focused }) =>
-// 						focused ? (
-// 							<SearchDrinkScreenIconSelected />
-// 						) : (
-// 							<SearchDrinkScreenIconUnselected />
-// 						),
-// 				}}
-// 			/>
-// 		</BottomTab.Navigator>
-// 	);
-// }
