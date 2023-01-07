@@ -24,7 +24,6 @@ import BigArrow from '../assets/bigArrow.svg';
 import ModalLine from '../assets/modalLine.svg';
 import CalendarIcon from '../assets/calendar-icon.svg';
 import YellowStar from '../assets/yellow-star.svg';
-import SizeItem from '../component/SizeItem';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import TemperatureList from '../component/TemperatureList';
 import AdditionalOptionList from '../component/AdditionalOpitonList';
@@ -41,9 +40,12 @@ export default function DrinkDetailScreen({
 	const drinkName = route.params.drink.drink_name;
 	const brand = route.params.drink.brand;
 	const sizeList = getBrandSizeTable(brand);
-	const initalSize = sizeList?.find(
+	const initalSize = sizeList.find(
 		(item) => route.params.drink.size === item.size,
-	);
+	) || {
+		size: '알 수 없음',
+		volume: 0,
+	};
 	const initalTemperature =
 		route.params.drink.temp === '' ? 'HOT' : route.params.drink.temp;
 	const initialCaffeine = route.params.drink.caffeine;
@@ -56,20 +58,18 @@ export default function DrinkDetailScreen({
 	];
 	const [shotCount, setShotCount] = useState(0);
 	const [cupCount, setCupCount] = useState(1);
-	const [isBookMark, setBookMark] = useState(false);
-	const [selectSize, setSelectSize] = useState(initalSize);
-	const [selectSizeTemp, setSelectSizeTemp] = useState(selectSize);
-	const [selectAdditionalOption, setSelectAdditionalOption] = useState({
+	const [isFavorite, setIsFavorite] = useState(false);
+	const [size, setSize] = useState(initalSize);
+	const [sizeTemp, setSizeTemp] = useState(size);
+	const [additionalOption, setAdditionalOption] = useState({
 		option: '선택 없음',
 		multiplier: 1,
 	});
-	const [selectAdditionalOptionTemp, setSelectAdditionalOptionTemp] = useState(
-		selectAdditionalOption,
-	);
+	const [additionalOptionTemp, setAdditionalOptionTemp] =
+		useState(additionalOption);
 	const [caffeineGoal, setCaffeineGoal] = useState(60);
-	const [selectTemperature, setSelectTemperature] = useState(initalTemperature);
-	const [selectTemperatureTemp, setSelectTemperatureTemp] =
-		useState(selectTemperature);
+	const [temperature, setTemperature] = useState(initalTemperature);
+	const [temperatureTemp, setTemperatureTemp] = useState(temperature);
 	const [optionModalVisible, setOptionModalVisible] = useState(false);
 	const [sizeModalVisible, setSizeModalVisible] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
@@ -83,13 +83,12 @@ export default function DrinkDetailScreen({
 						(drink) =>
 							drink.brand === brand &&
 							drink.drink_name === drinkName &&
-							drink.temp === selectTemperature,
+							drink.temp === temperature,
 				  )[0].caffeine;
 		const calcuatedTotalCaffeine =
-			((initialCaffeineWithTemperature / initalSize?.volume) *
-				selectSize?.volume +
+			((initialCaffeineWithTemperature / initalSize?.volume) * size?.volume +
 				shotCount * 75) *
-			selectAdditionalOption.multiplier *
+			additionalOption.multiplier *
 			cupCount;
 		return calcuatedTotalCaffeine.toFixed();
 	}
@@ -105,7 +104,7 @@ export default function DrinkDetailScreen({
 			>
 				<TouchableWithoutFeedback
 					onPress={() => {
-						setSelectSizeTemp(selectSize);
+						setSizeTemp(size);
 						setSizeModalVisible(false);
 					}}
 				>
@@ -114,7 +113,7 @@ export default function DrinkDetailScreen({
 				<View style={styles.modal}>
 					<ModalLine style={styles.modalLine} />
 					<View style={styles.modalSubtitle}>
-						<Text style={styles.boldBlackText}>사이즈</Text>
+						<Text style={styles.boldBlackText16}>사이즈</Text>
 					</View>
 
 					<View
@@ -126,8 +125,8 @@ export default function DrinkDetailScreen({
 						{sizeList.map((item) => (
 							<SizeList
 								item={item}
-								selectSizeTemp={selectSizeTemp}
-								setSelectSizeTemp={setSelectSizeTemp}
+								selectSizeTemp={sizeTemp}
+								setSelectSizeTemp={setSizeTemp}
 							/>
 						))}
 					</View>
@@ -159,11 +158,11 @@ export default function DrinkDetailScreen({
 						<Pressable
 							style={styles.applyButton}
 							onPress={() => {
-								setSelectSize(selectSizeTemp);
+								setSize(sizeTemp);
 								setSizeModalVisible(false);
 							}}
 						>
-							<Text style={styles.boldWhiteText}>적용하기</Text>
+							<Text style={styles.boldWhiteText16}>적용하기</Text>
 						</Pressable>
 					</View>
 				</View>
@@ -178,8 +177,8 @@ export default function DrinkDetailScreen({
 			>
 				<TouchableWithoutFeedback
 					onPress={() => {
-						setSelectAdditionalOptionTemp(selectAdditionalOption);
-						setSelectTemperatureTemp(selectTemperature);
+						setAdditionalOptionTemp(additionalOption);
+						setTemperatureTemp(temperature);
 						setOptionModalVisible(false);
 					}}
 				>
@@ -188,7 +187,7 @@ export default function DrinkDetailScreen({
 				<View style={styles.modal}>
 					<ModalLine style={styles.modalLine} />
 					<View style={styles.modalSubtitle}>
-						<Text style={styles.boldBlackText}>온도</Text>
+						<Text style={styles.boldBlackText16}>온도</Text>
 					</View>
 					<View
 						style={{
@@ -201,13 +200,13 @@ export default function DrinkDetailScreen({
 						{temperatureList.map((temperature) => (
 							<TemperatureList
 								temperature={temperature}
-								selectTemperatureTemp={selectTemperatureTemp}
-								setSelectTemperatureTemp={setSelectTemperatureTemp}
+								selectTemperatureTemp={temperatureTemp}
+								setSelectTemperatureTemp={setTemperatureTemp}
 							/>
 						))}
 					</View>
 					<View style={styles.modalSubtitle}>
-						<Text style={styles.boldBlackText}>추가 옵션</Text>
+						<Text style={styles.boldBlackText16}>추가 옵션</Text>
 					</View>
 					<View
 						style={{
@@ -218,8 +217,8 @@ export default function DrinkDetailScreen({
 						{additionalOptionList.map((item) => (
 							<AdditionalOptionList
 								item={item}
-								selectAdditionalOpitonTemp={selectAdditionalOptionTemp}
-								setSelectAdditionalOptionTemp={setSelectAdditionalOptionTemp}
+								selectAdditionalOpitonTemp={additionalOptionTemp}
+								setSelectAdditionalOptionTemp={setAdditionalOptionTemp}
 							/>
 						))}
 					</View>
@@ -251,12 +250,12 @@ export default function DrinkDetailScreen({
 						<Pressable
 							style={styles.applyButton}
 							onPress={() => {
-								setSelectTemperature(selectTemperatureTemp);
-								setSelectAdditionalOption(selectAdditionalOptionTemp);
+								setTemperature(temperatureTemp);
+								setAdditionalOption(additionalOptionTemp);
 								setOptionModalVisible(false);
 							}}
 						>
-							<Text style={styles.boldWhiteText}>적용하기</Text>
+							<Text style={styles.boldWhiteText16}>적용하기</Text>
 						</Pressable>
 					</View>
 				</View>
@@ -281,21 +280,21 @@ export default function DrinkDetailScreen({
 						}}
 					>
 						<Arrow onPress={() => navigation.goBack()} />
-						{isBookMark ? (
+						{isFavorite ? (
 							<YellowStar
 								onPress={() => {
-									setBookMark(false);
+									setIsFavorite(false);
 								}}
 							/>
 						) : (
 							<Star
 								onPress={() => {
-									setBookMark(true);
+									setIsFavorite(true);
 								}}
 							/>
 						)}
 					</View>
-					<Text style={styles.boldWhiteText}>{brand}</Text>
+					<Text style={styles.boldWhiteText16}>{brand}</Text>
 					<View
 						style={{
 							height: Dimensions.height * 30,
@@ -405,7 +404,7 @@ export default function DrinkDetailScreen({
 							>
 								{`하루 카페인 섭취 목표량의  `}
 							</Text>
-							<Text style={styles.boldBlackText}>{caffeineGoal}%</Text>
+							<Text style={styles.boldBlackText16}>{caffeineGoal}%</Text>
 						</View>
 
 						<View
@@ -458,7 +457,7 @@ export default function DrinkDetailScreen({
 								justifyContent: 'space-between',
 							}}
 						>
-							<Text style={styles.boldBlackText}>사이즈</Text>
+							<Text style={styles.boldBlackText16}>사이즈</Text>
 							<Text
 								style={{
 									fontSize: Dimensions.height * 16,
@@ -466,7 +465,7 @@ export default function DrinkDetailScreen({
 									fontWeight: '500',
 								}}
 							>
-								{selectSize?.size} ({(selectSize?.volume * 29.5735).toFixed()}
+								{size?.size} ({(size?.volume * 29.5735).toFixed()}
 								ml)
 							</Text>
 						</View>
@@ -495,7 +494,7 @@ export default function DrinkDetailScreen({
 							justifyContent: 'space-between',
 						}}
 					>
-						<Text style={styles.boldBlackText}>옵션</Text>
+						<Text style={styles.boldBlackText16}>옵션</Text>
 						<Text
 							style={{
 								fontSize: Dimensions.height * 16,
@@ -503,7 +502,7 @@ export default function DrinkDetailScreen({
 								fontWeight: '500',
 							}}
 						>
-							{selectTemperature}, {selectAdditionalOption.option}
+							{temperature}, {additionalOption.option}
 						</Text>
 					</View>
 					<BigArrow />
@@ -521,7 +520,7 @@ export default function DrinkDetailScreen({
 						alignItems: 'center',
 					}}
 				>
-					<Text style={styles.boldBlackText}>샷 추가</Text>
+					<Text style={styles.boldBlackText16}>샷 추가</Text>
 					<View
 						style={{
 							flexDirection: 'row',
@@ -541,7 +540,7 @@ export default function DrinkDetailScreen({
 								}}
 							/>
 						)}
-						<Text style={styles.boldBlackText}>{shotCount}</Text>
+						<Text style={styles.boldBlackText16}>{shotCount}</Text>
 						<BlackPlus
 							onPress={() => {
 								setShotCount(shotCount + 1);
@@ -560,7 +559,7 @@ export default function DrinkDetailScreen({
 						paddingHorizontal: Dimensions.width * 25,
 					}}
 				>
-					<Text style={styles.boldBlackText}>날짜</Text>
+					<Text style={styles.boldBlackText16}>날짜</Text>
 					<Pressable
 						style={({ pressed }) => ({
 							opacity: pressed ? 0.5 : 1,
@@ -614,10 +613,11 @@ export default function DrinkDetailScreen({
 						// }),
 					}}
 				>
-					<Pressable style={styles.applyButton}
-          onPress={() => navigation.goBack()}
-          >
-						<Text style={styles.boldWhiteText}>음료 추가</Text>
+					<Pressable
+						style={styles.applyButton}
+						onPress={() => navigation.goBack()}
+					>
+						<Text style={styles.boldWhiteText16}>음료 추가</Text>
 					</Pressable>
 				</View>
 				<DateTimePickerModal
@@ -677,17 +677,6 @@ const styles = StyleSheet.create({
 		paddingVertical: Dimensions.width * 15,
 		justifyContent: 'space-between',
 	},
-	searchBarInput: {
-		width: Dimensions.width * 278,
-		height: Dimensions.height * 44,
-		color: Colors.Black,
-	},
-	clearButton: {
-		width: Dimensions.width * 32,
-		height: Dimensions.height * 44,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
 	modal: {
 		width: Dimensions.width * 391,
 		height: Dimensions.height * 461,
@@ -721,31 +710,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	optionChange: {
-		width: Dimensions.width * 390,
-		height: Dimensions.height * 76,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		backgroundColor: Colors.White,
-		borderBottomColor: Colors.LightGray,
-		borderBottomWidth: 1,
-		paddingHorizontal: Dimensions.width * 25,
-	},
-	tailContainter: {
-		width: Dimensions.width * 358,
-		height: Dimensions.height * 44,
-		borderRadius: 30,
-		backgroundColor: Colors.DarkBrown,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	boldBlackText: {
+	boldBlackText16: {
 		fontSize: Dimensions.height * 16,
 		color: Colors.Black,
 		fontWeight: 'bold',
 	},
-	boldWhiteText: {
+	boldWhiteText16: {
 		color: Colors.White,
 		fontSize: Dimensions.height * 16,
 		fontWeight: 'bold',
