@@ -13,6 +13,7 @@ declare global {
 
 export type RootStackParamList = {
 	Home: undefined;
+	// Home: { accessToken: string, id; string };
 	DrinkDetail: { drink: drink };
 	SearchDrink: undefined;
 	Login: undefined;
