@@ -14,10 +14,11 @@ import { RootStackScreenProps } from '../types';
 import {
 	KakaoOAuthToken,
 	KakaoProfile,
-	getProfile as getKaKaoProfile,
 	login,
 	logout,
 	getProfile,
+	getAccessToken,
+	KakaoAccessTokenInfo,
 } from '@react-native-seoul/kakao-login';
 
 export default function LoginScreen({
@@ -25,7 +26,8 @@ export default function LoginScreen({
 }: RootStackScreenProps<'Login'>) {
 	const logInWithKakao = async () => {
 		const token: KakaoOAuthToken = await login();
-		console.log(token);
+		const profile = await getKakaoProfile();
+		console.log(token, profile);
 		return JSON.stringify(token);
 	};
 	const logOutWithKakao = async () => {
@@ -34,9 +36,16 @@ export default function LoginScreen({
 		return logOutMessage;
 	};
 
-	const getKaKaoProfile = async () => {
+	const getKakaoProfile = async () => {
 		const profile: KakaoProfile = await getProfile();
+		console.log(profile);
 		return JSON.stringify(profile);
+	};
+
+	const getKakaoToken = async () => {
+		const token: KakaoAccessTokenInfo = await getAccessToken();
+		console.log(token);
+		return JSON.stringify(token);
 	};
 
 	return (
@@ -68,6 +77,28 @@ export default function LoginScreen({
 				onPress={logInWithKakao}
 			>
 				<Text>로그인</Text>
+			</Pressable>
+			<Pressable
+				style={({ pressed }) => [
+					{
+						opacity: pressed ? 0.5 : 1,
+					},
+					styles.loginButton,
+				]}
+				onPress={getKakaoProfile}
+			>
+				<Text>카톡 프로필 정보 가져오기</Text>
+			</Pressable>
+			<Pressable
+				style={({ pressed }) => [
+					{
+						opacity: pressed ? 0.5 : 1,
+					},
+					styles.loginButton,
+				]}
+				onPress={getKakaoToken}
+			>
+				<Text>토큰 가져오기</Text>
 			</Pressable>
 			<Pressable
 				style={({ pressed }) => [
