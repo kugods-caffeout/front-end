@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-	View,
-	FlatList,
-	Pressable,
-	TextInput,
-	StyleSheet,
-	Text,
-} from 'react-native';
+import { View, Pressable, StyleSheet, Text, Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
@@ -26,20 +19,22 @@ export default function LoginScreen({
 }: RootStackScreenProps<'Login'>) {
 	const logInWithKakao = async () => {
 		const token: KakaoOAuthToken = await login();
-		const profile = await getKakaoProfile();
-		console.log(token, profile);
+		const profile: KakaoProfile = await getKakaoProfile();
+		const accessToken = token.accessToken;
+		const id = profile.id;
+		navigation.navigate('Home');
+		// navigation.navigate('Home', { accessToken: accessToken, id: id  })
 		return JSON.stringify(token);
 	};
 	const logOutWithKakao = async () => {
 		const logOutMessage = await logout();
-		console.log(logOutMessage);
+		Alert.alert(logOutMessage);
 		return logOutMessage;
 	};
 
 	const getKakaoProfile = async () => {
 		const profile: KakaoProfile = await getProfile();
-		console.log(profile);
-		return JSON.stringify(profile);
+		return profile;
 	};
 
 	const getKakaoToken = async () => {
@@ -77,17 +72,6 @@ export default function LoginScreen({
 				onPress={logInWithKakao}
 			>
 				<Text>로그인</Text>
-			</Pressable>
-			<Pressable
-				style={({ pressed }) => [
-					{
-						opacity: pressed ? 0.5 : 1,
-					},
-					styles.loginButton,
-				]}
-				onPress={getKakaoProfile}
-			>
-				<Text>카톡 프로필 정보 가져오기</Text>
 			</Pressable>
 			<Pressable
 				style={({ pressed }) => [
