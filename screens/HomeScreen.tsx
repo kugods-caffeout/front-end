@@ -87,7 +87,7 @@ export default function HomeScreen({
 					<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
 						{date.getMonth() + 1}.{date.getDate()}
 					</Text>
-					<DownArrow onPress={() => setDatePickerVisible(true)}></DownArrow>
+					<DownArrow onPress={() => setDatePickerVisible(true)} />
 				</Pressable>
 				<RightArrow onPress={TomorrowDate} />
 			</View>
@@ -114,7 +114,7 @@ export default function HomeScreen({
 					height: Dimensions.height * 1,
 					backgroundColor: Colors.LightGray,
 				}}
-			></View>
+			/>
 			<View
 				style={{
 					width: Dimensions.width * 390,
@@ -155,7 +155,7 @@ export default function HomeScreen({
 							height: Dimensions.height * 11,
 							borderRadius: 30,
 						}}
-					></Animated.View>
+					/>
 				</View>
 				<Text style={{ fontSize: 14, marginTop: 14 }}>
 					"이 정도면 적당해요!"
@@ -177,7 +177,7 @@ export default function HomeScreen({
 					navigation.navigate('SearchDrink');
 				}}
 			>
-				<PlusIcon></PlusIcon>
+				<PlusIcon />
 			</Pressable>
 		</SafeAreaView>
 	);
