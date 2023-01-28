@@ -2,8 +2,12 @@ import * as React from 'react';
 import { StatusBar, View, Text } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import Navigation from './navigation';
+import SplashScreen from 'react-native-splash-screen';
 
 export default function App() {
+	React.useEffect(() => {
+		SplashScreen.hide();
+	});
 	return (
 		<RecoilRoot>
 			<React.Suspense
