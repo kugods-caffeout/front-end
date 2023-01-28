@@ -22,27 +22,7 @@ export default function HomeScreen({
 }: RootStackScreenProps<'Home'>) {
 	const loaderValue = useRef(new Animated.Value(0)).current;
 	const [isDatePickerVisible, setDatePickerVisible] = useState(false);
-	const [date, setDate] = useState(new Date());
-
-	const TomorrowDate = async () => {
-		let promise = new Promise((resolve, reject) => {
-			const current = date;
-			current.setDate(current.getDate() + 1);
-			resolve(current);
-		});
-		let result: any = await promise;
-		setDate(result);
-	};
-
-	const Yesterday = async () => {
-		let promise = new Promise((resolve, reject) => {
-			const current = date;
-			current.setDate(current.getDate() - 1);
-			resolve(current);
-		});
-		let result: any = await promise;
-		setDate(result);
-	};
+	const [date, setDate] = useState(Date.now());
 
 	const load = (amount: number) => {
 		Animated.timing(loaderValue, {
@@ -75,7 +55,7 @@ export default function HomeScreen({
 					flexDirection: 'row',
 				}}
 			>
-				<LeftArrow onPress={Yesterday} />
+				<LeftArrow onPress={() => setDate(date - 86400000)} />
 				<Pressable
 					onPress={() => setDatePickerVisible(true)}
 					style={{
@@ -85,18 +65,23 @@ export default function HomeScreen({
 					}}
 				>
 					<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
-						{date.getMonth() + 1}.{date.getDate()}
+						{new Date(date).getMonth() + 1}.{new Date(date).getDate()}
 					</Text>
-					<DownArrow onPress={() => setDatePickerVisible(true)} />
+					<DownArrow />
 				</Pressable>
-				<RightArrow onPress={TomorrowDate} />
+				<RightArrow
+					onPress={() => {
+						setDate(date + 86400000);
+					}}
+				/>
 			</View>
 			<DateTimePickerModal
+				date={new Date(date)}
 				isVisible={isDatePickerVisible}
 				mode='date'
 				onConfirm={(date) => {
-					setDate(date);
 					setDatePickerVisible(false);
+					setDate(date.getTime());
 				}}
 				onCancel={() => {
 					setDatePickerVisible(false);
@@ -106,7 +91,6 @@ export default function HomeScreen({
 				confirmTextIOS={'확인'}
 				cancelTextIOS={'취소'}
 				accentColor={Colors.Brown}
-				date={date}
 			/>
 			<View
 				style={{
