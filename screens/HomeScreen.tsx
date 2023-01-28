@@ -15,40 +15,31 @@ import LeftArrow from '../assets/main-left-arrow.svg';
 import RightArrow from '../assets/main-right-arrow.svg';
 import { useEffect, useRef, useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PieChart } from 'react-native-gifted-charts';
 
 export default function HomeScreen({
 	navigation,
 	route,
 }: RootStackScreenProps<'Home'>) {
-	const loaderValue = useRef(new Animated.Value(0)).current;
 	const [isDatePickerVisible, setDatePickerVisible] = useState(false);
 	const [date, setDate] = useState(Date.now());
 
-	const load = (amount: number) => {
-		Animated.timing(loaderValue, {
-			toValue: (amount / 370) * 100, //amount들어가야함
-			duration: 500,
-			useNativeDriver: false,
-		}).start();
-	};
-
-	const width = loaderValue.interpolate({
-		inputRange: [0, 100],
-		outputRange: ['0%', '100%'],
-		extrapolate: 'clamp',
-	});
-
-	useEffect(() => {
-		load(120); //amount
-	}, []);
-
 	return (
-		<SafeAreaView style={styles.topContainer}>
+		<View
+			style={[
+				styles.topContainer,
+				{
+					paddingTop: useSafeAreaInsets().top,
+					paddingBottom: useSafeAreaInsets().bottom,
+				},
+			]}
+		>
 			<View
 				style={{
 					width: Dimensions.width * 390,
-					height: Dimensions.height * 44,
-					paddingHorizontal: 10,
+					height: Dimensions.height * 61,
+					paddingHorizontal: 15,
 					backgroundColor: Colors.White,
 					justifyContent: 'space-between',
 					alignItems: 'center',
@@ -64,7 +55,7 @@ export default function HomeScreen({
 						alignItems: 'center',
 					}}
 				>
-					<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
+					<Text style={styles.boldBlackText24}>
 						{new Date(date).getMonth() + 1}.{new Date(date).getDate()}
 					</Text>
 					<DownArrow />
@@ -95,55 +86,66 @@ export default function HomeScreen({
 			<View
 				style={{
 					width: Dimensions.width * 390,
-					height: Dimensions.height * 1,
-					backgroundColor: Colors.LightGray,
-				}}
-			/>
-			<View
-				style={{
-					width: Dimensions.width * 390,
-					height: Dimensions.height * 164,
+					height: Dimensions.height * 255,
 					justifyContent: 'center',
-					alignItems: 'center',
-					backgroundColor: Colors.White,
+					backgroundColor: Colors.DarkBrown,
 				}}
 			>
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'center',
-						marginTop: Dimensions.height * 16,
+				<PieChart
+					data={[
+						{ value: 85, color: '#F27400' },
+						{ value: 80, color: Colors.White },
+					]}
+					donut={true}
+					radius={Dimensions.width * 81}
+					innerRadius={Dimensions.width * 74}
+					innerCircleColor={Colors.White}
+					innerCircleBorderColor={Colors.DarkGray}
+					innerCircleBorderWidth={2}
+					centerLabelComponent={() => {
+						return (
+							<View
+								style={{
+									justifyContent: 'center',
+									alignItems: 'center',
+								}}
+							>
+								<Text
+									style={{
+										color: Colors.Black,
+										fontSize: 12,
+									}}
+								>
+									카페인 섭취
+								</Text>
+								<View
+									style={{
+										flexDirection: 'row',
+										alignItems: 'baseline',
+									}}
+								>
+									<Text
+										style={{
+											color: '#F27400',
+											fontSize: 35,
+											fontWeight: 'bold',
+										}}
+									>
+										85
+									</Text>
+									<Text
+										style={{
+											color: Colors.Black,
+											fontSize: 20,
+										}}
+									>
+										%
+									</Text>
+								</View>
+							</View>
+						);
 					}}
-				>
-					<Text
-						style={{ fontSize: 40, fontWeight: 'bold', color: Colors.Green }}
-					>
-						120
-					</Text>
-					<Text style={{ fontSize: 40, fontWeight: 'bold' }}>/</Text>
-					<Text style={{ fontSize: 40, fontWeight: 'bold' }}>370</Text>
-				</View>
-				<View
-					style={{
-						width: Dimensions.width * 319,
-						height: Dimensions.height * 11,
-						backgroundColor: Colors.DarkGray,
-						borderRadius: 30,
-						marginTop: 36,
-					}}
-				>
-					<Animated.View
-						style={{
-							backgroundColor: Colors.DarkBrown,
-							width,
-							height: Dimensions.height * 11,
-							borderRadius: 30,
-						}}
-					/>
-				</View>
-				<Text style={{ fontSize: 14, marginTop: 14 }}>
-					"이 정도면 적당해요!"
-				</Text>
+				/>
 			</View>
 			<Pressable
 				style={{
@@ -163,7 +165,7 @@ export default function HomeScreen({
 			>
 				<PlusIcon />
 			</Pressable>
-		</SafeAreaView>
+		</View>
 	);
 }
 
@@ -172,5 +174,11 @@ const styles = StyleSheet.create({
 		width: Dimensions.width * 390,
 		height: Dimensions.height * 844,
 		backgroundColor: Colors.LightGray,
+		alignItems: 'center',
+	},
+	boldBlackText24: {
+		fontSize: Dimensions.height * 24,
+		color: Colors.Black,
+		fontWeight: 'bold',
 	},
 });
