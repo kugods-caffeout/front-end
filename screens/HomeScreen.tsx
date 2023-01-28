@@ -81,64 +81,137 @@ export default function HomeScreen({
 					width: Dimensions.width * 390,
 					height: Dimensions.height * 255,
 					justifyContent: 'center',
+					alignItems: 'center',
 					backgroundColor: Colors.DarkBrown,
 				}}
 			>
-				<PieChart
-					data={[
-						{ value: 85, color: '#F27400' },
-						{ value: 80, color: Colors.White },
-					]}
-					donut={true}
-					radius={Dimensions.width * 81}
-					innerRadius={Dimensions.width * 74}
-					innerCircleColor={Colors.White}
-					innerCircleBorderColor={Colors.DarkGray}
-					innerCircleBorderWidth={2}
-					centerLabelComponent={() => {
-						return (
-							<View
-								style={{
-									justifyContent: 'center',
-									alignItems: 'center',
-								}}
-							>
-								<Text
-									style={{
-										color: Colors.Black,
-										fontSize: 12,
-									}}
-								>
-									카페인 섭취
-								</Text>
+				<View
+					style={{
+						width: Dimensions.width * 274,
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
+				>
+					<PieChart
+						data={[
+							{ value: 85, color: '#F27400' },
+							{ value: 15, color: Colors.White },
+						]}
+						donut={true}
+						radius={Dimensions.width * 81}
+						innerRadius={Dimensions.width * 74}
+						innerCircleColor={Colors.White}
+						extraRadiusForFocused={0}
+						innerCircleBorderColor={Colors.DarkGray}
+						innerCircleBorderWidth={2}
+						centerLabelComponent={() => {
+							return (
 								<View
 									style={{
-										flexDirection: 'row',
-										alignItems: 'baseline',
+										justifyContent: 'center',
+										alignItems: 'center',
 									}}
 								>
-									<Text
-										style={{
-											color: '#F27400',
-											fontSize: 35,
-											fontWeight: 'bold',
-										}}
-									>
-										85
-									</Text>
 									<Text
 										style={{
 											color: Colors.Black,
-											fontSize: 20,
+											fontSize: 12,
 										}}
 									>
-										%
+										카페인 섭취
 									</Text>
+									<View
+										style={{
+											flexDirection: 'row',
+											alignItems: 'baseline',
+										}}
+									>
+										<Text
+											style={{
+												color: '#F27400',
+												fontSize: 35,
+												fontWeight: 'bold',
+											}}
+										>
+											85
+										</Text>
+										<Text
+											style={{
+												color: Colors.Black,
+												fontSize: 20,
+											}}
+										>
+											%
+										</Text>
+									</View>
 								</View>
-							</View>
-						);
-					}}
-				/>
+							);
+						}}
+					/>
+					<View
+						style={{
+							height: Dimensions.height * 90,
+							borderLeftColor: Colors.White,
+							borderLeftWidth: 2,
+							paddingLeft: Dimensions.width * 14,
+							flexDirection: 'column',
+							justifyContent: 'space-around',
+						}}
+					>
+						<View
+							style={{
+								width: Dimensions.width * 10,
+								height: Dimensions.width * 10,
+								borderRadius: Dimensions.width * 10,
+								backgroundColor: '#F27400',
+								position: 'absolute',
+								top: 0,
+								left: Dimensions.width * 14,
+							}}
+						/>
+						<Text
+							style={{
+								color: Colors.White,
+								fontSize: 40,
+								fontWeight: 'bold',
+							}}
+						>
+							314
+						</Text>
+						<View
+							style={{
+								width: Dimensions.width * 25,
+								height: 1,
+								backgroundColor: Colors.White,
+							}}
+						/>
+						<View
+							style={{
+								flexDirection: 'row',
+								alignItems: 'baseline',
+							}}
+						>
+							<Text
+								style={{
+									color: Colors.White,
+									fontSize: 20,
+									fontWeight: 'bold',
+								}}
+							>
+								370
+							</Text>
+							<Text
+								style={{
+									color: Colors.White,
+									fontSize: 15,
+								}}
+							>
+								{` mg`}
+							</Text>
+						</View>
+					</View>
+				</View>
 			</View>
 			<Pressable
 				style={{
