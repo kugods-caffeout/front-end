@@ -26,14 +26,6 @@ export default function HomeScreen({
 	const [isDatePickerVisible, setDatePickerVisible] = useState(false);
 	const [date, setDate] = useState(new Date());
 
-	const handleConfirm = (date: Date) => {
-		hideDatePicker();
-		setDate(date);
-	};
-	const hideDatePicker = () => {
-		setDatePickerVisible(false);
-	};
-
 	const TomorrowDate = async () => {
 		let promise = new Promise((resolve, reject) => {
 			const current = date;
@@ -104,8 +96,13 @@ export default function HomeScreen({
 			<DateTimePickerModal
 				isVisible={isDatePickerVisible}
 				mode='date'
-				onConfirm={handleConfirm}
-				onCancel={hideDatePicker}
+				onConfirm={(date) => {
+					setDate(date);
+					setDatePickerVisible(false);
+				}}
+				onCancel={() => {
+					setDatePickerVisible(false);
+				}}
 				display={'inline'}
 				locale={'ko'}
 				confirmTextIOS={'확인'}
