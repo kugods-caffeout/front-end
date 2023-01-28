@@ -26,9 +26,6 @@ export default function HomeScreen({
 	const [isDatePickerVisible, setDatePickerVisible] = useState(false);
 	const [date, setDate] = useState(new Date());
 
-	const ShowDatePicker = () => {
-		setDatePickerVisible(true);
-	};
 	const handleConfirm = (date: Date) => {
 		hideDatePicker();
 		setDate(date);
@@ -90,7 +87,7 @@ export default function HomeScreen({
 			>
 				<LeftArrow onPress={Yesterday} />
 				<Pressable
-					onPress={ShowDatePicker}
+					onPress={() => setDatePickerVisible(true)}
 					style={{
 						flexDirection: 'row',
 						justifyContent: 'center',
@@ -100,7 +97,7 @@ export default function HomeScreen({
 					<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
 						{date.getMonth() + 1}.{date.getDate()}
 					</Text>
-					<DownArrow onPress={ShowDatePicker}></DownArrow>
+					<DownArrow onPress={() => setDatePickerVisible(true)}></DownArrow>
 				</Pressable>
 				<RightArrow onPress={TomorrowDate} />
 			</View>
