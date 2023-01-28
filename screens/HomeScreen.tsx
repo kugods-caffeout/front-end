@@ -1,11 +1,4 @@
-import {
-	StyleSheet,
-	View,
-	Text,
-	Pressable,
-	SafeAreaView,
-	Animated,
-} from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
 import { RootStackScreenProps } from '../types';
@@ -13,7 +6,7 @@ import PlusIcon from '../assets/home-plus-icon.svg';
 import DownArrow from '../assets/arrow-down.svg';
 import LeftArrow from '../assets/main-left-arrow.svg';
 import RightArrow from '../assets/main-right-arrow.svg';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PieChart } from 'react-native-gifted-charts';
