@@ -24,14 +24,14 @@ export default function HomeScreen({
 }: RootStackScreenProps<'Home'>) {
 	const loaderValue = useRef(new Animated.Value(0)).current;
 	const [isDatePickerVisible, setDatePickerVisible] = useState(false);
-	const [initalDate, setInitalDate] = useState(new Date());
+	const [date, setDate] = useState(new Date());
 
 	const ShowDatePicker = () => {
 		setDatePickerVisible(true);
 	};
 	const handleConfirm = (date: Date) => {
 		hideDatePicker();
-		setInitalDate(date);
+		setDate(date);
 	};
 	const hideDatePicker = () => {
 		setDatePickerVisible(false);
@@ -39,22 +39,22 @@ export default function HomeScreen({
 
 	const TomorrowDate = async () => {
 		let promise = new Promise((resolve, reject) => {
-			const current = initalDate;
+			const current = date;
 			current.setDate(current.getDate() + 1);
 			resolve(current);
 		});
 		let result: any = await promise;
-		setInitalDate(result);
+		setDate(result);
 	};
 
 	const Yesterday = async () => {
 		let promise = new Promise((resolve, reject) => {
-			const current = initalDate;
+			const current = date;
 			current.setDate(current.getDate() - 1);
 			resolve(current);
 		});
 		let result: any = await promise;
-		setInitalDate(result);
+		setDate(result);
 	};
 
 	const load = (amount: number) => {
@@ -98,7 +98,7 @@ export default function HomeScreen({
 					}}
 				>
 					<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
-						{initalDate.getMonth() + 1}.{initalDate.getDate()}
+						{date.getMonth() + 1}.{date.getDate()}
 					</Text>
 					<DownArrow onPress={ShowDatePicker}></DownArrow>
 				</Pressable>
@@ -114,7 +114,7 @@ export default function HomeScreen({
 				confirmTextIOS={'확인'}
 				cancelTextIOS={'취소'}
 				accentColor={Colors.Brown}
-				date={initalDate}
+				date={date}
 			/>
 			<View
 				style={{
