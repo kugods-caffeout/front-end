@@ -1,15 +1,32 @@
 import * as React from 'react';
-import { Text, Pressable, View } from 'react-native';
+import { Text, Pressable } from 'react-native';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
 
 export default function SizeItem(props: {
-	size: string;
-	volume: number;
-	isSelected: boolean;
+	item: {
+		size: string;
+		volume: number;
+	};
+	selectSizeTemp: {
+		size: string;
+		volume: number;
+	};
+	setSelectSizeTemp: React.Dispatch<
+		React.SetStateAction<{
+			size: string;
+			volume: number;
+		}>
+	>;
 }) {
 	return (
-		<View
+		<Pressable
+			onPress={() =>
+				props.setSelectSizeTemp({
+					size: props.item.size,
+					volume: props.item.volume,
+				})
+			}
 			style={{
 				width: Dimensions.width * 81,
 				height: Dimensions.height * 121,
@@ -17,28 +34,37 @@ export default function SizeItem(props: {
 				borderStyle: 'solid',
 				borderColor: Colors.DarkGray,
 				borderRadius: 10,
-				backgroundColor: props.isSelected ? Colors.Brown : Colors.White,
+				backgroundColor:
+					props.selectSizeTemp.size === props.item.size
+						? Colors.Brown
+						: Colors.White,
 				justifyContent: 'center',
 				alignItems: 'center',
 			}}
 		>
 			<Text
 				style={{
-					color: props.isSelected ? Colors.White : Colors.DeepGray,
+					color:
+						props.selectSizeTemp.size === props.item.size
+							? Colors.White
+							: Colors.DeepGray,
 					fontSize: 16,
 					fontWeight: '700',
 				}}
 			>
-				{props.size}
+				{props.item.size}
 			</Text>
 			<Text
 				style={{
-					color: props.isSelected ? Colors.White : '#C7C7C7',
+					color:
+						props.selectSizeTemp.size === props.item.size
+							? Colors.White
+							: '#C7C7C7',
 					fontSize: 13,
 				}}
 			>
-				{(props.volume * 29.5735).toFixed()}ml
+				{(props.item.volume * 29.5735).toFixed()}ml
 			</Text>
-		</View>
+		</Pressable>
 	);
 }

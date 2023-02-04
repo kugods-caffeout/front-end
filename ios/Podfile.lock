@@ -327,6 +327,8 @@ PODS:
     - RCTTypeSafety
     - React-Core
     - ReactCommon/turbomodule/core
+  - react-native-splash-screen (3.3.0):
+    - React-Core
   - React-perflogger (0.70.4)
   - React-RCTActionSheet (0.70.4):
     - React-Core/RCTActionSheetHeaders (= 0.70.4)
@@ -455,6 +457,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -543,6 +546,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-date-picker"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-splash-screen:
+    :path: "../node_modules/react-native-splash-screen"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -618,6 +623,7 @@ SPEC CHECKSUMS:
   React-logger: f8071ad48248781d5afdb8a07f778758529d3019
   react-native-date-picker: 93e43b3084cea595b4d68b1405d6d99849663bd6
   react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
+  react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   React-perflogger: 5e41b01b35d97cc1b0ea177181eb33b5c77623b6
   React-RCTActionSheet: 48949f30b24200c82f3dd27847513be34e06a3ae
   React-RCTAnimation: 96af42c97966fcd53ed9c31bee6f969c770312b6
