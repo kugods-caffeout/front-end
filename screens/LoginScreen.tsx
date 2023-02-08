@@ -64,8 +64,8 @@ export default function LoginScreen({
 		>
 			<LoginBackground
 				style={{
-					right: 0,
-					top: 0,
+					height: Dimensions.height,
+					width: Dimensions.width,
 					position: 'absolute',
 				}}
 			></LoginBackground>
