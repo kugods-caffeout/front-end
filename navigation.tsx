@@ -34,7 +34,7 @@ function RootNavigator() {
 			<Stack.Screen
 				name='SearchDrink'
 				component={SearchDrinkScreen}
-				options={{ headerShown: false }}
+				options={{ headerShown: false}}
 			/>
 			<Stack.Screen
 				name='DrinkDetail'
