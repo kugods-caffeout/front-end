@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable } from 'react-native';
+import { StyleSheet, View, Text, Pressable, FlatList } from 'react-native';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
 import { RootStackScreenProps } from '../types';
@@ -10,6 +10,8 @@ import { useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PieChart } from 'react-native-gifted-charts';
+import HomeDrinkItem from '../component/HomeDrinkItem';
+import MonsterOrange from '../assets/monster-orange.svg';
 
 export default function HomeScreen({
 	navigation,
@@ -213,14 +215,124 @@ export default function HomeScreen({
 					</View>
 				</View>
 			</View>
+			<MonsterOrange
+				style={{
+					position: 'absolute',
+					right: Dimensions.width * 58,
+					top: Dimensions.height * 257,
+				}}
+			/>
+			<View
+				style={{
+					width: Dimensions.width * 311,
+					height: Dimensions.height * 40,
+					borderRadius: 10,
+					backgroundColor: Colors.White,
+					position: 'absolute',
+					top: Dimensions.height * 293,
+					justifyContent: 'center',
+					alignItems: 'center',
+					zIndex: 1,
+				}}
+			>
+				<Text
+					style={{
+						color: Colors.Black,
+						fontSize: 14,
+					}}
+				>
+					" 곧 카페인 하루 권장량을 초과해요!"
+				</Text>
+			</View>
+			<View
+				style={{
+					width: Dimensions.width * 390,
+					height: Dimensions.height * 528,
+					backgroundColor: '#F6F6F6',
+					paddingHorizontal: Dimensions.width * 16,
+					paddingTop: Dimensions.height * 46,
+					paddingBottom: useSafeAreaInsets().bottom,
+				}}
+			>
+				<View
+					style={{
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						marginBottom: Dimensions.height * 20,
+					}}
+				>
+					<View
+						style={{
+							backgroundColor: Colors.Brown,
+							width: Dimensions.width * 107,
+							height: Dimensions.height * 28,
+							justifyContent: 'center',
+							alignItems: 'center',
+							borderRadius: 20,
+						}}
+					>
+						<Text
+							style={{
+								color: Colors.White,
+								fontSize: 14,
+								fontWeight: 'bold',
+							}}
+						>
+							내가 마신 음료
+						</Text>
+					</View>
+					<View
+						style={{
+							width: Dimensions.width * 241,
+							height: 1,
+							backgroundColor: Colors.DarkGray,
+							marginTop: Dimensions.height * 9,
+							marginBottom: Dimensions.height * 16,
+						}}
+					/>
+				</View>
+				<FlatList
+					showsVerticalScrollIndicator={false}
+					key={'-'}
+					numColumns={2}
+					columnWrapperStyle={{
+						justifyContent: 'space-between',
+					}}
+					renderItem={(drink) => (
+						<HomeDrinkItem
+							caffeine={drink.item.caffeine}
+							brand={drink.item.brand}
+							drinkName={drink.item.drinkName}
+						/>
+					)}
+					data={[
+						{
+							caffeine: 120,
+							brand: '스타벅스',
+							drinkName: '돌체 콜드 브루',
+						},
+						{
+							caffeine: 6,
+							brand: '스타벅스',
+							drinkName: '유자차',
+						},
+						{
+							caffeine: 72,
+							brand: '스타벅스',
+							drinkName: '아메리카노',
+						},
+					]}
+				/>
+			</View>
 			<Pressable
 				style={{
 					position: 'absolute',
-					right: 34,
-					bottom: 84,
-					height: 60,
-					width: 60,
-					borderRadius: 50,
+					right: Dimensions.width * 34,
+					bottom: useSafeAreaInsets().bottom + Dimensions.height * 60,
+					height: Dimensions.width * 60,
+					width: Dimensions.width * 60,
+					borderRadius: Dimensions.width * 60,
 					backgroundColor: Colors.Brown,
 					justifyContent: 'center',
 					alignItems: 'center',
@@ -239,7 +351,6 @@ const styles = StyleSheet.create({
 	topContainer: {
 		width: Dimensions.width * 390,
 		height: Dimensions.height * 844,
-		backgroundColor: Colors.LightGray,
 		alignItems: 'center',
 	},
 	boldBlackText24: {
