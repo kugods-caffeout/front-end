@@ -1,182 +1,338 @@
-import {
-	StyleSheet,
-	View,
-	Text,
-	ScrollView,
-	Pressable,
-	SafeAreaView,
-	Animated,
-} from 'react-native';
+import { StyleSheet, View, Text, Pressable, FlatList } from 'react-native';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
 import { RootStackScreenProps } from '../types';
 import PlusIcon from '../assets/home-plus-icon.svg';
-import Kakao from '../assets/kakao-example.svg';
 import DownArrow from '../assets/arrow-down.svg';
 import LeftArrow from '../assets/main-left-arrow.svg';
 import RightArrow from '../assets/main-right-arrow.svg';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PieChart } from 'react-native-gifted-charts';
+import HomeDrinkItem from '../component/HomeDrinkItem';
+import MonsterOrange from '../assets/monster-orange.svg';
 
 export default function HomeScreen({
 	navigation,
 	route,
 }: RootStackScreenProps<'Home'>) {
-	const loaderValue = useRef(new Animated.Value(0)).current;
 	const [isDatePickerVisible, setDatePickerVisible] = useState(false);
-	const [initalDate, setInitalDate] = useState(new Date());
-
-	const ShowDatePicker = () => {
-		setDatePickerVisible(true);
-	};
-	const handleConfirm = (date: Date) => {
-		hideDatePicker();
-		setInitalDate(date);
-	};
-	const hideDatePicker = () => {
-		setDatePickerVisible(false);
-	};
-
-	const TomorrowDate = async () => {
-		let promise = new Promise((resolve, reject) => {
-			const current = initalDate;
-			current.setDate(current.getDate() + 1);
-			resolve(current);
-		});
-		let result: any = await promise;
-		setInitalDate(result);
-	};
-
-	const Yesterday = async () => {
-		let promise = new Promise((resolve, reject) => {
-			const current = initalDate;
-			current.setDate(current.getDate() - 1);
-			resolve(current);
-		});
-		let result: any = await promise;
-		setInitalDate(result);
-	};
-
-	const load = (amount: number) => {
-		Animated.timing(loaderValue, {
-			toValue: (amount / 370) * 100, //amount들어가야함
-			duration: 500,
-			useNativeDriver: false,
-		}).start();
-	};
-
-	const width = loaderValue.interpolate({
-		inputRange: [0, 100],
-		outputRange: ['0%', '100%'],
-		extrapolate: 'clamp',
-	});
-
-	useEffect(() => {
-		load(120); //amount
-	}, []);
+	const [date, setDate] = useState(Date.now());
 
 	return (
-		<SafeAreaView style={styles.topContainer}>
+		<View
+			style={[
+				styles.topContainer,
+				{
+					paddingTop: useSafeAreaInsets().top,
+					paddingBottom: useSafeAreaInsets().bottom,
+				},
+			]}
+		>
 			<View
 				style={{
 					width: Dimensions.width * 390,
-					height: Dimensions.height * 44,
-					paddingHorizontal: 10,
+					height: Dimensions.height * 61,
+					paddingHorizontal: 15,
 					backgroundColor: Colors.White,
 					justifyContent: 'space-between',
 					alignItems: 'center',
 					flexDirection: 'row',
 				}}
 			>
-				<LeftArrow onPress={Yesterday} />
+				<LeftArrow onPress={() => setDate(date - 86400000)} />
 				<Pressable
-					onPress={ShowDatePicker}
+					onPress={() => setDatePickerVisible(true)}
 					style={{
 						flexDirection: 'row',
 						justifyContent: 'center',
 						alignItems: 'center',
 					}}
 				>
-					<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
-						{initalDate.getMonth() + 1}.{initalDate.getDate()}
+					<Text style={styles.boldBlackText24}>
+						{new Date(date).getMonth() + 1}.{new Date(date).getDate()}
 					</Text>
-					<DownArrow onPress={ShowDatePicker}></DownArrow>
+					<DownArrow />
 				</Pressable>
-				<RightArrow onPress={TomorrowDate} />
+				<RightArrow
+					onPress={() => {
+						setDate(date + 86400000);
+					}}
+				/>
 			</View>
 			<DateTimePickerModal
+				date={new Date(date)}
 				isVisible={isDatePickerVisible}
 				mode='date'
-				onConfirm={handleConfirm}
-				onCancel={hideDatePicker}
+				onConfirm={(date) => {
+					setDatePickerVisible(false);
+					setDate(date.getTime());
+				}}
+				onCancel={() => {
+					setDatePickerVisible(false);
+				}}
 				display={'inline'}
 				locale={'ko'}
 				confirmTextIOS={'확인'}
 				cancelTextIOS={'취소'}
 				accentColor={Colors.Brown}
-				date={initalDate}
 			/>
 			<View
 				style={{
 					width: Dimensions.width * 390,
-					height: Dimensions.height * 1,
-					backgroundColor: Colors.LightGray,
+					height: Dimensions.height * 255,
+					justifyContent: 'center',
+					alignItems: 'center',
+					backgroundColor: Colors.DarkBrown,
 				}}
-			></View>
+			>
+				<View
+					style={{
+						width: Dimensions.width * 274,
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
+				>
+					<PieChart
+						data={[
+							{ value: 85, color: '#F27400' },
+							{ value: 15, color: Colors.White },
+						]}
+						donut={true}
+						radius={Dimensions.width * 81}
+						innerRadius={Dimensions.width * 74}
+						innerCircleColor={Colors.White}
+						extraRadiusForFocused={0}
+						innerCircleBorderColor={Colors.DarkGray}
+						innerCircleBorderWidth={2}
+						centerLabelComponent={() => {
+							return (
+								<View
+									style={{
+										justifyContent: 'center',
+										alignItems: 'center',
+									}}
+								>
+									<Text
+										style={{
+											color: Colors.Black,
+											fontSize: 12,
+										}}
+									>
+										카페인 섭취
+									</Text>
+									<View
+										style={{
+											flexDirection: 'row',
+											alignItems: 'baseline',
+										}}
+									>
+										<Text
+											style={{
+												color: '#F27400',
+												fontSize: 35,
+												fontWeight: 'bold',
+											}}
+										>
+											85
+										</Text>
+										<Text
+											style={{
+												color: Colors.Black,
+												fontSize: 20,
+											}}
+										>
+											%
+										</Text>
+									</View>
+								</View>
+							);
+						}}
+					/>
+					<View
+						style={{
+							height: Dimensions.height * 90,
+							borderLeftColor: Colors.White,
+							borderLeftWidth: 2,
+							paddingLeft: Dimensions.width * 14,
+							flexDirection: 'column',
+							justifyContent: 'space-around',
+						}}
+					>
+						<View
+							style={{
+								width: Dimensions.width * 10,
+								height: Dimensions.width * 10,
+								borderRadius: Dimensions.width * 10,
+								backgroundColor: '#F27400',
+								position: 'absolute',
+								top: 0,
+								left: Dimensions.width * 14,
+							}}
+						/>
+						<Text
+							style={{
+								color: Colors.White,
+								fontSize: 40,
+								fontWeight: 'bold',
+							}}
+						>
+							314
+						</Text>
+						<View
+							style={{
+								width: Dimensions.width * 25,
+								height: 1,
+								backgroundColor: Colors.White,
+							}}
+						/>
+						<View
+							style={{
+								flexDirection: 'row',
+								alignItems: 'baseline',
+							}}
+						>
+							<Text
+								style={{
+									color: Colors.White,
+									fontSize: 20,
+									fontWeight: 'bold',
+								}}
+							>
+								370
+							</Text>
+							<Text
+								style={{
+									color: Colors.White,
+									fontSize: 15,
+								}}
+							>
+								{` mg`}
+							</Text>
+						</View>
+					</View>
+				</View>
+			</View>
+			<MonsterOrange
+				style={{
+					position: 'absolute',
+					right: Dimensions.width * 58,
+					top: Dimensions.height * 257,
+				}}
+			/>
+			<View
+				style={{
+					width: Dimensions.width * 311,
+					height: Dimensions.height * 40,
+					borderRadius: 10,
+					backgroundColor: Colors.White,
+					position: 'absolute',
+					top: Dimensions.height * 293,
+					justifyContent: 'center',
+					alignItems: 'center',
+					zIndex: 1,
+				}}
+			>
+				<Text
+					style={{
+						color: Colors.Black,
+						fontSize: 14,
+					}}
+				>
+					" 곧 카페인 하루 권장량을 초과해요!"
+				</Text>
+			</View>
 			<View
 				style={{
 					width: Dimensions.width * 390,
-					height: Dimensions.height * 164,
-					justifyContent: 'center',
-					alignItems: 'center',
-					backgroundColor: Colors.White,
+					height: Dimensions.height * 528,
+					backgroundColor: '#F6F6F6',
+					paddingHorizontal: Dimensions.width * 16,
+					paddingTop: Dimensions.height * 46,
+					paddingBottom: useSafeAreaInsets().bottom,
 				}}
 			>
 				<View
 					style={{
 						flexDirection: 'row',
-						justifyContent: 'center',
-						marginTop: Dimensions.height * 16,
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						marginBottom: Dimensions.height * 20,
 					}}
 				>
-					<Text
-						style={{ fontSize: 40, fontWeight: 'bold', color: Colors.Green }}
-					>
-						120
-					</Text>
-					<Text style={{ fontSize: 40, fontWeight: 'bold' }}>/</Text>
-					<Text style={{ fontSize: 40, fontWeight: 'bold' }}>370</Text>
-				</View>
-				<View
-					style={{
-						width: Dimensions.width * 319,
-						height: Dimensions.height * 11,
-						backgroundColor: Colors.DarkGray,
-						borderRadius: 30,
-						marginTop: 36,
-					}}
-				>
-					<Animated.View
+					<View
 						style={{
-							backgroundColor: Colors.DarkBrown,
-							width,
-							height: Dimensions.height * 11,
-							borderRadius: 30,
+							backgroundColor: Colors.Brown,
+							width: Dimensions.width * 107,
+							height: Dimensions.height * 28,
+							justifyContent: 'center',
+							alignItems: 'center',
+							borderRadius: 20,
 						}}
-					></Animated.View>
+					>
+						<Text
+							style={{
+								color: Colors.White,
+								fontSize: 14,
+								fontWeight: 'bold',
+							}}
+						>
+							내가 마신 음료
+						</Text>
+					</View>
+					<View
+						style={{
+							width: Dimensions.width * 241,
+							height: 1,
+							backgroundColor: Colors.DarkGray,
+							marginTop: Dimensions.height * 9,
+							marginBottom: Dimensions.height * 16,
+						}}
+					/>
 				</View>
-				<Text style={{ fontSize: 14, marginTop: 14 }}>
-					"이 정도면 적당해요!"
-				</Text>
+				<FlatList
+					showsVerticalScrollIndicator={false}
+					key={'-'}
+					numColumns={2}
+					columnWrapperStyle={{
+						justifyContent: 'space-between',
+					}}
+					renderItem={(drink) => (
+						<HomeDrinkItem
+							caffeine={drink.item.caffeine}
+							brand={drink.item.brand}
+							drinkName={drink.item.drinkName}
+						/>
+					)}
+					data={[
+						{
+							caffeine: 120,
+							brand: '스타벅스',
+							drinkName: '돌체 콜드 브루',
+						},
+						{
+							caffeine: 6,
+							brand: '스타벅스',
+							drinkName: '유자차',
+						},
+						{
+							caffeine: 72,
+							brand: '스타벅스',
+							drinkName: '아메리카노',
+						},
+					]}
+				/>
 			</View>
 			<Pressable
 				style={{
 					position: 'absolute',
-					right: 34,
-					bottom: 84,
-					height: 60,
-					width: 60,
-					borderRadius: 50,
+					right: Dimensions.width * 34,
+					bottom: useSafeAreaInsets().bottom + Dimensions.height * 60,
+					height: Dimensions.width * 60,
+					width: Dimensions.width * 60,
+					borderRadius: Dimensions.width * 60,
 					backgroundColor: Colors.Brown,
 					justifyContent: 'center',
 					alignItems: 'center',
@@ -185,9 +341,9 @@ export default function HomeScreen({
 					navigation.navigate('SearchDrink');
 				}}
 			>
-				<PlusIcon></PlusIcon>
+				<PlusIcon />
 			</Pressable>
-		</SafeAreaView>
+		</View>
 	);
 }
 
@@ -195,6 +351,11 @@ const styles = StyleSheet.create({
 	topContainer: {
 		width: Dimensions.width * 390,
 		height: Dimensions.height * 844,
-		backgroundColor: Colors.LightGray,
+		alignItems: 'center',
+	},
+	boldBlackText24: {
+		fontSize: Dimensions.height * 24,
+		color: Colors.Black,
+		fontWeight: 'bold',
 	},
 });
