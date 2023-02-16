@@ -62,13 +62,14 @@ export default function LoginScreen({
 				},
 			]}
 		>
-			<LoginBackground
+			<ImageBackground
 				style={{
-					height: Dimensions.height,
-					width: Dimensions.width,
+					width: Dimensions.width * 390,
+					height: Dimensions.height * 844,
 					position: 'absolute',
 				}}
-			></LoginBackground>
+				source={require('../assets/login-background.png')}
+			/>
 			<View
 				style={{ flexDirection: 'row', paddingTop: Dimensions.height * 570 }}
 			>
