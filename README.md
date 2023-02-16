@@ -1,40 +1,32 @@
-# front-end
-React Native/Typescript 기반 클라이언트(프론트엔드)입니다.
+# 카페아웃 프론트엔드(클라이언트) | 디자인
 
-## 커밋규칙
+**작성일자 :** 2023.01.22
 
-**[ACTIVITY] 커밋메세지**
+## 목표 및 현황
 
-**ACTIVITY목록**
-- int: only for initial commit
-- doc: changes document or comment
-- ftr: add new feature
-- mod: modify existing feature
-- fix: fix an error or issue
-- rfc: refactor code
-- add: add new file or directory
-- rmv: remove existing file or directory
+- **목표 :**
+  - **22년 Q3 : 음료 검색 화면 구현**
+  - **22년 Q4 : 음료 상세 정보 화면 구현**
+- **현황 :**
+  - **23년 Q1 : 로그인 화면, 홈 화면 구현**
 
-**커밋메세지 형식**
-- 한글로 작성합니다.
-- "~함" 형식으로 작성합니다.
-- 메세지 끝에 점을 붙이지 않습니다.
+## 구성
 
-예시)[ftr]로그인 기능을 추가함
+- **front-end (client)**
+  - **언어** : `TypeScript` (4.8.3)
+  - **프레임워크** : `React Native` (0.70.4) `React` (18.1.0)
+  - **상태관리 라이브러리** : `Recoil` (0.7.6)
+- **프로토타입 디자인** : `Figma`
 
-## 브랜치 전략 
-**Github Flow 채택**
-- 최상위 브랜치 : main
-- 기능별 브랜치 : feature/기능명(영어, 단어 사이는 '-'로 구분)
+## 개발팀원
 
-예시)
-- main
-  - feature/sign-in
-  - feature/sign-up
-  - feature/search
+- **KUGODS 1기 개발 코어 하채영**  
+  [![GitHub Badge](https://img.shields.io/badge/GitHub-181717?&logo=GitHub&logoColor=white&style=for-the-badge&link=https://github.com/ChaeyoungHa)](https://github.com/ChaeyoungHa)
+- **KUGODS 1기 개발 크루 김자헌**  
+  [![GitHub Badge](https://img.shields.io/badge/GitHub-181717?&logo=GitHub&logoColor=white&style=for-the-badge&link=https://github.com/KoreaUniNeo)](https://github.com/KoreaUniNeo)
+- **KUGODS 1기 개발 크루 김명진**  
+  [![GitHub Badge](https://img.shields.io/badge/GitHub-181717?&logo=GitHub&logoColor=white&style=for-the-badge&link=https://github.com/MyoungJinKim)](https://github.com/MyoungJinKim)
 
-## PR 규칙
-- PR의 Reviewer를 자신을 제외한 다른 팀원을 모두 지정합니다.
-- Reviewer는 코드 리뷰를 마친 후 Comment/Approve/Request changes 중 한 가지를 선택합니다.
-- 반드시 1명 이상의 Reviewer가 Approve해야만 Merge 할 수 있습니다.
-- Merge 정책 : Rebase and Merge
+## 디자인 팀원
+
+- **KUGODS 1기 디자이너 박원우**
