@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { View, Pressable, StyleSheet, Text, Alert } from 'react-native';
+import {
+	View,
+	Pressable,
+	StyleSheet,
+	Text,
+	Alert,
+	ImageBackground,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
@@ -13,6 +20,8 @@ import {
 	getAccessToken,
 	KakaoAccessTokenInfo,
 } from '@react-native-seoul/kakao-login';
+import KakaoLoginButton from '../assets/kakao-login.svg';
+import LoginBackground from '../assets/login-background.svg';
 
 export default function LoginScreen({
 	navigation,
@@ -53,47 +62,40 @@ export default function LoginScreen({
 				},
 			]}
 		>
-			<Text
+			<ImageBackground
 				style={{
-					color: Colors.Black,
-					fontWeight: 'bold',
-					fontSize: 30,
+					width: Dimensions.width * 390,
+					height: Dimensions.height * 844,
+					position: 'absolute',
 				}}
+				source={require('../assets/login-background.png')}
+			/>
+			<View
+				style={{ flexDirection: 'row', paddingTop: Dimensions.height * 570 }}
 			>
-				로그인 화면
-			</Text>
+				<Text style={{ fontSize: 12, color: Colors.White, fontWeight: 'bold' }}>
+					카페아웃
+				</Text>
+				<Text
+					style={{
+						fontSize: 12,
+						color: Colors.White,
+						paddingLeft: 3,
+						paddingBottom: Dimensions.height * 20,
+					}}
+				>
+					시작하기
+				</Text>
+			</View>
 			<Pressable
 				style={({ pressed }) => [
 					{
 						opacity: pressed ? 0.5 : 1,
 					},
-					styles.loginButton,
 				]}
 				onPress={logInWithKakao}
 			>
-				<Text>로그인</Text>
-			</Pressable>
-			<Pressable
-				style={({ pressed }) => [
-					{
-						opacity: pressed ? 0.5 : 1,
-					},
-					styles.loginButton,
-				]}
-				onPress={getKakaoToken}
-			>
-				<Text>토큰 가져오기</Text>
-			</Pressable>
-			<Pressable
-				style={({ pressed }) => [
-					{
-						opacity: pressed ? 0.5 : 1,
-					},
-					styles.loginButton,
-				]}
-				onPress={logOutWithKakao}
-			>
-				<Text>로그아웃</Text>
+				<KakaoLoginButton />
 			</Pressable>
 		</View>
 	);
@@ -104,14 +106,6 @@ const styles = StyleSheet.create({
 		width: Dimensions.width * 390,
 		height: Dimensions.height * 844,
 		backgroundColor: Colors.White,
-		alignItems: 'center',
-	},
-	loginButton: {
-		width: Dimensions.width * 358,
-		height: Dimensions.height * 44,
-		borderRadius: 30,
-		backgroundColor: '#FEE500',
-		justifyContent: 'center',
 		alignItems: 'center',
 	},
 });
