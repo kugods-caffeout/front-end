@@ -29,4 +29,5 @@
 
 ## 디자인 팀원
 
-- **KUGODS 1기 디자이너 박원우**
+- **KUGODS 1기 디자이너 박원우**  
+    [![Instagram Badge](https://img.shields.io/badge/Instagram-E4405F?&logo=Instagram&logoColor=white&style=for-the-badge&link=https://www.instagram.com/ww.25.6/)](https://www.instagram.com/ww.25.6/)
