@@ -6662,6 +6662,7 @@
   "version" "1.0.5"
 
 "react-native@*", "react-native@>= 0.30.0", "react-native@>=0.55", "react-native@>=0.57.0", "react-native@>=0.59.0", "react-native@>=0.65.0", "react-native@0.70.4":
+
   "integrity" "sha512-1e4jWotS20AJ/4lGVkZQs2wE0PvCpIRmPQEQ1FyH7wdyuewFFIxbUHqy6vAj1JWVFfAzbDakOQofrIkkHWLqNA=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.70.4.tgz"
   "version" "0.70.4"

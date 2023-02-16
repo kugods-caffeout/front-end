@@ -239,7 +239,7 @@ export default function DrinkDetailScreen({
 										height: 4,
 									},
 									shadowOpacity: 0.1,
-								},
+						 		},
 								android: {
 									shadowColor: '#00000010',
 									evevation: 20,

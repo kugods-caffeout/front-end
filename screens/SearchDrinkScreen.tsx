@@ -11,15 +11,19 @@ import {
 	getDrinkSelector,
 	getFilteredDrinkSelector,
 } from '../recoil/selectors/getDrinkSelector';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {
+	SafeAreaView,
+	useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+
+import BackArrow from '../assets/black-back-arrow.svg';
 
 export default function SearchDrinkScreen({
 	navigation,
 }: RootStackScreenProps<'SearchDrink'>) {
 	const [drinkKeyword, setDrinkKeyword] = React.useState('');
 	const filteredSelector = useRecoilValue<drink[]>(getFilteredDrinkSelector);
-	
 
 	function searchedDrinkList(drinkList: drink[], keyword: string) {
 		if (keyword === '') {
@@ -54,6 +58,19 @@ export default function SearchDrinkScreen({
 				},
 			]}
 		>
+			<Pressable
+				style={{
+					width: Dimensions.width * 12,
+					height: Dimensions.height * 12,
+					marginHorizontal: Dimensions.width * 12,
+					marginBottom: Dimensions.height * 13,
+				}}
+				onPress={() => {
+					navigation.goBack();
+				}}
+			>
+				<BackArrow />
+			</Pressable>
 			<View style={styles.headerContainer}>
 				<View style={styles.searchBarContainer}>
 					<SearchIcon />
@@ -110,6 +127,7 @@ const styles = StyleSheet.create({
 	headerContainer: {
 		width: Dimensions.width * 390,
 		height: Dimensions.height * 56,
+		paddingHorizontal: Dimensions.height * 12,
 		backgroundColor: Colors.White,
 		justifyContent: 'center',
 		alignItems: 'center',
