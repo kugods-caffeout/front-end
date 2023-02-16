@@ -239,7 +239,7 @@ export default function DrinkDetailScreen({
 										height: 4,
 									},
 									shadowOpacity: 0.1,
-						 		},
+								},
 								android: {
 									shadowColor: '#00000010',
 									evevation: 20,
@@ -615,7 +615,7 @@ export default function DrinkDetailScreen({
 				>
 					<Pressable
 						style={styles.applyButton}
-						onPress={() => navigation.goBack()}
+						onPress={() => navigation.navigate('Home')}
 					>
 						<Text style={styles.boldWhiteText16}>음료 추가</Text>
 					</Pressable>
