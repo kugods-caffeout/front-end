@@ -1,11 +1,11 @@
 import axios from 'axios';
-
+import { AUTH_TOKEN } from '@env';
 export const API_URL = 'http://52.78.225.87';
 
 /* axios 공통 config */
 export const axiosInstance = axios.create({
 	baseURL: API_URL,
-	headers: { 'Cache-Control': 'no-cache' },
+	headers: { 'Authorization': `Bearer ${AUTH_TOKEN}` },
 });
 
 /* baseAPI 정의 */
