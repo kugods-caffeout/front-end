@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, Pressable, FlatList } from 'react-native';
 import Colors from '../constants/Colors';
 import Dimensions from '../constants/Dimensions';
-import { RootStackScreenProps } from '../types';
+import { drink, RootStackScreenProps } from '../types';
 import PlusIcon from '../assets/home-plus-icon.svg';
 import DownArrow from '../assets/arrow-down.svg';
 import LeftArrow from '../assets/main-left-arrow.svg';
@@ -219,7 +219,7 @@ export default function HomeScreen({
 				style={{
 					position: 'absolute',
 					right: Dimensions.width * 58,
-					top: Dimensions.height * 257,
+					top: Dimensions.height * 257 + useSafeAreaInsets().top,
 				}}
 			/>
 			<View
@@ -229,7 +229,7 @@ export default function HomeScreen({
 					borderRadius: 10,
 					backgroundColor: Colors.White,
 					position: 'absolute',
-					top: Dimensions.height * 293,
+					top: Dimensions.height * 293 + useSafeAreaInsets().top,
 					justifyContent: 'center',
 					alignItems: 'center',
 					zIndex: 1,
@@ -247,7 +247,7 @@ export default function HomeScreen({
 			<View
 				style={{
 					width: Dimensions.width * 390,
-					height: Dimensions.height * 528,
+					height: Dimensions.height * 485,
 					backgroundColor: '#F6F6F6',
 					paddingHorizontal: Dimensions.width * 16,
 					paddingTop: Dimensions.height * 46,
@@ -301,26 +301,58 @@ export default function HomeScreen({
 					}}
 					renderItem={(drink) => (
 						<HomeDrinkItem
-							caffeine={drink.item.caffeine}
+							__v={drink.item.__v}
+							_id={drink.item._id}
 							brand={drink.item.brand}
-							drinkName={drink.item.drinkName}
+							caffeine={drink.item.caffeine}
+							createdAt={drink.item.createdAt}
+							drink_name={drink.item.drink_name}
+							img={drink.item.img}
+							kcal={drink.item.kcal}
+							size={drink.item.size}
+							temp={drink.item.temp}
+							updatedAt={drink.item.updatedAt}
 						/>
 					)}
 					data={[
 						{
-							caffeine: 120,
-							brand: '스타벅스',
-							drinkName: '돌체 콜드 브루',
-						},
-						{
+							_id: '636f5f8327f92fddf37761d1',
+							brand: '할리스',
+							drink_name: '콜드브루 라떼',
+							temp: 'ICED',
+							img: 'https://admin.hollys.co.kr/upload/menu/etc/menuEtc_202205100953196550.png',
+							size: 'Regular',
+							kcal: 190,
 							caffeine: 6,
-							brand: '스타벅스',
-							drinkName: '유자차',
+							createdAt: '2022-11-12T08:55:31.396Z',
+							updatedAt: '2022-11-12T08:55:31.396Z',
+							__v: 0,
 						},
 						{
-							caffeine: 72,
+							_id: '636f5f8327f92fddf37761db',
+							brand: '할리스',
+							drink_name: '에스프레소',
+							temp: 'HOT',
+							img: 'https://admin.hollys.co.kr/upload/menu/etc/menuEtc_202205100950557620.png',
+							size: 'Regular',
+							kcal: 311,
+							caffeine: 93,
+							createdAt: '2022-11-12T08:55:31.397Z',
+							updatedAt: '2022-11-12T08:55:31.397Z',
+							__v: 0,
+						},
+						{
+							_id: '636f5fa258e81b16d1707b0a',
 							brand: '스타벅스',
-							drinkName: '아메리카노',
+							drink_name: '나이트로 바닐라 크림',
+							temp: '',
+							img: 'https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210426091745609.jpg',
+							size: '톨',
+							kcal: 80,
+							caffeine: 232,
+							createdAt: '2022-11-12T08:56:02.053Z',
+							updatedAt: '2022-11-12T08:56:02.053Z',
+							__v: 0,
 						},
 					]}
 				/>
@@ -329,7 +361,7 @@ export default function HomeScreen({
 				style={{
 					position: 'absolute',
 					right: Dimensions.width * 34,
-					bottom: useSafeAreaInsets().bottom + Dimensions.height * 60,
+					bottom: useSafeAreaInsets().bottom,
 					height: Dimensions.width * 60,
 					width: Dimensions.width * 60,
 					borderRadius: Dimensions.width * 60,
@@ -351,6 +383,7 @@ const styles = StyleSheet.create({
 	topContainer: {
 		width: Dimensions.width * 390,
 		height: Dimensions.height * 844,
+		backgroundColor: Colors.White,
 		alignItems: 'center',
 	},
 	boldBlackText24: {
